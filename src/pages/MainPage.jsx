@@ -20,7 +20,7 @@ function MainPage() {
                 <MainPageDeckList />
             </div>
 
-            {isAuthorized && currentDeckName && (
+            {currentDeckName && (
                 <div className="game-selection">
                     <button onClick={() => navigateTo('bubble')}>Play Bubble Game</button>
                     <button onClick={() => navigateTo('matching')}>Play Matching Game</button>
