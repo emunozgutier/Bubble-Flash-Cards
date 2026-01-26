@@ -9,19 +9,7 @@ import MainPageDeckList from './submodules1/MainPageDeckList';
 function MainPage() {
     const navigate = useNavigate();
     const { isAuthorized } = useDriveStore();
-    const { cards, draftCard, addCard, setDraftCardFront, setDraftCardBack, resetDraftCard } = useDataStore();
-
-    const handleAddCard = (e) => {
-        e.preventDefault();
-        if (!draftCard.front || !draftCard.back) return;
-        const newCard = {
-            id: Date.now(),
-            front: draftCard.front,
-            back: draftCard.back
-        };
-        addCard(newCard);
-        resetDraftCard();
-    };
+    const { cards } = useDataStore();
 
     return (
         <div className="select-deck-page">
@@ -38,22 +26,6 @@ function MainPage() {
                     <button onClick={() => navigate('/matching')}>Play Matching Game</button>
                 </div>
             )}
-
-            <form className="add-card-form" onSubmit={handleAddCard}>
-                <input
-                    type="text"
-                    placeholder="Front (Question)"
-                    value={draftCard.front}
-                    onChange={(e) => setDraftCardFront(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Back (Answer)"
-                    value={draftCard.back}
-                    onChange={(e) => setDraftCardBack(e.target.value)}
-                />
-                <button type="submit">Add Card</button>
-            </form>
 
             <div className="card-grid">
                 {cards.map(card => (
