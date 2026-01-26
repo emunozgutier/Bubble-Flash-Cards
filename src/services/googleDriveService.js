@@ -57,10 +57,15 @@ export const signIn = () => {
     }
 };
 
-export const findFile = async (filename) => {
+export const findFile = async (filename, parentId = null) => {
     try {
+        let query = `name = '${filename}' and trashed = false`;
+        if (parentId) {
+            query += ` and '${parentId}' in parents`;
+        }
+
         const response = await window.gapi.client.drive.files.list({
-            q: `name = '${filename}' and trashed = false`,
+            q: query,
             fields: 'files(id, name)',
             spaces: 'drive',
         });
@@ -71,13 +76,42 @@ export const findFile = async (filename) => {
     }
 };
 
-export const saveFile = async (filename, content, fileId = null) => {
+export const createFolder = async (name, parentId = null) => {
+    const metadata = {
+        name: name,
+        mimeType: 'application/vnd.google-apps.folder',
+    };
+    if (parentId) {
+        metadata.parents = [parentId];
+    }
+
+    const accessToken = window.gapi.auth.getToken().access_token;
+    const form = new FormData();
+    form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+
+    try {
+        const response = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
+            method: 'POST',
+            headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
+            body: form
+        });
+        return await response.json();
+    } catch (err) {
+        console.error("Error creating folder", err);
+        throw err;
+    }
+};
+
+export const saveFile = async (filename, content, fileId = null, parentId = null) => {
     const fileContent = JSON.stringify(content, null, 2);
     const file = new Blob([fileContent], { type: 'application/json' });
     const metadata = {
         name: filename,
         mimeType: 'application/json',
     };
+    if (parentId) {
+        metadata.parents = [parentId];
+    }
 
     const accessToken = window.gapi.auth.getToken().access_token;
     const form = new FormData();
