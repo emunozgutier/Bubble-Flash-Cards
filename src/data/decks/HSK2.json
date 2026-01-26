@@ -1,0 +1,2380 @@
+{
+  "cards": [
+    {
+      "id": "HSK2_1769396447123_0",
+      "chinese": "爱",
+      "pinyin": "ài",
+      "english": "to love; to be fond of; to like; affection; to be inclined (to do sth); to tend to (happen)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_1",
+      "chinese": "八",
+      "pinyin": "bā",
+      "english": "eight; 8",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_2",
+      "chinese": "爸爸",
+      "pinyin": "bà ba",
+      "english": "(coll.) father; dad",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_3",
+      "chinese": "吧",
+      "pinyin": "bā",
+      "english": "bar (loanword) (serving drinks, or providing Internet access etc); to puff (on a pipe etc); (onom.) bang; abbr. for 贴吧",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_4",
+      "chinese": "白",
+      "pinyin": "Bái",
+      "english": "surname Bai",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_5",
+      "chinese": "百",
+      "pinyin": "Bǎi",
+      "english": "surname Bai",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_6",
+      "chinese": "帮助",
+      "pinyin": "bāng zhù",
+      "english": "assistance; aid; to help; to assist",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_7",
+      "chinese": "报纸",
+      "pinyin": "bào zhǐ",
+      "english": "newspaper; newsprint",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_8",
+      "chinese": "杯子",
+      "pinyin": "bēi zi",
+      "english": "cup; glass",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_9",
+      "chinese": "北京",
+      "pinyin": "Běi jīng",
+      "english": "Beijing, capital of the People's Republic of China",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_10",
+      "chinese": "本",
+      "pinyin": "běn",
+      "english": "root; stem; origin; source; this; the current; original; inherent; originally; classifier for books, periodicals, files etc",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_11",
+      "chinese": "比",
+      "pinyin": "Bǐ",
+      "english": "Belgium; Belgian; abbr. for 比利时",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_12",
+      "chinese": "便宜",
+      "pinyin": "biàn yí",
+      "english": "convenient",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_13",
+      "chinese": "别",
+      "pinyin": "Bié",
+      "english": "surname Bie",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_14",
+      "chinese": "不",
+      "pinyin": "bù",
+      "english": "no; not so; (bound form) not; un-",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_15",
+      "chinese": "不客气",
+      "pinyin": "bù kè qi",
+      "english": "you're welcome; don't mention it; impolite; rude; blunt",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_16",
+      "chinese": "菜",
+      "pinyin": "cài",
+      "english": "dish (type of food); vegetable; cuisine; (coll.) (one's) type; (of one's skills etc) weak; poor",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_17",
+      "chinese": "茶",
+      "pinyin": "chá",
+      "english": "tea; tea plant",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_18",
+      "chinese": "唱歌",
+      "pinyin": "chàng gē",
+      "english": "to sing a song",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_19",
+      "chinese": "吃",
+      "pinyin": "chī",
+      "english": "to eat; to consume; to eat at (a cafeteria etc); to eradicate; to destroy; to absorb; to suffer (shock, injury, defeat etc)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_20",
+      "chinese": "出",
+      "pinyin": "chū",
+      "english": "to go out; to come out; to occur; to produce; to go beyond; to rise; to put forth; to happen; (used after a verb to indicate an outward direction or a positive result); classifier for dramas, plays, operas etc",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_21",
+      "chinese": "出租车",
+      "pinyin": "chū zū chē",
+      "english": "taxi; (Tw) rental car",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_22",
+      "chinese": "穿",
+      "pinyin": "chuān",
+      "english": "to wear; to put on; to dress; to bore through; to pierce; to perforate; to penetrate; to pass through; to thread",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_23",
+      "chinese": "船",
+      "pinyin": "chuán",
+      "english": "variant of 船",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_24",
+      "chinese": "次",
+      "pinyin": "cì",
+      "english": "next in sequence; second; the second (day, time etc); secondary; vice-; sub-; infra-; inferior quality; substandard; order; sequence; hypo- (chemistry); classifier for enumerated events: time",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_25",
+      "chinese": "从",
+      "pinyin": "cóng",
+      "english": "variant of 从",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_26",
+      "chinese": "错",
+      "pinyin": "Cuò",
+      "english": "surname Cuo",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_27",
+      "chinese": "打电话",
+      "pinyin": "dǎ diàn huà",
+      "english": "to make a telephone call",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_28",
+      "chinese": "打篮球",
+      "pinyin": "dǎ lán qiú",
+      "english": "to play basketball",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_29",
+      "chinese": "大",
+      "pinyin": "dà",
+      "english": "big; large; great; older (than another person); eldest (as in 姐); greatly; freely; fully; (dialect) father; (dialect) uncle (father's brother)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_30",
+      "chinese": "大家",
+      "pinyin": "dà jiā",
+      "english": "everyone; influential family; great expert",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_31",
+      "chinese": "但是",
+      "pinyin": "dàn shì",
+      "english": "but; however",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_32",
+      "chinese": "到",
+      "pinyin": "dào",
+      "english": "to reach; to arrive; to leave for; to go to; to (a place); until (a time); up to (a point); (verb complement indicating arriving at a place or reaching a point); considerate; thoughtful; thorough",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_33",
+      "chinese": "的",
+      "pinyin": "de",
+      "english": "of; ~'s (possessive particle); (used after an attribute); (used to form a nominal expression); (used at the end of a declarative sentence for emphasis); also pr. [dì] or [di] in poetry and songs",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_34",
+      "chinese": "得",
+      "pinyin": "dé",
+      "english": "to obtain; to get; to gain; to catch (a disease); proper; suitable; proud; contented; to allow; to permit; ready; finished",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_35",
+      "chinese": "弟弟",
+      "pinyin": "dì di",
+      "english": "younger brother",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_36",
+      "chinese": "第一",
+      "pinyin": "dì yī",
+      "english": "first; number one; primary",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_37",
+      "chinese": "点",
+      "pinyin": "diǎn",
+      "english": "point; dot; drop; speck; o'clock; point (in space or time); to draw a dot; to check on a list; to choose; to order (food in a restaurant); to touch briefly; to hint; to light; to ignite; to pour a liquid drop by drop; (old) one fifth of a two-hour watch 更; dot stroke in Chinese characters; classifier for items",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_38",
+      "chinese": "电脑",
+      "pinyin": "diàn nǎo",
+      "english": "computer",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_39",
+      "chinese": "电视",
+      "pinyin": "diàn shì",
+      "english": "television; TV",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_40",
+      "chinese": "电影",
+      "pinyin": "diàn yǐng",
+      "english": "movie; film",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_41",
+      "chinese": "东西",
+      "pinyin": "dōng xī",
+      "english": "east and west",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_42",
+      "chinese": "懂",
+      "pinyin": "dǒng",
+      "english": "to understand; to comprehend",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_43",
+      "chinese": "都",
+      "pinyin": "Dū",
+      "english": "surname Du",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_44",
+      "chinese": "读",
+      "pinyin": "dòu",
+      "english": "comma; phrase marked by pause",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_45",
+      "chinese": "对不起",
+      "pinyin": "duì bu qǐ",
+      "english": "I'm sorry; excuse me; I beg your pardon; to let (sb) down; to disappoint",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_46",
+      "chinese": "多",
+      "pinyin": "duō",
+      "english": "many; much; too many; in excess; (after a numeral) ... odd; how (to what extent) (Taiwan pr. [duó]); (bound form) multi-; poly-",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_47",
+      "chinese": "多少",
+      "pinyin": "duō shǎo",
+      "english": "number; amount; somewhat",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_48",
+      "chinese": "儿子",
+      "pinyin": "ér zi",
+      "english": "son",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_49",
+      "chinese": "二",
+      "pinyin": "èr",
+      "english": "two; 2; (Beijing dialect) stupid",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_50",
+      "chinese": "饭馆",
+      "pinyin": "fàn guǎn",
+      "english": "restaurant",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_51",
+      "chinese": "房间",
+      "pinyin": "fáng jiān",
+      "english": "room",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_52",
+      "chinese": "飞机",
+      "pinyin": "fēi jī",
+      "english": "airplane",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_53",
+      "chinese": "非常",
+      "pinyin": "fēi cháng",
+      "english": "very; really; unusual; extraordinary",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_54",
+      "chinese": "分钟",
+      "pinyin": "fēn zhōng",
+      "english": "minute",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_55",
+      "chinese": "服务员",
+      "pinyin": "fú wù yuán",
+      "english": "waiter; waitress; attendant; customer service personnel",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_56",
+      "chinese": "高",
+      "pinyin": "Gāo",
+      "english": "surname Gao",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_57",
+      "chinese": "高兴",
+      "pinyin": "gāo xìng",
+      "english": "happy; glad; willing (to do sth); in a cheerful mood",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_58",
+      "chinese": "告诉",
+      "pinyin": "gào sù",
+      "english": "to press charges; to file a complaint",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_59",
+      "chinese": "哥哥",
+      "pinyin": "gē ge",
+      "english": "older brother",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_60",
+      "chinese": "个",
+      "pinyin": "gě",
+      "english": "used in 自个儿",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_61",
+      "chinese": "给",
+      "pinyin": "gěi",
+      "english": "to; for; for the benefit of; to give; to allow; to do sth (for sb); (grammatical equivalent of 被); (grammatical equivalent of 把); (sentence intensifier)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_62",
+      "chinese": "工作",
+      "pinyin": "gōng zuò",
+      "english": "to work; (of a machine) to operate; job; work; task",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_63",
+      "chinese": "公共汽车",
+      "pinyin": "gōng gòng qì chē",
+      "english": "bus",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_64",
+      "chinese": "公斤",
+      "pinyin": "gōng jīn",
+      "english": "kilogram (kg)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_65",
+      "chinese": "公司",
+      "pinyin": "gōng sī",
+      "english": "company; firm; corporation",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_66",
+      "chinese": "狗",
+      "pinyin": "gǒu",
+      "english": "dog",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_67",
+      "chinese": "贵",
+      "pinyin": "guì",
+      "english": "expensive; noble; precious; (honorific) your",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_68",
+      "chinese": "还",
+      "pinyin": "Huán",
+      "english": "surname Huan",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_69",
+      "chinese": "孩子",
+      "pinyin": "hái zi",
+      "english": "child",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_70",
+      "chinese": "汉语",
+      "pinyin": "Hàn yǔ",
+      "english": "Chinese language",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_71",
+      "chinese": "好",
+      "pinyin": "hǎo",
+      "english": "good; appropriate; proper; all right!; (before a verb) easy to; (before a verb) good to; (before an adjective for exclamatory effect) so; (verb complement indicating completion); (of two people) close; on intimate terms; (after a personal pronoun) hello",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_72",
+      "chinese": "好吃",
+      "pinyin": "hǎo chī",
+      "english": "tasty; delicious",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_73",
+      "chinese": "号",
+      "pinyin": "háo",
+      "english": "roar; cry",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_74",
+      "chinese": "喝",
+      "pinyin": "hē",
+      "english": "to drink; variant of 嗬",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_75",
+      "chinese": "和",
+      "pinyin": "hé",
+      "english": "old variant of 和",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_76",
+      "chinese": "黑",
+      "pinyin": "Hēi",
+      "english": "abbr. for Heilongjiang province 黑龙江",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_77",
+      "chinese": "很",
+      "pinyin": "hěn",
+      "english": "(adverb of degree); quite; very; awfully",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_78",
+      "chinese": "红",
+      "pinyin": "Hóng",
+      "english": "surname Hong",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_79",
+      "chinese": "后面",
+      "pinyin": "hòu mian",
+      "english": "the back; the rear; the last bit; behind; near the end; at the back; later; afterwards",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_80",
+      "chinese": "欢迎",
+      "pinyin": "huān yíng",
+      "english": "to welcome; welcome",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_81",
+      "chinese": "回",
+      "pinyin": "huí",
+      "english": "to circle; to go back; to turn around; to answer; to return; to revolve; Hui ethnic group (Chinese Muslims); time; classifier for acts of a play; section or chapter (of a classic book)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_82",
+      "chinese": "回答",
+      "pinyin": "huí dá",
+      "english": "to reply; to answer; reply; answer",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_83",
+      "chinese": "会",
+      "pinyin": "huì",
+      "english": "can; to have the skill; to know how to; to be likely to; to be sure to; to meet; to get together; meeting; gathering; (suffix) union; group; association; (bound form) a moment (Taiwan pr. [huǐ])",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_84",
+      "chinese": "火车站",
+      "pinyin": "huǒ chē zhàn",
+      "english": "train station",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_85",
+      "chinese": "机场",
+      "pinyin": "jī chǎng",
+      "english": "airport; airfield; (slang) service provider for Shadowsocks or similar software for circumventing Internet censorship",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_86",
+      "chinese": "鸡蛋",
+      "pinyin": "jī dàn",
+      "english": "(chicken) egg; hen's egg",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_87",
+      "chinese": "几",
+      "pinyin": "jī",
+      "english": "small table",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_88",
+      "chinese": "家",
+      "pinyin": "jiā",
+      "english": "used in 家伙 and 家俱",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_89",
+      "chinese": "件",
+      "pinyin": "jiàn",
+      "english": "item; component; classifier for events, things, clothes etc",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_90",
+      "chinese": "叫",
+      "pinyin": "jiào",
+      "english": "to shout; to call; to order; to ask; to be called; by (indicates agent in the passive mood)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_91",
+      "chinese": "教室",
+      "pinyin": "jiào shì",
+      "english": "classroom",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_92",
+      "chinese": "介绍",
+      "pinyin": "jiè shào",
+      "english": "to introduce (sb to sb); to give a presentation; to present (sb for a job etc); introduction",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_93",
+      "chinese": "姐姐",
+      "pinyin": "jiě jie",
+      "english": "older sister",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_94",
+      "chinese": "今天",
+      "pinyin": "jīn tiān",
+      "english": "today; at the present; now",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_95",
+      "chinese": "近",
+      "pinyin": "jìn",
+      "english": "near; close to; approximately",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_96",
+      "chinese": "进",
+      "pinyin": "jìn",
+      "english": "to go forward; to advance; to go in; to enter; to put in; to submit; to take in; to admit; (math.) base of a number system; classifier for sections in a building or residential compound",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_97",
+      "chinese": "九",
+      "pinyin": "jiǔ",
+      "english": "nine; 9",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_98",
+      "chinese": "就",
+      "pinyin": "jiù",
+      "english": "(after a suppositional clause) in that case; then; (after a clause of action) as soon as; immediately after; (same as 是) merely; nothing else but; simply; just; precisely; exactly; only; as little as; as much as; as many as; to approach; to move towards; to undertake; to engage in; (often followed by 着) taking advantage of; (of food) to go with; with regard to; concerning; (pattern: 就 ... 也 ...) even if ... still ...; (pattern: 不 ... 就 ...) if not ... then must be ...",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_99",
+      "chinese": "觉得",
+      "pinyin": "jué de",
+      "english": "to think that ...; to feel that ...; to feel (uncomfortable etc)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_100",
+      "chinese": "咖啡",
+      "pinyin": "kā fēi",
+      "english": "coffee (loanword)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_101",
+      "chinese": "开",
+      "pinyin": "kāi",
+      "english": "to open (transitive or intransitive); (of ships, vehicles, troops etc) to start; to turn on; to put in operation; to operate; to run; to boil; to write out (a prescription, check, invoice etc); (directional complement) away; off; carat (gold); abbr. for Kelvin, 开尔文; abbr. for 开本, book format",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_102",
+      "chinese": "开始",
+      "pinyin": "kāi shǐ",
+      "english": "to begin; beginning; to start; initial",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_103",
+      "chinese": "看",
+      "pinyin": "kān",
+      "english": "to look after; to take care of; to watch; to guard",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_104",
+      "chinese": "看见",
+      "pinyin": "kàn jiàn",
+      "english": "to see; to catch sight of",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_105",
+      "chinese": "考试",
+      "pinyin": "kǎo shì",
+      "english": "to take an exam; exam",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_106",
+      "chinese": "可能",
+      "pinyin": "kě néng",
+      "english": "might (happen); possible; probable; possibility; probability; maybe; perhaps",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_107",
+      "chinese": "可以",
+      "pinyin": "kě yǐ",
+      "english": "can; may; possible; able to; not bad; pretty good",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_108",
+      "chinese": "课",
+      "pinyin": "kè",
+      "english": "subject; course; class; lesson; to levy; tax; form of divination",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_109",
+      "chinese": "块",
+      "pinyin": "kuài",
+      "english": "lump; chunk; piece; classifier for pieces of cloth, cake, soap etc; (coll.) classifier for money and currency units",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_110",
+      "chinese": "快",
+      "pinyin": "kuài",
+      "english": "rapid; quick; speed; rate; soon; almost; to make haste; clever; sharp (of knives or wits); forthright; plainspoken; gratified; pleased; pleasant",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_111",
+      "chinese": "快乐",
+      "pinyin": "kuài lè",
+      "english": "happy; joyful",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_112",
+      "chinese": "来",
+      "pinyin": "lái",
+      "english": "to come; (used as a substitute for a more specific verb); hither (directional complement for motion toward the speaker, as in 回来); ever since (as in 自古以来); for the past (amount of time); (prefix) the coming ...; the next ... (as in 来世); (between two verbs) in order to; (after a round number) approximately; (used after 得 to indicate possibility, as in 谈得来, or after 不 to indicate impossibility, as in 吃不来)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_113",
+      "chinese": "老师",
+      "pinyin": "lǎo shī",
+      "english": "teacher",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_114",
+      "chinese": "了",
+      "pinyin": "le",
+      "english": "(completed action marker); (modal particle indicating change of state, situation now); (modal particle intensifying preceding clause)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_115",
+      "chinese": "累",
+      "pinyin": "lěi",
+      "english": "to accumulate; to involve or implicate (Taiwan pr. [lèi]); continuous; repeated",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_116",
+      "chinese": "冷",
+      "pinyin": "Lěng",
+      "english": "surname Leng",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_117",
+      "chinese": "离",
+      "pinyin": "chī",
+      "english": "mythical beast (archaic)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_118",
+      "chinese": "里",
+      "pinyin": "lǐ",
+      "english": "variant of 里",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_119",
+      "chinese": "两",
+      "pinyin": "liǎng",
+      "english": "two; both; some; a few; tael, unit of weight equal to 50 grams (modern) or 1⁄16 of a catty 斤 (old)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_120",
+      "chinese": "零",
+      "pinyin": "líng",
+      "english": "zero; nought; zero sign; fractional; fragmentary; odd (of numbers); (placed between two numbers to indicate a smaller quantity followed by a larger one); fraction; (in mathematics) remainder (after division); extra; to wither and fall; to wither",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_121",
+      "chinese": "六",
+      "pinyin": "liù",
+      "english": "six; 6",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_122",
+      "chinese": "路",
+      "pinyin": "Lù",
+      "english": "surname Lu",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_123",
+      "chinese": "旅游",
+      "pinyin": "lǚ yóu",
+      "english": "trip; journey; tourism; travel; tour; to travel",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_124",
+      "chinese": "妈妈",
+      "pinyin": "mā ma",
+      "english": "mama; mommy; mother",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_125",
+      "chinese": "吗",
+      "pinyin": "má",
+      "english": "(coll.) what?",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_126",
+      "chinese": "买",
+      "pinyin": "mǎi",
+      "english": "to buy; to purchase",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_127",
+      "chinese": "卖",
+      "pinyin": "mài",
+      "english": "to sell; to betray; to spare no effort; to show off or flaunt",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_128",
+      "chinese": "慢",
+      "pinyin": "màn",
+      "english": "slow",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_129",
+      "chinese": "忙",
+      "pinyin": "máng",
+      "english": "busy; hurriedly; to hurry; to rush",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_130",
+      "chinese": "猫",
+      "pinyin": "māo",
+      "english": "cat; (dialect) to hide oneself; (coll.) modem",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_131",
+      "chinese": "没",
+      "pinyin": "méi",
+      "english": "(negative prefix for verbs) have not; not",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_132",
+      "chinese": "没关系",
+      "pinyin": "méi guān xi",
+      "english": "it doesn't matter",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_133",
+      "chinese": "每",
+      "pinyin": "měi",
+      "english": "each; every",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_134",
+      "chinese": "妹妹",
+      "pinyin": "mèi mei",
+      "english": "younger sister; young woman",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_135",
+      "chinese": "门",
+      "pinyin": "Mén",
+      "english": "surname Men",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_136",
+      "chinese": "米饭",
+      "pinyin": "mǐ fàn",
+      "english": "(cooked) rice",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_137",
+      "chinese": "名字",
+      "pinyin": "míng zi",
+      "english": "name (of a person or thing)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_138",
+      "chinese": "明天",
+      "pinyin": "míng tiān",
+      "english": "tomorrow",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_139",
+      "chinese": "哪",
+      "pinyin": "nǎ",
+      "english": "how; which",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_140",
+      "chinese": "那",
+      "pinyin": "Nā",
+      "english": "surname Na",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_141",
+      "chinese": "男人",
+      "pinyin": "nán rén",
+      "english": "a man; a male; men",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_142",
+      "chinese": "呢",
+      "pinyin": "ne",
+      "english": "particle indicating that a previously asked question is to be applied to the preceding word (\"What about ...?\", \"And ...?\"); particle for inquiring about location (\"Where is ...?\"); particle signaling a pause, to emphasize the preceding words and allow the listener time to take them on board (\"ok?\", \"are you with me?\"); (at the end of a declarative sentence) particle indicating continuation of a state or action; particle indicating strong affirmation",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_143",
+      "chinese": "能",
+      "pinyin": "Néng",
+      "english": "surname Neng",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_144",
+      "chinese": "你",
+      "pinyin": "nǐ",
+      "english": "you (informal, as opposed to courteous 您)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_145",
+      "chinese": "年",
+      "pinyin": "Nián",
+      "english": "surname Nian",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_146",
+      "chinese": "您",
+      "pinyin": "nín",
+      "english": "you (courteous, as opposed to informal 你)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_147",
+      "chinese": "牛奶",
+      "pinyin": "niú nǎi",
+      "english": "cow's milk",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_148",
+      "chinese": "女儿",
+      "pinyin": "nǚ ér",
+      "english": "daughter",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_149",
+      "chinese": "女人",
+      "pinyin": "nǚ rén",
+      "english": "woman",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_150",
+      "chinese": "旁边",
+      "pinyin": "páng biān",
+      "english": "side; adjacent place",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_151",
+      "chinese": "跑步",
+      "pinyin": "pǎo bù",
+      "english": "to run; to jog; (military) to march at the double",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_152",
+      "chinese": "朋友",
+      "pinyin": "péng you",
+      "english": "friend",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_153",
+      "chinese": "票",
+      "pinyin": "piào",
+      "english": "ticket; ballot; banknote; person held for ransom; amateur performance of Chinese opera; classifier for groups, batches, business transactions",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_154",
+      "chinese": "漂亮",
+      "pinyin": "piào liang",
+      "english": "pretty; beautiful",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_155",
+      "chinese": "苹果",
+      "pinyin": "píng guǒ",
+      "english": "apple",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_156",
+      "chinese": "七",
+      "pinyin": "qī",
+      "english": "seven; 7",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_157",
+      "chinese": "妻子",
+      "pinyin": "qī zǐ",
+      "english": "wife and children",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_158",
+      "chinese": "起床",
+      "pinyin": "qǐ chuáng",
+      "english": "to get out of bed; to get up",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_159",
+      "chinese": "千",
+      "pinyin": "qiān",
+      "english": "thousand",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_160",
+      "chinese": "前面",
+      "pinyin": "qián miàn",
+      "english": "ahead; in front; preceding; above; also pr. [qián mian]",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_161",
+      "chinese": "钱",
+      "pinyin": "Qián",
+      "english": "surname Qian",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_162",
+      "chinese": "晴",
+      "pinyin": "qíng",
+      "english": "clear; fine (weather)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_163",
+      "chinese": "请",
+      "pinyin": "qǐng",
+      "english": "to ask; to invite; please (do sth); to treat (to a meal etc); to request",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_164",
+      "chinese": "去",
+      "pinyin": "qù",
+      "english": "to go; to go to (a place); (of a time etc) last; just passed; to send; to remove; to get rid of; to reduce; to be apart from in space or time; to die (euphemism); to play (a part); (when used either before or after a verb) to go in order to do sth; (after a verb of motion indicates movement away from the speaker); (used after certain verbs to indicate detachment or separation)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_165",
+      "chinese": "去年",
+      "pinyin": "qù nián",
+      "english": "last year",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_166",
+      "chinese": "让",
+      "pinyin": "ràng",
+      "english": "to yield; to permit; to let sb do sth; to have sb do sth; to make sb (feel sad etc); by (indicates the agent in a passive clause, like 被)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_167",
+      "chinese": "热",
+      "pinyin": "rè",
+      "english": "to warm up; to heat up; hot (of weather); heat; fervent",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_168",
+      "chinese": "人",
+      "pinyin": "rén",
+      "english": "person; people",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_169",
+      "chinese": "认识",
+      "pinyin": "rèn shi",
+      "english": "to know; to recognize; to be familiar with; to get acquainted with sb; knowledge; understanding; awareness; cognition",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_170",
+      "chinese": "日",
+      "pinyin": "Rì",
+      "english": "abbr. for 本, Japan",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_171",
+      "chinese": "三",
+      "pinyin": "Sān",
+      "english": "surname San",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_172",
+      "chinese": "商店",
+      "pinyin": "shāng diàn",
+      "english": "store; shop",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_173",
+      "chinese": "上",
+      "pinyin": "shǎng",
+      "english": "used in 上声",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_174",
+      "chinese": "上班",
+      "pinyin": "shàng bān",
+      "english": "to go to work; to be on duty; to start work; to go to the office",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_175",
+      "chinese": "上午",
+      "pinyin": "shàng wǔ",
+      "english": "morning",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_176",
+      "chinese": "少",
+      "pinyin": "shǎo",
+      "english": "few; less; to lack; to be missing; to stop (doing sth); seldom",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_177",
+      "chinese": "身体",
+      "pinyin": "shēn tǐ",
+      "english": "the body; one's health; in person",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_178",
+      "chinese": "什么",
+      "pinyin": "shén me",
+      "english": "what?; something; anything",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_179",
+      "chinese": "生病",
+      "pinyin": "shēng bìng",
+      "english": "to fall ill",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_180",
+      "chinese": "生日",
+      "pinyin": "shēng rì",
+      "english": "birthday",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_181",
+      "chinese": "十",
+      "pinyin": "shí",
+      "english": "ten; 10",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_182",
+      "chinese": "时候",
+      "pinyin": "shí hou",
+      "english": "time; length of time; moment; period",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_183",
+      "chinese": "时间",
+      "pinyin": "shí jiān",
+      "english": "time; period",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_184",
+      "chinese": "事情",
+      "pinyin": "shì qing",
+      "english": "affair; matter; thing; business",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_185",
+      "chinese": "是",
+      "pinyin": "shì",
+      "english": "to be (followed by substantives only); correct; right; true; (respectful acknowledgement of a command) very well; (adverb for emphatic assertion)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_186",
+      "chinese": "手表",
+      "pinyin": "shǒu biǎo",
+      "english": "wristwatch",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_187",
+      "chinese": "手机",
+      "pinyin": "shǒu jī",
+      "english": "cell phone; mobile phone",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_188",
+      "chinese": "书",
+      "pinyin": "Shū",
+      "english": "abbr. for 书经",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_189",
+      "chinese": "谁",
+      "pinyin": "shéi",
+      "english": "who; also pr. [shuí]",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_190",
+      "chinese": "水",
+      "pinyin": "Shuǐ",
+      "english": "surname Shui",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_191",
+      "chinese": "水果",
+      "pinyin": "shuǐ guǒ",
+      "english": "fruit",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_192",
+      "chinese": "睡觉",
+      "pinyin": "shuì jiào",
+      "english": "to go to bed; to sleep",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_193",
+      "chinese": "说话",
+      "pinyin": "shuō huà",
+      "english": "to speak; to say; to talk; to gossip; to tell stories; talk; word",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_194",
+      "chinese": "四",
+      "pinyin": "sì",
+      "english": "four; 4",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_195",
+      "chinese": "送",
+      "pinyin": "sòng",
+      "english": "to send; to deliver; to transmit; to give (as a present); to see (sb) off; to accompany; to go along with",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_196",
+      "chinese": "岁",
+      "pinyin": "suì",
+      "english": "variant of 岁, year; years old",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_197",
+      "chinese": "所以",
+      "pinyin": "suǒ yǐ",
+      "english": "therefore; as a result; so; the reason why",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_198",
+      "chinese": "他",
+      "pinyin": "tā",
+      "english": "he; him (used for either sex when the sex is unknown or unimportant); (used before sb's name for emphasis); (used as a meaningless mock object); (literary) other",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_199",
+      "chinese": "它",
+      "pinyin": "tā",
+      "english": "it",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_200",
+      "chinese": "她",
+      "pinyin": "tā",
+      "english": "she",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_201",
+      "chinese": "太",
+      "pinyin": "tài",
+      "english": "highest; greatest; too (much); very; extremely",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_202",
+      "chinese": "踢",
+      "pinyin": "tī",
+      "english": "to kick; to play (e.g. soccer); (slang) butch (in a lesbian relationship)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_203",
+      "chinese": "题",
+      "pinyin": "Tí",
+      "english": "surname Ti",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_204",
+      "chinese": "天气",
+      "pinyin": "tiān qì",
+      "english": "weather",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_205",
+      "chinese": "跳舞",
+      "pinyin": "tiào wǔ",
+      "english": "to dance",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_206",
+      "chinese": "听",
+      "pinyin": "yǐn",
+      "english": "smile (archaic)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_207",
+      "chinese": "同学",
+      "pinyin": "tóng xué",
+      "english": "to study at the same school; fellow student; classmate",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_208",
+      "chinese": "外",
+      "pinyin": "wài",
+      "english": "outside; in addition; foreign; external",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_209",
+      "chinese": "完",
+      "pinyin": "wán",
+      "english": "to finish; to be over; whole; complete; entire",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_210",
+      "chinese": "玩",
+      "pinyin": "wán",
+      "english": "to play; to have fun; to trifle with; toy; sth used for amusement; curio or antique (Taiwan pr. [wàn]); to keep sth for entertainment",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_211",
+      "chinese": "晚上",
+      "pinyin": "wǎn shang",
+      "english": "evening; night; in the evening",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_212",
+      "chinese": "为",
+      "pinyin": "wéi",
+      "english": "as (in the capacity of); to take sth as; to act as; to serve as; to behave as; to become; to be; to do; by (in the passive voice)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_213",
+      "chinese": "喂",
+      "pinyin": "wéi",
+      "english": "hello (when answering the phone)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_214",
+      "chinese": "问",
+      "pinyin": "wèn",
+      "english": "to ask; to inquire",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_215",
+      "chinese": "问题",
+      "pinyin": "wèn tí",
+      "english": "question; problem; issue; topic",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_216",
+      "chinese": "我",
+      "pinyin": "wǒ",
+      "english": "I; me; my",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_217",
+      "chinese": "我们",
+      "pinyin": "wǒ men",
+      "english": "we; us; ourselves; our",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_218",
+      "chinese": "五",
+      "pinyin": "wǔ",
+      "english": "five; 5",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_219",
+      "chinese": "希望",
+      "pinyin": "xī wàng",
+      "english": "to hope; a hope; a wish",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_220",
+      "chinese": "洗",
+      "pinyin": "xǐ",
+      "english": "to wash; to bathe; to develop (photographs); to shuffle (cards etc); to erase (a recording)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_221",
+      "chinese": "喜欢",
+      "pinyin": "xǐ huan",
+      "english": "to like; to be fond of",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_222",
+      "chinese": "西瓜",
+      "pinyin": "xī guā",
+      "english": "watermelon",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_223",
+      "chinese": "下",
+      "pinyin": "xià",
+      "english": "down; downwards; below; lower; later; next (week etc); second (of two parts); to decline; to go down; to arrive at (a decision, conclusion etc); measure word to show the frequency of an action",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_224",
+      "chinese": "下午",
+      "pinyin": "xià wǔ",
+      "english": "afternoon; p.m.",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_225",
+      "chinese": "下雨",
+      "pinyin": "xià yǔ",
+      "english": "to rain",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_226",
+      "chinese": "先生",
+      "pinyin": "xiān sheng",
+      "english": "teacher; gentleman; sir; mister (Mr.); husband; (dialect) doctor",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_227",
+      "chinese": "现在",
+      "pinyin": "xiàn zài",
+      "english": "now; at present; at the moment; modern; current; nowadays",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_228",
+      "chinese": "想",
+      "pinyin": "xiǎng",
+      "english": "to think (about); to think of; to devise; to think (that); to believe (that); to desire; to want (to); to miss (feel wistful about the absence of)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_229",
+      "chinese": "向",
+      "pinyin": "Xiàng",
+      "english": "surname Xiang",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_230",
+      "chinese": "小",
+      "pinyin": "xiǎo",
+      "english": "small; tiny; few; young",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_231",
+      "chinese": "小姐",
+      "pinyin": "xiǎo jie",
+      "english": "young lady; miss; (slang) prostitute",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_232",
+      "chinese": "小时",
+      "pinyin": "xiǎo shí",
+      "english": "hour",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_233",
+      "chinese": "笑",
+      "pinyin": "xiào",
+      "english": "old variant of 笑",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_234",
+      "chinese": "些",
+      "pinyin": "xiē",
+      "english": "classifier indicating a small amount or small number greater than 1: some, a few, several",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_235",
+      "chinese": "写",
+      "pinyin": "xiě",
+      "english": "to write",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_236",
+      "chinese": "谢谢",
+      "pinyin": "xiè xie",
+      "english": "to thank; thanks; thank you",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_237",
+      "chinese": "新",
+      "pinyin": "Xīn",
+      "english": "abbr. for Xinjiang 疆 or Singapore 坡; surname Xin",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_238",
+      "chinese": "星期",
+      "pinyin": "xīng qī",
+      "english": "week; day of the week; Sunday",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_239",
+      "chinese": "姓",
+      "pinyin": "xìng",
+      "english": "family name; surname; to be surnamed",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_240",
+      "chinese": "休息",
+      "pinyin": "xiū xi",
+      "english": "rest; to rest",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_241",
+      "chinese": "学生",
+      "pinyin": "xué sheng",
+      "english": "student; schoolchild",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_242",
+      "chinese": "学习",
+      "pinyin": "xué xí",
+      "english": "to learn; to study",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_243",
+      "chinese": "学校",
+      "pinyin": "xué xiào",
+      "english": "school",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_244",
+      "chinese": "雪",
+      "pinyin": "Xuě",
+      "english": "surname Xue",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_245",
+      "chinese": "颜色",
+      "pinyin": "yán sè",
+      "english": "color; countenance; appearance; facial expression; pigment; dyestuff",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_246",
+      "chinese": "眼睛",
+      "pinyin": "yǎn jing",
+      "english": "eye",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_247",
+      "chinese": "羊肉",
+      "pinyin": "yáng ròu",
+      "english": "mutton; goat meat",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_248",
+      "chinese": "药",
+      "pinyin": "yào",
+      "english": "leaf of the iris; variant of 药",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_249",
+      "chinese": "要",
+      "pinyin": "yāo",
+      "english": "(bound form) to demand; to coerce",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_250",
+      "chinese": "也",
+      "pinyin": "Yě",
+      "english": "surname Ye",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_251",
+      "chinese": "一",
+      "pinyin": "yī",
+      "english": "one; single; a (article); as soon as; entire; whole; all; throughout; \"one\" radical in Chinese characters (Kangxi radical 1); also pr. [yāo] for greater clarity when spelling out numbers digit by digit",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_252",
+      "chinese": "一起",
+      "pinyin": "yī qǐ",
+      "english": "in the same place; together; with; altogether (in total)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_253",
+      "chinese": "衣服",
+      "pinyin": "yī fu",
+      "english": "clothes",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_254",
+      "chinese": "医生",
+      "pinyin": "yī shēng",
+      "english": "doctor",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_255",
+      "chinese": "医院",
+      "pinyin": "yī yuàn",
+      "english": "hospital",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_256",
+      "chinese": "已经",
+      "pinyin": "yǐ jīng",
+      "english": "already",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_257",
+      "chinese": "椅子",
+      "pinyin": "yǐ zi",
+      "english": "chair",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_258",
+      "chinese": "意思",
+      "pinyin": "yì si",
+      "english": "idea; opinion; meaning; wish; desire; interest; fun; token of appreciation, affection etc; to give as a small token; to do sth as a gesture of goodwill etc",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_259",
+      "chinese": "因为",
+      "pinyin": "yīn wèi",
+      "english": "because; owing to; on account of",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_260",
+      "chinese": "阴",
+      "pinyin": "Yīn",
+      "english": "surname Yin",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_261",
+      "chinese": "游泳",
+      "pinyin": "yóu yǒng",
+      "english": "swimming; to swim",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_262",
+      "chinese": "有",
+      "pinyin": "yǒu",
+      "english": "to have; there is; (bound form) having; with; -ful; -ed; -al (as in 意 intentional)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_263",
+      "chinese": "右边",
+      "pinyin": "yòu bian",
+      "english": "right side; right, to the right",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_264",
+      "chinese": "鱼",
+      "pinyin": "Yú",
+      "english": "surname Yu",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_265",
+      "chinese": "元",
+      "pinyin": "Yuán",
+      "english": "surname Yuan; the Yuan or Mongol dynasty (1279-1368)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_266",
+      "chinese": "远",
+      "pinyin": "yuǎn",
+      "english": "far; distant; remote; (intensifier in a comparison) by far; much (lower etc)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_267",
+      "chinese": "月",
+      "pinyin": "yuè",
+      "english": "moon; month; monthly",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_268",
+      "chinese": "运动",
+      "pinyin": "yùn dòng",
+      "english": "to move; to exercise; sports; exercise; motion; movement; campaign",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_269",
+      "chinese": "再",
+      "pinyin": "zài",
+      "english": "again; once more; re-; second; another; then (after sth, and not until then); no matter how ... (followed by an adjective or verb, and then (usually) 也 or 都 for emphasis)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_270",
+      "chinese": "再见",
+      "pinyin": "zài jiàn",
+      "english": "goodbye; see you again later",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_271",
+      "chinese": "在",
+      "pinyin": "zài",
+      "english": "to exist; to be alive; (of sb or sth) to be (located) at; (used before a verb to indicate an action in progress)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_272",
+      "chinese": "早上",
+      "pinyin": "zǎo shang",
+      "english": "early morning",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_273",
+      "chinese": "怎么",
+      "pinyin": "zěn me",
+      "english": "how?; what?; why?",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_274",
+      "chinese": "怎么样",
+      "pinyin": "zěn me yàng",
+      "english": "how?; how about?; how was it?; how are things?",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_275",
+      "chinese": "张",
+      "pinyin": "Zhāng",
+      "english": "surname Zhang",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_276",
+      "chinese": "长",
+      "pinyin": "cháng",
+      "english": "length; long; forever; always; constantly",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_277",
+      "chinese": "丈夫",
+      "pinyin": "zhàng fu",
+      "english": "husband",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_278",
+      "chinese": "找",
+      "pinyin": "zhǎo",
+      "english": "to try to find; to look for; to call on sb; to find; to seek; to return; to give change",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_279",
+      "chinese": "这",
+      "pinyin": "zhè",
+      "english": "(pronoun) this; these; (bound form) this; the (followed by a noun); (bound form) this; these (followed by a classifier) (in this sense, commonly pr. [zhèi], esp. in Beijing)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_280",
+      "chinese": "着",
+      "pinyin": "zhāo",
+      "english": "(chess) move; trick; all right!; (dialect) to add",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_281",
+      "chinese": "真",
+      "pinyin": "zhēn",
+      "english": "really; truly; indeed; real; true; genuine",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_282",
+      "chinese": "正在",
+      "pinyin": "zhèng zài",
+      "english": "just at (that time); right in (that place); right in the middle of (doing sth)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_283",
+      "chinese": "知道",
+      "pinyin": "zhī dào",
+      "english": "to know; to become aware of; also pr. [zhī dao]",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_284",
+      "chinese": "中国",
+      "pinyin": "Zhōng guó",
+      "english": "China",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_285",
+      "chinese": "中午",
+      "pinyin": "zhōng wǔ",
+      "english": "noon; midday",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_286",
+      "chinese": "住",
+      "pinyin": "zhù",
+      "english": "to live; to dwell; to stay; to reside; to stop; (suffix indicating firmness, steadiness, or coming to a halt)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_287",
+      "chinese": "准备",
+      "pinyin": "zhǔn bèi",
+      "english": "preparation; to prepare; to intend; to be about to; reserve (fund)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_288",
+      "chinese": "桌子",
+      "pinyin": "zhuō zi",
+      "english": "table; desk",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_289",
+      "chinese": "字",
+      "pinyin": "zì",
+      "english": "letter; symbol; character; word; courtesy or style name traditionally given to males aged 20 in dynastic China",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_290",
+      "chinese": "自行车",
+      "pinyin": "zì xíng chē",
+      "english": "bicycle; bike",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_291",
+      "chinese": "走",
+      "pinyin": "zǒu",
+      "english": "to walk; to go; to run; to move (of vehicle); to visit; to leave; to go away; to die (euph.); from; through; away (in compound verbs, such as 走); to change (shape, form, meaning)",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_292",
+      "chinese": "最",
+      "pinyin": "zuì",
+      "english": "variant of 最",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_293",
+      "chinese": "昨天",
+      "pinyin": "zuó tiān",
+      "english": "yesterday",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_294",
+      "chinese": "左边",
+      "pinyin": "zuǒ bian",
+      "english": "left; the left side; to the left of",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_295",
+      "chinese": "坐",
+      "pinyin": "Zuò",
+      "english": "surname Zuo",
+      "proficiency": 1,
+      "lastSeen": null
+    },
+    {
+      "id": "HSK2_1769396447123_296",
+      "chinese": "做",
+      "pinyin": "zuò",
+      "english": "to make; to produce; to write; to compose; to do; to engage in; to hold (a party etc); (of a person) to be (an intermediary, a good student etc); to become (husband and wife, friends etc); (of a thing) to serve as; to be used for; to assume (an air or manner)",
+      "proficiency": 1,
+      "lastSeen": null
+    }
+  ]
+}

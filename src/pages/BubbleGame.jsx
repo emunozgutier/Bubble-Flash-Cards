@@ -17,7 +17,9 @@ function BubbleGame() {
                 <p>Values to match:</p>
                 <ul>
                     {cards.map(card => (
-                        <li key={card.id}>{card.front} - {card.back}</li>
+                        <li key={card.id}>
+                            {card.chinese || card.front} - {card.english || card.back}
+                        </li>
                     ))}
                 </ul>
             </div>

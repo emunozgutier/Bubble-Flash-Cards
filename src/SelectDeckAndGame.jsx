@@ -5,7 +5,20 @@ import useDriveStore from './stores/useDriveStore';
 import useDataStore from './stores/useDataStore';
 import { signIn, saveFile, loadFile } from './services/googleDriveService';
 
+import hsk1Data from './data/decks/HSK1.json';
+import hsk2Data from './data/decks/HSK2.json';
+import hsk3Data from './data/decks/HSK3.json';
+import hsk4Data from './data/decks/HSK4.json';
+import hsk5Data from './data/decks/HSK5.json';
+
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
+const DEFAULT_DECKS = {
+    'HSK1': hsk1Data,
+    'HSK2': hsk2Data,
+    'HSK3': hsk3Data,
+    'HSK4': hsk4Data,
+    'HSK5': hsk5Data
+};
 
 function SelectDeckAndGame() {
     const navigate = useNavigate();
@@ -39,10 +52,15 @@ function SelectDeckAndGame() {
         } else {
             if (appFolderId) {
                 try {
-                    const res = await saveFile(`${newDeck}.json`, { cards: [] }, null, appFolderId);
+                    const defaultData = DEFAULT_DECKS[newDeck] || { cards: [] };
+                    // If defaultData has "cards" property (which it does from our script), use it.
+                    // The saveFile expects an object content.
+                    const contentToSave = defaultData.cards ? defaultData : { cards: defaultData.cards || [] };
+
+                    const res = await saveFile(`${newDeck}.json`, contentToSave, null, appFolderId);
                     updateDeckFileId(newDeck, res.id);
                     setCurrentDeckName(newDeck);
-                    setCards([]);
+                    setCards(contentToSave.cards);
                 } catch (err) {
                     alert("Error creating new deck: " + err.message);
                 }
@@ -129,6 +147,7 @@ function SelectDeckAndGame() {
                 {cards.map(card => (
                     <FlashCard
                         key={card.id}
+                        card={card}
                         front={card.front}
                         back={card.back}
                     />
