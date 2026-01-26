@@ -7,7 +7,7 @@ const ROOT_FOLDER_NAME = 'breadBoardApps';
 const APP_FOLDER_NAME = 'BubbleFlashCards';
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
-const Signin = () => {
+const MainPageSignin = () => {
     const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading, isLoading } = useDriveStore();
     const { setCards, setCurrentDeckName } = useDataStore();
 
@@ -116,4 +116,4 @@ const Signin = () => {
 
 };
 
-export default Signin;
+export default MainPageSignin;
