@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import FlashCard from '../components/FlashCard';
 import useDriveStore from '../stores/useDriveStore';
 import useDataStore from '../stores/useDataStore';
-import { signIn, saveFile, loadFile } from '../services/googleDriveService';
+import { saveFile, loadFile } from '../services/googleDriveService';
+import Signin from './submodules/Signin';
 
 import hsk1Data from '../data/decks/HSK1.json';
 import hsk2Data from '../data/decks/HSK2.json';
@@ -103,11 +104,9 @@ function MainPage() {
             <h1>Flash Cards Manager</h1>
 
             <div className="controls">
-                {!isAuthorized ? (
-                    <button onClick={signIn}>Sign In with Google</button>
-                ) : (
+                <Signin />
+                {isAuthorized && (
                     <>
-                        <span className="auth-status">✅ Connected</span>
                         <select value={currentDeckName} onChange={handleDeckChange} disabled={isLoading}>
                             {/* Merge defaults and drive decks */}
                             {Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)])).map(name => (
