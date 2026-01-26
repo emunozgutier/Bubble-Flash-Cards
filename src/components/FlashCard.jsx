@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FlashCard.css';
 
-export default function FlashCard({ front, back, onDelete }) {
+export default function FlashCard({ front, back }) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     const handleClick = () => {
