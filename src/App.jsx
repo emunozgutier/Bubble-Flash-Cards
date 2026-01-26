@@ -104,7 +104,7 @@ function App() {
     const initializeGoogleModules = async () => {
       try {
         await initGapi();
-        await initGis((_accessToken) => {
+        await initGis(() => {
           setAuthorized(true);
           initializeDriveStructure();
         });
