@@ -15,8 +15,7 @@ export const initGapi = () => {
                         discoveryDocs: DISCOVERY_DOCS,
                     });
                     gapiInited = true;
-                    if (gisInited) resolve();
-                    else resolve(); // Resolve this promise regardless
+                    resolve(); // Resolve immediately
                 } catch (err) {
                     reject(err);
                 }
@@ -34,7 +33,7 @@ export const initGapi = () => {
                         discoveryDocs: DISCOVERY_DOCS,
                     });
                     gapiInited = true;
-                    if (gisInited) resolve();
+                    resolve(); // Resolve immediately
                 } catch (err) {
                     reject(err);
                 }
@@ -77,7 +76,7 @@ export const initGis = (onTokenCallback) => {
             });
             console.log("GIS Initialized, tokenClient set.");
             gisInited = true;
-            if (gapiInited) resolve();
+            resolve();
         };
         script.onerror = (err) => {
             console.error("GIS Script failed to load", err);
