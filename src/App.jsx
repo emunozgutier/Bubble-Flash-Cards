@@ -1,32 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import FlashCard from './components/FlashCard'
 import { initGapi, initGis, signIn, findFile, saveFile, loadFile, createFolder } from './services/googleDriveService'
+import useDriveStore from './stores/useDriveStore'
+import useDataStore from './stores/useDataStore'
 
 const ROOT_FOLDER_NAME = 'breadBoardApps';
 const APP_FOLDER_NAME = 'BubbleFlashCards';
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
 function App() {
-  const [cards, setCards] = useState([
-    { id: 1, front: 'Welcome', back: 'Login to save your cards to Google Drive!' },
-  ]);
-  const [newFront, setNewFront] = useState('');
-  const [newBack, setNewBack] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const { isAuthorized, appFolderId, deckFileIds, isLoading,
+    setAuthorized, setAppFolderId, setDeckFileIds, updateDeckFileId, setIsLoading } = useDriveStore();
 
-  // Drive state
-  const [appFolderId, setAppFolderId] = useState(null);
-  const [currentDeckName, setCurrentDeckName] = useState(DECK_NAMES[0]);
-  const [deckFileIds, setDeckFileIds] = useState({}); // Map deckName -> fileId
+  const { cards, currentDeckName, draftCard,
+    setCards, addCard, setCurrentDeckName, setDraftCardFront, setDraftCardBack, resetDraftCard } = useDataStore();
 
   useEffect(() => {
     const initializeGoogleModules = async () => {
       try {
         await initGapi();
         await initGis((accessToken) => {
-          setIsAuthorized(true);
+          setAuthorized(true);
           initializeDriveStructure();
         });
       } catch (error) {
@@ -137,7 +132,7 @@ function App() {
         try {
           // Quick create
           const res = await saveFile(`${newDeck}.json`, { cards: [] }, null, appFolderId);
-          setDeckFileIds(prev => ({ ...prev, [newDeck]: res.id }));
+          updateDeckFileId(newDeck, res.id);
           setCurrentDeckName(newDeck);
           setCards([]);
         } catch (err) {
@@ -149,15 +144,14 @@ function App() {
 
   const handleAddCard = (e) => {
     e.preventDefault();
-    if (!newFront || !newBack) return;
+    if (!draftCard.front || !draftCard.back) return;
     const newCard = {
       id: Date.now(),
-      front: newFront,
-      back: newBack
+      front: draftCard.front,
+      back: draftCard.back
     };
-    setCards([...cards, newCard]);
-    setNewFront('');
-    setNewBack('');
+    addCard(newCard);
+    resetDraftCard();
   };
 
   const handleSaveToDrive = async () => {
@@ -169,7 +163,7 @@ function App() {
 
       const result = await saveFile(filename, { cards }, fileId, appFolderId);
       if (result.id && !fileId) {
-        setDeckFileIds(prev => ({ ...prev, [currentDeckName]: result.id }));
+        updateDeckFileId(currentDeckName, result.id);
       }
       alert(`Saved ${currentDeckName} successfully!`);
     } catch (error) {
@@ -207,14 +201,14 @@ function App() {
         <input
           type="text"
           placeholder="Front (Question)"
-          value={newFront}
-          onChange={(e) => setNewFront(e.target.value)}
+          value={draftCard.front}
+          onChange={(e) => setDraftCardFront(e.target.value)}
         />
         <input
           type="text"
           placeholder="Back (Answer)"
-          value={newBack}
-          onChange={(e) => setNewBack(e.target.value)}
+          value={draftCard.back}
+          onChange={(e) => setDraftCardBack(e.target.value)}
         />
         <button type="submit">Add Card</button>
       </form>
