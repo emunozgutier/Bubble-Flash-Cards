@@ -28,6 +28,14 @@ const MainPageDeckList = () => {
         deckStats
     } = useDataStore();
 
+    // Use state for 'now' to ensure rendering is pure (deterministic based on state)
+    // Hooks must be unconditional and at the top
+    const [now, setNow] = React.useState(() => Date.now());
+
+    React.useEffect(() => {
+        setNow(Date.now());
+    }, []);
+
     const loadDeck = async (deckName, fileId) => {
         setIsLoading(true);
         try {
@@ -94,13 +102,6 @@ const MainPageDeckList = () => {
     }
 
     const availableDecks = Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)]));
-
-    // Use state for 'now' to ensure rendering is pure (deterministic based on state)
-    const [now, setNow] = React.useState(Date.now());
-
-    React.useEffect(() => {
-        setNow(Date.now());
-    }, []);
 
     const formatLastStudied = (timestamp) => {
         if (!timestamp) return 'Never';
