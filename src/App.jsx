@@ -16,20 +16,37 @@ function App() {
   const { cards, currentDeckName, draftCard,
     setCards, addCard, setCurrentDeckName, setDraftCardFront, setDraftCardBack, resetDraftCard } = useDataStore();
 
-  useEffect(() => {
-    const initializeGoogleModules = async () => {
-      try {
-        await initGapi();
-        await initGis((accessToken) => {
-          setAuthorized(true);
-          initializeDriveStructure();
-        });
-      } catch (error) {
-        console.error("Failed to initialize Google modules", error);
+  const loadDeck = async (deckName, fileId) => {
+    setIsLoading(true);
+    try {
+      const data = await loadFile(fileId);
+      if (data && data.cards) {
+        setCards(data.cards);
+      } else {
+        setCards([]);
       }
-    };
-    initializeGoogleModules();
-  }, []);
+      setCurrentDeckName(deckName);
+    } catch (err) {
+      console.error(`Error loading deck ${deckName}`, err);
+      alert(`Failed to load ${deckName}`);
+    }
+    setIsLoading(false);
+  };
+
+  const createMissingDecks = async (parentId, existingIds) => {
+    const newIds = { ...existingIds };
+    for (const deck of DECK_NAMES) {
+      if (!newIds[deck]) {
+        const filename = `${deck}.json`;
+        const initialData = { cards: [] }; // Empty deck
+        const res = await saveFile(filename, initialData, null, parentId);
+        newIds[deck] = res.id;
+      }
+    }
+    setDeckFileIds(newIds);
+    // Load the first one after ensuring creation
+    await loadDeck(DECK_NAMES[0], newIds[DECK_NAMES[0]]);
+  };
 
   // Initialize folders and decks
   const initializeDriveStructure = async () => {
@@ -83,37 +100,21 @@ function App() {
     setIsLoading(false);
   };
 
-  const createMissingDecks = async (parentId, existingIds) => {
-    const newIds = { ...existingIds };
-    for (const deck of DECK_NAMES) {
-      if (!newIds[deck]) {
-        const filename = `${deck}.json`;
-        const initialData = { cards: [] }; // Empty deck
-        const res = await saveFile(filename, initialData, null, parentId);
-        newIds[deck] = res.id;
+  useEffect(() => {
+    const initializeGoogleModules = async () => {
+      try {
+        await initGapi();
+        await initGis((_accessToken) => {
+          setAuthorized(true);
+          initializeDriveStructure();
+        });
+      } catch (error) {
+        console.error("Failed to initialize Google modules", error);
       }
-    }
-    setDeckFileIds(newIds);
-    // Load the first one after ensuring creation
-    await loadDeck(DECK_NAMES[0], newIds[DECK_NAMES[0]]);
-  };
-
-  const loadDeck = async (deckName, fileId) => {
-    setIsLoading(true);
-    try {
-      const data = await loadFile(fileId);
-      if (data && data.cards) {
-        setCards(data.cards);
-      } else {
-        setCards([]);
-      }
-      setCurrentDeckName(deckName);
-    } catch (err) {
-      console.error(`Error loading deck ${deckName}`, err);
-      alert(`Failed to load ${deckName}`);
-    }
-    setIsLoading(false);
-  };
+    };
+    initializeGoogleModules();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleDeckChange = async (e) => {
     const newDeck = e.target.value;
