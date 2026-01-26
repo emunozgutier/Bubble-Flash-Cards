@@ -5,6 +5,22 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bubble-flash-cards</title>
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        const errorDiv = document.createElement('div');
+        errorDiv.style.position = 'fixed';
+        errorDiv.style.top = '0';
+        errorDiv.style.left = '0';
+        errorDiv.style.width = '100%';
+        errorDiv.style.backgroundColor = 'red';
+        errorDiv.style.color = 'white';
+        errorDiv.style.padding = '20px';
+        errorDiv.style.zIndex = '9999';
+        errorDiv.textContent = 'Global Error: ' + message + ' at ' + source + ':' + lineno + ':' + colno;
+        document.body.appendChild(errorDiv);
+        console.error(message, error);
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>
