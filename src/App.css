@@ -37,27 +37,57 @@
 
 .deck-list {
   display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 10px;
+  flex-direction: column;
+  gap: 15px;
   padding: 10px;
   width: 100%;
+  max-width: 600px;
   justify-content: center;
-  border-bottom: 1px solid #eee;
 }
 
 .deck-item {
-  padding: 10px 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 15px 25px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: white;
   cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  text-align: left;
 }
 
 .deck-item:hover {
-  background-color: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #bbb;
+}
+
+.deck-item-header {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.deck-stats {
+  font-size: 0.9rem;
+  color: #666;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .deck-item.active {

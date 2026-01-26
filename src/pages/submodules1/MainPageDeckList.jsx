@@ -20,18 +20,25 @@ const DEFAULT_DECKS = {
 
 const MainPageDeckList = () => {
     const { isAuthorized, appFolderId, deckFileIds, isLoading, updateDeckFileId, setIsLoading } = useDriveStore();
-    const { cards, currentDeckName, setCards, setCurrentDeckName } = useDataStore();
+    const {
+        cards,
+        currentDeckName,
+        setCards,
+        setCurrentDeckName,
+        deckStats
+    } = useDataStore();
 
     const loadDeck = async (deckName, fileId) => {
         setIsLoading(true);
         try {
             const data = await loadFile(fileId);
+            // Set name first so the store updates stats for the correct deck
+            setCurrentDeckName(deckName);
             if (data && data.cards) {
                 setCards(data.cards);
             } else {
                 setCards([]);
             }
-            setCurrentDeckName(deckName);
         } catch (err) {
             console.error(`Error loading deck ${deckName}`, err);
             alert(`Failed to load ${deckName}`);
@@ -88,19 +95,46 @@ const MainPageDeckList = () => {
 
     const availableDecks = Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)]));
 
+    const formatLastStudied = (timestamp) => {
+        if (!timestamp) return 'Never';
+        const diff = Date.now() - timestamp;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        if (days === 0) return 'Today';
+        if (days === 1) return 'Yesterday';
+        return `${days} days ago`;
+    };
+
     return (
         <div className="deck-list-container">
             <div className="deck-list">
-                {availableDecks.map(name => (
-                    <button
-                        key={name}
-                        className={`deck-item ${name === currentDeckName ? 'active' : ''}`}
-                        onClick={() => handleDeckChange(name)}
-                        disabled={isLoading}
-                    >
-                        {name}
-                    </button>
-                ))}
+                {availableDecks.map(name => {
+                    const stats = deckStats[name] || {};
+                    const lastStudied = formatLastStudied(stats.lastStudied);
+                    const progress = stats.progress || 0;
+
+                    return (
+                        <button
+                            key={name}
+                            className={`deck-item ${name === currentDeckName ? 'active' : ''}`}
+                            onClick={() => handleDeckChange(name)}
+                            disabled={isLoading}
+                        >
+                            <div className="deck-item-header">
+                                <span>{name}</span>
+                            </div>
+                            <div className="deck-stats">
+                                <div className="stat-row">
+                                    <span>Last Studied:</span>
+                                    <span>{lastStudied}</span>
+                                </div>
+                                <div className="stat-row">
+                                    <span>Progress:</span>
+                                    <span>{progress}%</span>
+                                </div>
+                            </div>
+                        </button>
+                    );
+                })}
             </div>
             <div className="deck-actions">
                 <button onClick={handleSaveToDrive} disabled={isLoading || !currentDeckName}>
