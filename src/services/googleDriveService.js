@@ -12,7 +12,6 @@ export const initGapi = () => {
                         apiKey: API_KEY,
                         discoveryDocs: DISCOVERY_DOCS,
                     });
-                    gapiInited = true;
                     resolve(); // Resolve immediately
                 } catch (err) {
                     reject(err);
@@ -30,7 +29,6 @@ export const initGapi = () => {
                         apiKey: API_KEY,
                         discoveryDocs: DISCOVERY_DOCS,
                     });
-                    gapiInited = true;
                     resolve(); // Resolve immediately
                 } catch (err) {
                     reject(err);
