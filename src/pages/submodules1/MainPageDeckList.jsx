@@ -95,9 +95,16 @@ const MainPageDeckList = () => {
 
     const availableDecks = Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)]));
 
+    // Use state for 'now' to ensure rendering is pure (deterministic based on state)
+    const [now, setNow] = React.useState(Date.now());
+
+    React.useEffect(() => {
+        setNow(Date.now());
+    }, []);
+
     const formatLastStudied = (timestamp) => {
         if (!timestamp) return 'Never';
-        const diff = Date.now() - timestamp;
+        const diff = now - timestamp;
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         if (days === 0) return 'Today';
         if (days === 1) return 'Yesterday';

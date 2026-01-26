@@ -8,7 +8,7 @@ const APP_FOLDER_NAME = 'BubbleFlashCards';
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
 const MainPageSignin = () => {
-    const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading, isLoading } = useDriveStore();
+    const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading } = useDriveStore();
     const { setCards, setCurrentDeckName } = useDataStore();
 
     const loadDeck = async (deckName, fileId) => {

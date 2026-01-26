@@ -1,8 +1,6 @@
 import { CLIENT_ID, API_KEY, SCOPES, DISCOVERY_DOCS } from '../config';
 
 let tokenClient;
-let gapiInited = false;
-let gisInited = false;
 
 export const initGapi = () => {
     return new Promise((resolve, reject) => {
@@ -57,7 +55,6 @@ export const initGis = (onTokenCallback) => {
                 },
             });
             console.log("GIS Initialized (cached), tokenClient set.");
-            gisInited = true;
             resolve();
             return;
         }
@@ -75,7 +72,6 @@ export const initGis = (onTokenCallback) => {
                 },
             });
             console.log("GIS Initialized, tokenClient set.");
-            gisInited = true;
             resolve();
         };
         script.onerror = (err) => {
