@@ -9,7 +9,7 @@ import MainPageDeckList from './submodules1/MainPageDeckList';
 function MainPage() {
     const navigate = useNavigate();
     const { isAuthorized } = useDriveStore();
-    const { cards } = useDataStore();
+    const { cards, currentDeckName } = useDataStore();
 
     return (
         <div className="select-deck-page">
@@ -20,7 +20,7 @@ function MainPage() {
                 <MainPageDeckList />
             </div>
 
-            {isAuthorized && (
+            {isAuthorized && currentDeckName && (
                 <div className="game-selection">
                     <button onClick={() => navigate('/bubble')}>Play Bubble Game</button>
                     <button onClick={() => navigate('/matching')}>Play Matching Game</button>

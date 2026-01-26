@@ -39,8 +39,7 @@ const MainPageDeckList = () => {
         setIsLoading(false);
     };
 
-    const handleDeckChange = async (e) => {
-        const newDeck = e.target.value;
+    const handleDeckChange = async (newDeck) => {
         if (newDeck === currentDeckName) return;
 
         const fileId = deckFileIds[newDeck];
@@ -87,18 +86,28 @@ const MainPageDeckList = () => {
         return null; // Or handle as you see fit, but generally this component is shown when authorized
     }
 
+    const availableDecks = Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)]));
+
     return (
-        <>
-            <select value={currentDeckName} onChange={handleDeckChange} disabled={isLoading}>
-                {/* Merge defaults and drive decks */}
-                {Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)])).map(name => (
-                    <option key={name} value={name}>{name}</option>
+        <div className="deck-list-container">
+            <div className="deck-list">
+                {availableDecks.map(name => (
+                    <button
+                        key={name}
+                        className={`deck-item ${name === currentDeckName ? 'active' : ''}`}
+                        onClick={() => handleDeckChange(name)}
+                        disabled={isLoading}
+                    >
+                        {name}
+                    </button>
                 ))}
-            </select>
-            <button onClick={handleSaveToDrive} disabled={isLoading}>
-                {isLoading ? 'Saving...' : 'Save Deck'}
-            </button>
-        </>
+            </div>
+            <div className="deck-actions">
+                <button onClick={handleSaveToDrive} disabled={isLoading || !currentDeckName}>
+                    {isLoading ? 'Saving...' : 'Save Current Deck'}
+                </button>
+            </div>
+        </div>
     );
 };
 
