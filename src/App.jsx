@@ -1,7 +1,10 @@
 import { useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import FlashCard from './components/FlashCard'
-import { initGapi, initGis, signIn, findFile, saveFile, loadFile, createFolder } from './services/googleDriveService'
+import SelectDeckAndGame from './SelectDeckAndGame'
+import BubbleGame from './pages/BubbleGame'
+import MatchingGame from './pages/MatchingGame'
+import { initGapi, initGis, findFile, saveFile, loadFile, createFolder } from './services/googleDriveService'
 import useDriveStore from './stores/useDriveStore'
 import useDataStore from './stores/useDataStore'
 
@@ -10,11 +13,8 @@ const APP_FOLDER_NAME = 'BubbleFlashCards';
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
 function App() {
-  const { isAuthorized, appFolderId, deckFileIds, isLoading,
-    setAuthorized, setAppFolderId, setDeckFileIds, updateDeckFileId, setIsLoading } = useDriveStore();
-
-  const { cards, currentDeckName, draftCard,
-    setCards, addCard, setCurrentDeckName, setDraftCardFront, setDraftCardBack, resetDraftCard } = useDataStore();
+  const { setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading } = useDriveStore();
+  const { setCards, setCurrentDeckName } = useDataStore();
 
   const loadDeck = async (deckName, fileId) => {
     setIsLoading(true);
@@ -116,114 +116,14 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleDeckChange = async (e) => {
-    const newDeck = e.target.value;
-    if (newDeck === currentDeckName) return;
-
-    // Save current deck before switching? (Optional, but good UX)
-    // For now, let's just switch and load.
-
-    const fileId = deckFileIds[newDeck];
-    if (fileId) {
-      await loadDeck(newDeck, fileId);
-    } else {
-      // Should not happen if we initialized correctly, but handle just in case
-      // Create it?
-      if (appFolderId) {
-        try {
-          // Quick create
-          const res = await saveFile(`${newDeck}.json`, { cards: [] }, null, appFolderId);
-          updateDeckFileId(newDeck, res.id);
-          setCurrentDeckName(newDeck);
-          setCards([]);
-        } catch (err) {
-          alert("Error creating new deck: " + err.message);
-        }
-      }
-    }
-  };
-
-  const handleAddCard = (e) => {
-    e.preventDefault();
-    if (!draftCard.front || !draftCard.back) return;
-    const newCard = {
-      id: Date.now(),
-      front: draftCard.front,
-      back: draftCard.back
-    };
-    addCard(newCard);
-    resetDraftCard();
-  };
-
-  const handleSaveToDrive = async () => {
-    if (!isAuthorized || !appFolderId) return;
-    setIsLoading(true);
-    try {
-      const filename = `${currentDeckName}.json`;
-      const fileId = deckFileIds[currentDeckName];
-
-      const result = await saveFile(filename, { cards }, fileId, appFolderId);
-      if (result.id && !fileId) {
-        updateDeckFileId(currentDeckName, result.id);
-      }
-      alert(`Saved ${currentDeckName} successfully!`);
-    } catch (error) {
-      alert('Failed to save: ' + error.message);
-    }
-    setIsLoading(false);
-  };
-
-
-
-
   return (
-    <>
-      <h1>Flash Cards</h1>
-
-      <div className="controls">
-        {!isAuthorized ? (
-          <button onClick={signIn}>Sign In with Google</button>
-        ) : (
-          <>
-            <span className="auth-status">✅ Connected</span>
-            <select value={currentDeckName} onChange={handleDeckChange} disabled={isLoading}>
-              {DECK_NAMES.map(name => (
-                <option key={name} value={name}>{name}</option>
-              ))}
-            </select>
-            <button onClick={handleSaveToDrive} disabled={isLoading}>
-              {isLoading ? 'Saving...' : 'Save Deck'}
-            </button>
-          </>
-        )}
-      </div>
-
-      <form className="add-card-form" onSubmit={handleAddCard}>
-        <input
-          type="text"
-          placeholder="Front (Question)"
-          value={draftCard.front}
-          onChange={(e) => setDraftCardFront(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Back (Answer)"
-          value={draftCard.back}
-          onChange={(e) => setDraftCardBack(e.target.value)}
-        />
-        <button type="submit">Add Card</button>
-      </form>
-
-      <div className="card-grid">
-        {cards.map(card => (
-          <FlashCard
-            key={card.id}
-            front={card.front}
-            back={card.back}
-          />
-        ))}
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SelectDeckAndGame />} />
+        <Route path="/bubble" element={<BubbleGame />} />
+        <Route path="/matching" element={<MatchingGame />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

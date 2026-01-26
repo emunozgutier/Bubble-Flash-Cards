@@ -1,0 +1,141 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import FlashCard from './components/FlashCard';
+import useDriveStore from './stores/useDriveStore';
+import useDataStore from './stores/useDataStore';
+import { signIn, saveFile, loadFile } from './services/googleDriveService';
+
+const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
+
+function SelectDeckAndGame() {
+    const navigate = useNavigate();
+    const { isAuthorized, appFolderId, deckFileIds, isLoading, updateDeckFileId, setIsLoading } = useDriveStore();
+    const { cards, currentDeckName, draftCard, setCards, addCard, setCurrentDeckName, setDraftCardFront, setDraftCardBack, resetDraftCard } = useDataStore();
+
+    const loadDeck = async (deckName, fileId) => {
+        setIsLoading(true);
+        try {
+            const data = await loadFile(fileId);
+            if (data && data.cards) {
+                setCards(data.cards);
+            } else {
+                setCards([]);
+            }
+            setCurrentDeckName(deckName);
+        } catch (err) {
+            console.error(`Error loading deck ${deckName}`, err);
+            alert(`Failed to load ${deckName}`);
+        }
+        setIsLoading(false);
+    };
+
+    const handleDeckChange = async (e) => {
+        const newDeck = e.target.value;
+        if (newDeck === currentDeckName) return;
+
+        const fileId = deckFileIds[newDeck];
+        if (fileId) {
+            await loadDeck(newDeck, fileId);
+        } else {
+            if (appFolderId) {
+                try {
+                    const res = await saveFile(`${newDeck}.json`, { cards: [] }, null, appFolderId);
+                    updateDeckFileId(newDeck, res.id);
+                    setCurrentDeckName(newDeck);
+                    setCards([]);
+                } catch (err) {
+                    alert("Error creating new deck: " + err.message);
+                }
+            }
+        }
+    };
+
+    const handleAddCard = (e) => {
+        e.preventDefault();
+        if (!draftCard.front || !draftCard.back) return;
+        const newCard = {
+            id: Date.now(),
+            front: draftCard.front,
+            back: draftCard.back
+        };
+        addCard(newCard);
+        resetDraftCard();
+    };
+
+    const handleSaveToDrive = async () => {
+        if (!isAuthorized || !appFolderId) return;
+        setIsLoading(true);
+        try {
+            const filename = `${currentDeckName}.json`;
+            const fileId = deckFileIds[currentDeckName];
+
+            const result = await saveFile(filename, { cards }, fileId, appFolderId);
+            if (result.id && !fileId) {
+                updateDeckFileId(currentDeckName, result.id);
+            }
+            alert(`Saved ${currentDeckName} successfully!`);
+        } catch (error) {
+            alert('Failed to save: ' + error.message);
+        }
+        setIsLoading(false);
+    };
+
+    return (
+        <div className="select-deck-page">
+            <h1>Flash Cards Manager</h1>
+
+            <div className="controls">
+                {!isAuthorized ? (
+                    <button onClick={signIn}>Sign In with Google</button>
+                ) : (
+                    <>
+                        <span className="auth-status">✅ Connected</span>
+                        <select value={currentDeckName} onChange={handleDeckChange} disabled={isLoading}>
+                            {DECK_NAMES.map(name => (
+                                <option key={name} value={name}>{name}</option>
+                            ))}
+                        </select>
+                        <button onClick={handleSaveToDrive} disabled={isLoading}>
+                            {isLoading ? 'Saving...' : 'Save Deck'}
+                        </button>
+                    </>
+                )}
+            </div>
+
+            {isAuthorized && (
+                <div className="game-selection">
+                    <button onClick={() => navigate('/bubble')}>Play Bubble Game</button>
+                    <button onClick={() => navigate('/matching')}>Play Matching Game</button>
+                </div>
+            )}
+
+            <form className="add-card-form" onSubmit={handleAddCard}>
+                <input
+                    type="text"
+                    placeholder="Front (Question)"
+                    value={draftCard.front}
+                    onChange={(e) => setDraftCardFront(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Back (Answer)"
+                    value={draftCard.back}
+                    onChange={(e) => setDraftCardBack(e.target.value)}
+                />
+                <button type="submit">Add Card</button>
+            </form>
+
+            <div className="card-grid">
+                {cards.map(card => (
+                    <FlashCard
+                        key={card.id}
+                        front={card.front}
+                        back={card.back}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+
+export default SelectDeckAndGame;
