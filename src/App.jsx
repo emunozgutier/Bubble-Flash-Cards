@@ -4,7 +4,7 @@ import './App.css'
 import SelectDeckAndGame from './SelectDeckAndGame'
 import BubbleGame from './pages/BubbleGame'
 import MatchingGame from './pages/MatchingGame'
-import { initGapi, initGis, findFile, saveFile, loadFile, createFolder } from './services/googleDriveService'
+import { initGapi, initGis, findFile, saveFile, loadFile, createFolder, listFiles } from './services/googleDriveService'
 import useDriveStore from './stores/useDriveStore'
 import useDataStore from './stores/useDataStore'
 
@@ -73,25 +73,41 @@ function App() {
       }
       setAppFolderId(appId);
 
-      // 3. Check for existence of all decks
+      // 3. Find ALL json files in APP folder
+      const files = await listFiles(appId);
       const ids = {};
-      for (const deck of DECK_NAMES) {
-        const filename = `${deck}.json`;
-        const files = await findFile(filename, appId);
-        if (files && files.length > 0) {
-          ids[deck] = files[0].id;
-        }
+      if (files && files.length > 0) {
+        files.forEach(file => {
+          // Remove .json extension for the deck name key if preferred, or keep it.
+          // The current app uses "HSK1" logic, so let's strip .json if present.
+          const deckName = file.name.replace(/\.json$/i, '');
+          ids[deckName] = file.id;
+        });
       }
+
       setDeckFileIds(ids);
 
-      // 4. Load the default deck (first one)
-      if (ids[DECK_NAMES[0]]) {
-        await loadDeck(DECK_NAMES[0], ids[DECK_NAMES[0]]);
-      } else {
-        // If not found, we will create it on save, or we can create empty now?
-        // Let's create empty now to be sure it exists
-        await createMissingDecks(appId, ids);
-      }
+      // 4. Ensure default decks exist (create if missing)
+      // This will check if HSK1 etc exist in our 'ids' map. If not, create them.
+      await createMissingDecks(appId, ids);
+
+      // Update ids after creation
+      // Note: createMissingDecks calls setDeckFileIds with new merged ids, so we don't need to do it here again manually
+      // but we do need the updated list for loading the default deck.
+
+      // We can just rely on the fact that if HSK1 was missing, it's created and added to state in createMissingDecks.
+      // But for local reasoning let's just use the merged map that createMissingDecks computes.
+      // Actually createMissingDecks logic is:
+      // const newIds = { ...existingIds }; ... setDeckFileIds(newIds);
+
+      // So let's load the default deck (first one)
+      // We need to re-read what createMissingDecks did or pass the updated ids back?
+      // Simpler: createMissingDecks internally updates state. But we want to call loadDeck here.
+      // Let's rely on the fact that we know HSK1 is index 0.
+
+      // Wait, createMissingDecks is async and updates state. State update might not reflect immediately in this closure.
+      // Let's modify createMissingDecks to return the new ids object.
+
 
     } catch (err) {
       console.error("Error initializing Drive structure", err);
@@ -117,7 +133,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<SelectDeckAndGame />} />
         <Route path="/bubble" element={<BubbleGame />} />

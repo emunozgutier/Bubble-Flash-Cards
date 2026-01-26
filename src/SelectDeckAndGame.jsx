@@ -109,7 +109,8 @@ function SelectDeckAndGame() {
                     <>
                         <span className="auth-status">✅ Connected</span>
                         <select value={currentDeckName} onChange={handleDeckChange} disabled={isLoading}>
-                            {DECK_NAMES.map(name => (
+                            {/* Merge defaults and drive decks */}
+                            {Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)])).map(name => (
                                 <option key={name} value={name}>{name}</option>
                             ))}
                         </select>

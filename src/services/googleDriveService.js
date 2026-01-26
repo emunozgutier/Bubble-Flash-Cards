@@ -76,6 +76,21 @@ export const findFile = async (filename, parentId = null) => {
     }
 };
 
+export const listFiles = async (folderId) => {
+    try {
+        const query = `'${folderId}' in parents and trashed = false and mimeType = 'application/json'`;
+        const response = await window.gapi.client.drive.files.list({
+            q: query,
+            fields: 'files(id, name)',
+            spaces: 'drive',
+        });
+        return response.result.files;
+    } catch (err) {
+        console.error("Error listing files", err);
+        throw err;
+    }
+};
+
 export const createFolder = async (name, parentId = null) => {
     const metadata = {
         name: name,
