@@ -6,6 +6,24 @@ let gisInited = false;
 
 export const initGapi = () => {
     return new Promise((resolve, reject) => {
+        if (window.gapi) {
+            // Already loaded, just init client if needed or resolve
+            window.gapi.load('client', async () => {
+                try {
+                    await window.gapi.client.init({
+                        apiKey: API_KEY,
+                        discoveryDocs: DISCOVERY_DOCS,
+                    });
+                    gapiInited = true;
+                    if (gisInited) resolve();
+                    else resolve(); // Resolve this promise regardless
+                } catch (err) {
+                    reject(err);
+                }
+            });
+            return;
+        }
+
         const script = document.createElement('script');
         script.src = 'https://apis.google.com/js/api.js';
         script.onload = () => {
@@ -29,6 +47,22 @@ export const initGapi = () => {
 
 export const initGis = (onTokenCallback) => {
     return new Promise((resolve, reject) => {
+        if (window.google && window.google.accounts) {
+            tokenClient = window.google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: (tokenResponse) => {
+                    if (tokenResponse && tokenResponse.access_token) {
+                        onTokenCallback(tokenResponse.access_token);
+                    }
+                },
+            });
+            console.log("GIS Initialized (cached), tokenClient set.");
+            gisInited = true;
+            resolve();
+            return;
+        }
+
         const script = document.createElement('script');
         script.src = 'https://accounts.google.com/gsi/client';
         script.onload = () => {
@@ -41,19 +75,25 @@ export const initGis = (onTokenCallback) => {
                     }
                 },
             });
+            console.log("GIS Initialized, tokenClient set.");
             gisInited = true;
             if (gapiInited) resolve();
         };
-        script.onerror = reject;
+        script.onerror = (err) => {
+            console.error("GIS Script failed to load", err);
+            reject(err);
+        };
         document.body.appendChild(script);
     });
 };
 
 export const signIn = () => {
+    console.log("Sign In clicked. TokenClient:", tokenClient);
     if (tokenClient) {
         tokenClient.requestAccessToken({ prompt: 'consent' });
     } else {
         console.error("Token client not initialized");
+        alert("Google Sign-In not initialized yet. Please refresh or check console.");
     }
 };
 
