@@ -58,24 +58,43 @@ const MainPageDeckList = () => {
         if (newDeck === currentDeckName) return;
 
         const fileId = deckFileIds[newDeck];
-        if (fileId) {
-            await loadDeck(newDeck, fileId);
-        } else {
-            if (appFolderId) {
-                try {
-                    const defaultData = DEFAULT_DECKS[newDeck] || { cards: [] };
-                    // If defaultData has "cards" property (which it does from our script), use it.
-                    // The saveFile expects an object content.
-                    const contentToSave = defaultData.cards ? defaultData : { cards: defaultData.cards || [] };
 
-                    const res = await saveFile(`${newDeck}.json`, contentToSave, null, appFolderId);
-                    updateDeckFileId(newDeck, res.id);
+        // If authorized and file exists in Drive, load it
+        if (isAuthorized && fileId) {
+            await loadDeck(newDeck, fileId);
+            return;
+        }
+
+        // If authorized but file doesn't exist, create it from default
+        if (isAuthorized && appFolderId) {
+            try {
+                const defaultData = DEFAULT_DECKS[newDeck] || { cards: [] };
+                const contentToSave = defaultData.cards ? defaultData : { cards: defaultData.cards || [] };
+
+                const res = await saveFile(`${newDeck}.json`, contentToSave, null, appFolderId);
+                updateDeckFileId(newDeck, res.id);
+                setCurrentDeckName(newDeck);
+                setCards(contentToSave.cards);
+            } catch (err) {
+                alert("Error creating new deck: " + err.message);
+                // Fallback to local default on error
+                const defaultData = DEFAULT_DECKS[newDeck];
+                if (defaultData) {
                     setCurrentDeckName(newDeck);
-                    setCards(contentToSave.cards);
-                } catch (err) {
-                    alert("Error creating new deck: " + err.message);
+                    setCards(defaultData.cards || []);
                 }
             }
+            return;
+        }
+
+        // Not authorized, load local default
+        const defaultData = DEFAULT_DECKS[newDeck];
+        if (defaultData) {
+            setCurrentDeckName(newDeck);
+            setCards(defaultData.cards || []);
+        } else {
+            setCurrentDeckName(newDeck);
+            setCards([]);
         }
     };
 
@@ -97,9 +116,7 @@ const MainPageDeckList = () => {
         setIsLoading(false);
     };
 
-    if (!isAuthorized) {
-        return null; // Or handle as you see fit, but generally this component is shown when authorized
-    }
+
 
     const availableDecks = Array.from(new Set([...DECK_NAMES, ...Object.keys(deckFileIds)]));
 
