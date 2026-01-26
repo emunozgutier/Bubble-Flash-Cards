@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import useNavigationStore from '../stores/useNavigationStore';
 import FlashCard from '../components/FlashCard';
 import useDriveStore from '../stores/useDriveStore';
 import useDataStore from '../stores/useDataStore';
@@ -7,7 +7,7 @@ import MainPageSignin from './submodules1/MainPageSignin';
 import MainPageDeckList from './submodules1/MainPageDeckList';
 
 function MainPage() {
-    const navigate = useNavigate();
+    const { navigateTo } = useNavigationStore();
     const { isAuthorized } = useDriveStore();
     const { cards, currentDeckName } = useDataStore();
 
@@ -22,8 +22,8 @@ function MainPage() {
 
             {isAuthorized && currentDeckName && (
                 <div className="game-selection">
-                    <button onClick={() => navigate('/bubble')}>Play Bubble Game</button>
-                    <button onClick={() => navigate('/matching')}>Play Matching Game</button>
+                    <button onClick={() => navigateTo('bubble')}>Play Bubble Game</button>
+                    <button onClick={() => navigateTo('matching')}>Play Matching Game</button>
                 </div>
             )}
 

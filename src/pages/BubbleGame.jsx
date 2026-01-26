@@ -1,14 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import useNavigationStore from '../stores/useNavigationStore';
 import useDataStore from '../stores/useDataStore';
 
 function BubbleGame() {
-    const navigate = useNavigate();
+    const { navigateTo } = useNavigationStore();
     const { cards, currentDeckName } = useDataStore();
 
     return (
         <div className="bubble-game">
-            <button onClick={() => navigate('/')}>Back to Deck Selection</button>
+            <button onClick={() => navigateTo('main')}>Back to Deck Selection</button>
             <h1>Bubble Game</h1>
             <p>Playing with deck: {currentDeckName}</p>
             <p>Total cards: {cards.length}</p>
