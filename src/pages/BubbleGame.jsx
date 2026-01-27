@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import useNavigationStore from '../stores/useNavigationStore';
 import useDataStore from '../stores/useDataStore';
+import useBubbleGameStore from '../stores/useBubbleGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import BubbleGameBubble from './submodules1/BubbleGameBubble';
 
