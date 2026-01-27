@@ -12,7 +12,7 @@
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
@@ -20,7 +20,8 @@
   transform: rotateY(180deg);
 }
 
-.flash-card-front, .flash-card-back {
+.flash-card-front,
+.flash-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -36,13 +37,14 @@
 }
 
 .flash-card-front {
-  background-color: #ffffff;
-  color: #333;
-  border: 2px solid #e0e0e0;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
 }
 
 .flash-card-back {
-  background-color: #4a90e2;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-text);
   transform: rotateY(180deg);
+  border: 2px solid var(--color-primary);
 }

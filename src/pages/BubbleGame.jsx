@@ -81,7 +81,7 @@ function BubbleGame() {
                     <BubbleGameBubble
                         text={currentCard.chinese || currentCard.front} // Question is Chinese/Front
                         className="main-bubble"
-                        style={{ width: '150px', height: '150px', fontSize: '1.5rem', backgroundColor: '#e0f7fa' }}
+                        style={{ width: '150px', height: '150px', fontSize: '1.5rem' }}
                     />
                 </div>
 

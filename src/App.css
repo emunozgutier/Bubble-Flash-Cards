@@ -50,20 +50,21 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 15px 25px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-surface);
   border-radius: 12px;
-  background-color: white;
+  background-color: var(--color-surface);
+  color: var(--color-text);
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   width: 100%;
   text-align: left;
 }
 
 .deck-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-color: #bbb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border-color: var(--color-primary);
 }
 
 .deck-item-header {
@@ -77,7 +78,7 @@
 
 .deck-stats {
   font-size: 0.9rem;
-  color: #666;
+  color: var(--color-text-secondary);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -91,9 +92,10 @@
 }
 
 .deck-item.active {
-  background-color: #646cff;
-  color: white;
-  border-color: #646cff;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
 }
 
 .game-selection {
@@ -119,12 +121,15 @@
 button {
   cursor: pointer;
 }
+
 /* Bubble Game Styles */
 .bubble-game-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 .game-title-bar {
@@ -132,13 +137,14 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f0f0f0;
-  border-bottom: 2px solid #ddd;
+  background-color: var(--color-surface);
+  border-bottom: 2px solid var(--color-border);
 }
 
 .game-title {
   margin: 0;
   font-size: 1.5rem;
+  color: var(--color-primary);
 }
 
 /* Use relative positioning for the game board to place bubbles absolutely */
@@ -146,7 +152,8 @@ button {
   flex: 1;
   position: relative;
   width: 100%;
-  max-width: 600px; /* Constrain width for better layout on large screens */
+  max-width: 600px;
+  /* Constrain width for better layout on large screens */
   margin: 0 auto;
 }
 
@@ -158,16 +165,20 @@ button {
   text-align: center;
   padding: 10px;
   cursor: pointer;
-  background-color: white;
-  border: 2px solid #333;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s, background-color 0.2s;
   user-select: none;
-  position: absolute; 
+  position: absolute;
 }
 
 .bubble-game-bubble:hover {
-  transform: translate(-50%, -50%) scale(1.05); /* Maintain centering transform + scale */
+  transform: translate(-50%, -50%) scale(1.05);
+  /* Maintain centering transform + scale */
+  background-color: var(--color-primary);
+  color: var(--color-text);
 }
 
 .bubble-text {
@@ -186,8 +197,10 @@ button {
   width: 150px;
   height: 150px;
   font-size: 1.5rem;
-  background-color: #e3f2fd;
-  border-color: #2196f3;
+  background-color: var(--color-surface);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  /* Highlight question text */
 }
 
 /* Top Bubble */
@@ -219,8 +232,10 @@ button {
 
 .score-board {
   position: absolute;
-  top: 60px; /* Below title bar */
+  top: 60px;
+  /* Below title bar */
   right: 20px;
   font-size: 1.2rem;
   font-weight: bold;
+  color: var(--color-primary);
 }
