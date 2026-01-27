@@ -10,64 +10,87 @@ function BubbleGame() {
     const { navigateTo } = useNavigationStore();
     const { cards, currentDeckName } = useDataStore();
 
-    const [currentCard, setCurrentCard] = useState(null);
-    const [options, setOptions] = useState([]);
-    const [score, setScore] = useState(0);
+    const {
+        lives,
+        cardsLeft,
+        currentCard,
+        options,
+        score,
+        gameState,
+        startGame,
+        submitAnswer,
+        continueGame
+    } = useBubbleGameStore();
 
-    // Initialize game or next round
+    // Start game when cards are loaded or deck changes
     useEffect(() => {
         if (cards.length > 0) {
-            startNewRound();
+            startGame(cards);
         }
     }, [cards]);
 
-    const startNewRound = () => {
-        if (!cards || cards.length === 0) return;
-
-        // 1. Pick a random card as the question
-        const cardIndex = Math.floor(Math.random() * cards.length);
-        const questionCard = cards[cardIndex];
-
-        // 2. Pick 2 distractors
-        const otherCards = cards.filter(c => c.id !== questionCard.id);
-        // Shuffle others to get random distractors
-        const shuffledOthers = [...otherCards].sort(() => 0.5 - Math.random());
-        const distractors = shuffledOthers.slice(0, 2);
-
-        // 3. Combine correct answer + distractors
-        const correctOption = {
-            id: questionCard.id,
-            text: questionCard.english || questionCard.back, // Answer is English/Back
-            isCorrect: true
-        };
-
-        const wrongOptions = distractors.map(c => ({
-            id: c.id,
-            text: c.english || c.back,
-            isCorrect: false
-        }));
-
-        const allOptions = [correctOption, ...wrongOptions];
-        // Shuffle options
-        const shuffledOptions = allOptions.sort(() => 0.5 - Math.random());
-
-        setCurrentCard(questionCard);
-        setOptions(shuffledOptions);
-    };
-
     const handleOptionClick = (option) => {
-        if (option.isCorrect) {
-            setScore(score + 1);
-            alert("Correct!");
-            startNewRound();
-        } else {
-            alert("Try again!");
+        const isCorrect = submitAnswer(option);
+        if (!isCorrect) {
+            if (lives > 1) {
+                alert("Try again!");
+            }
         }
     };
+
+    if (gameState === 'game_over') {
+        return (
+            <div className="bubble-game-container">
+                <GameTitleBar
+                    title={`Bubble Game - ${currentDeckName}`}
+                    onExit={() => navigateTo('main')}
+                />
+                <div className="game-over-screen">
+                    <h2>Game Over</h2>
+                    <p>You ran out of lives!</p>
+                    <button
+                        onClick={continueGame}
+                        className="game-over-button"
+                    >
+                        Continue
+                    </button>
+                    <button
+                        onClick={() => navigateTo('main')}
+                        className="game-exit-button"
+                    >
+                        Exit
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    if (gameState === 'won') {
+        return (
+            <div className="bubble-game-container">
+                <GameTitleBar
+                    title={`Bubble Game - ${currentDeckName}`}
+                    onExit={() => navigateTo('main')}
+                />
+                <div className="game-over-screen">
+                    <h2>Session Complete!</h2>
+                    <p>Score: {score}</p>
+                    <button
+                        onClick={continueGame}
+                        className="game-over-button"
+                    >
+                        Play Again
+                    </button>
+                </div>
+            </div>
+        );
+    }
 
     if (!currentCard) {
         return <div>Loading...</div>;
     }
+
+    const displayCardsLeft = cardsLeft + 1;
 
     return (
         <div className="bubble-game-container">
@@ -75,6 +98,11 @@ function BubbleGame() {
                 title={`Bubble Game - ${currentDeckName}`}
                 onExit={() => navigateTo('main')}
             />
+
+            <div className="game-stats">
+                <span>Lives: {'❤️'.repeat(lives)}</span>
+                <span>Cards Left: {displayCardsLeft}</span>
+            </div>
 
             <div className="game-board">
                 {/* Main Question Bubble */}
@@ -88,9 +116,6 @@ function BubbleGame() {
                 {/* Answer Bubbles - Positioned around */}
                 <div className="options-container">
                     {options.map((opt, index) => {
-                        // Simple positioning logic or just flex layout
-                        // Requirement: "top, bottom left and botton right" relative to... something?
-                        // Let's just create a nice layout area below
                         return (
                             <BubbleGameBubble
                                 key={opt.id}
@@ -101,9 +126,6 @@ function BubbleGame() {
                         );
                     })}
                 </div>
-            </div>
-            <div className="score-board">
-                Score: {score}
             </div>
         </div>
     );
