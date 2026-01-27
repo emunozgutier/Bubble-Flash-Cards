@@ -152,7 +152,8 @@ button {
   flex: 1;
   position: relative;
   width: 100%;
-  max-width: 600px;
+  max-width: 1000px;
+  /* Increased from 600px to use more space */
   /* Constrain width for better layout on large screens */
   margin: 0 auto;
 }
@@ -163,7 +164,8 @@ button {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10px;
+  padding: 20px;
+  /* Increased padding to keep text away from edges */
   cursor: pointer;
   background-color: var(--color-surface);
   color: var(--color-text);
@@ -172,6 +174,8 @@ button {
   transition: transform 0.2s, background-color 0.2s;
   user-select: none;
   position: absolute;
+  overflow: hidden;
+  /* Ensure text doesn't spill out */
 }
 
 .bubble-game-bubble:hover {
@@ -185,7 +189,16 @@ button {
   font-weight: bold;
   pointer-events: none;
   overflow-wrap: break-word;
-  max-width: 90%;
+  /* Ensure long words break */
+  word-break: break-word;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  /* Limit number of lines */
+  -webkit-box-orient: vertical;
+  line-height: 1.2;
 }
 
 /* Center Bubble (Main Question) */
@@ -194,9 +207,11 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 150px;
-  height: 150px;
-  font-size: 1.5rem;
+  width: 200px;
+  /* Increased size */
+  height: 200px;
+  /* Increased size */
+  font-size: 1.8rem;
   background-color: var(--color-surface);
   border-color: var(--color-primary);
   color: var(--color-primary);
@@ -205,29 +220,38 @@ button {
 
 /* Top Bubble */
 .option-0 {
-  top: 20%;
+  top: 15%;
+  /* Moved up */
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 110px;
-  height: 110px;
+  width: 140px;
+  /* Increased size */
+  height: 140px;
+  /* Increased size */
 }
 
 /* Bottom Left Bubble */
 .option-1 {
   top: 80%;
-  left: 20%;
+  left: 15%;
+  /* Moved out */
   transform: translate(-50%, -50%);
-  width: 110px;
-  height: 110px;
+  width: 140px;
+  /* Increased size */
+  height: 140px;
+  /* Increased size */
 }
 
 /* Bottom Right Bubble */
 .option-2 {
   top: 80%;
-  left: 80%;
+  left: 85%;
+  /* Moved out */
   transform: translate(-50%, -50%);
-  width: 110px;
-  height: 110px;
+  width: 140px;
+  /* Increased size */
+  height: 140px;
+  /* Increased size */
 }
 
 .score-board {
