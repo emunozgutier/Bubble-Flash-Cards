@@ -5,6 +5,7 @@ import useDataStore from '../stores/useDataStore';
 import useBubbleGameStore from '../stores/useBubbleGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import BubbleGameBubble from './submodules1/BubbleGameBubble';
+import './BubbleGame.css';
 
 function BubbleGame() {
     const { navigateTo } = useNavigationStore();
