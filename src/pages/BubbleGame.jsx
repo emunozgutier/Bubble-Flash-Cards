@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import useNavigationStore from '../stores/useNavigationStore';
 import useDataStore from '../stores/useDataStore';
-import GameTitleBar from './submodules2/GameTitleBar';
-import BubbleGameBubble from './submodules2/BubbleGameBubble';
+import GameTitleBar from './submodules1/GameTitleBar';
+import BubbleGameBubble from './submodules1/BubbleGameBubble';
 
 function BubbleGame() {
     const { navigateTo } = useNavigationStore();
