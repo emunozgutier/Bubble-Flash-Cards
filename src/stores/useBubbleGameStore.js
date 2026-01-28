@@ -92,62 +92,25 @@ const useBubbleGameStore = create((set, get) => ({
     },
 
     submitAnswer: (option) => {
-        const { lives, score, nextRound } = get();
+        const { lives, score } = get();
 
         if (option.isCorrect) {
             set({ score: score + 1 });
-            // Alert logic moved to UI or handled here? user looked for alert in original code.
-            // Let's return true/false so UI can alert if needed, OR just update state.
-            // original had alerts "Correct!" / "Try again!".
-            // "Try again" implies we trigger next round or let them retry?
-            // "If you get 3 wrong the game is gone". This implies we move on or fail.
-            // Usually in these games, correct -> next. Wrong -> lose life, maybe next?
-            // User said: "if you get 3 wrong the game is gone".
-            // Let's assume wrong -> lose life, stay on card? Or wrong -> lose life, next card?
-            // "Try again" suggests stay.
-            // But if I stay, I can just click 4 times.
-            // Let's assume: Wrong -> Lose Life. Stay on card to learn? 
-            // Or Wrong -> Lose Life.
-            // If I just stay, game is trivial.
-            // But if I move on, I miss the card.
-            // Let's Stick to: Right -> Next. Wrong -> Lose Life. If Life > 0, Stay?
-            // "when playing make sure... if you get 3 wrong game is gone".
-            // Let's assume infinite retries per card until lives run out?
-            // That matches "Try again!".
+            return true;
+        } else {
+            const newLives = lives - 1;
+            set({ lives: newLives });
+            if (newLives <= 0) {
+                set({ gameState: 'game_over' });
+            }
+            return false;
+        }
+    },
 
-            submitAnswer: (option) => {
-                const { lives, score } = get(); // Removed nextRound destruction
-
-                if (option.isCorrect) {
-                    set({ score: score + 1 });
-                    // nextRound(); // Removed: Component handles timing
-                    return true;
-                } else {
-                    const newLives = lives - 1;
-                    set({ lives: newLives });
-                    if (newLives <= 0) {
-                        set({ gameState: 'game_over' });
-                    }
-                    return false;
-                }
-            },
-
-                continueGame: () => {
-                    // "Asked if you want to continue"
-                    // Usually "Continue" implies "Retry" or "Keep playing but reset lives"?
-                    // User said: "asked if you want to continue".
-                    // Use case: Child playing, lost. "Continue?" -> New game.
-                    // Or "Continue" -> Reset lives to 3, keep current score/progress?
-                    // "the game is gone and you are asked if you want to continue".
-                    // This sounds like "Game Over. Play Again?".
-                    // I will implement it as "Restart with new 16 cards".
-
-                    // Actually, checking "Continue" in video games often means "Reset lives, keep level".
-                    // But here "16 cards" is a session.
-                    // I'll make continue restart the session (startGame).
-                    const { deck, startGame, questionMode } = get();
-                    startGame(deck, questionMode); // Restart with same deck and mode
-                }
-        }));
+    continueGame: () => {
+        const { deck, startGame, questionMode } = get();
+        startGame(deck, questionMode);
+    }
+}));
 
 export default useBubbleGameStore;

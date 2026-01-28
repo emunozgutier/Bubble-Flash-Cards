@@ -165,8 +165,12 @@ function BubbleGame() {
                         let animationClass = '';
                         if (poppedBubbles.has(opt.id)) {
                             animationClass = 'bubble-pop';
-                        } else if (isRoundComplete && !opt.isCorrect) {
-                            animationClass = 'bubble-fall';
+                        } else if (isRoundComplete) {
+                            if (!opt.isCorrect) {
+                                animationClass = 'bubble-fall';
+                            } else {
+                                animationClass = 'bubble-correct';
+                            }
                         }
 
                         return (
