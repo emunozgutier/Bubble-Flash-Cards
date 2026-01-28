@@ -33,7 +33,7 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                 width: 300,
                 height: 300,
                 padding: 20,
-                showOutline: true, // Always show outline initially?
+                showOutline: isGuided, // Initialize based on state
                 strokeAnimationSpeed: 1,
                 delayBetweenStrokes: 200, // Speed up animation
                 charDataLoader: (char, onComplete, onLoadingError) => {
@@ -55,6 +55,10 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                     setIsLoading(false);
                 }
             });
+
+            if (!isGuided) {
+                writer.hideOutline();
+            }
 
             setWriterInstance(writer);
 
@@ -83,6 +87,12 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
 
         // "Guided" -> Show outline/hints more aggressively or simple quizzing with hints on mistake
         // "Unguided" -> Strict
+
+        if (isGuided) {
+            writerInstance.showOutline();
+        } else {
+            writerInstance.hideOutline();
+        }
 
         // Actually, HanziWriter 'quiz' method has options
         writerInstance.quiz({
