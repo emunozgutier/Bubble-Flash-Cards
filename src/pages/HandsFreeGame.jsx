@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import useNavigationStore from '../stores/useNavigationStore';
 import useGameStore from '../stores/useGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
-// import GameSummary from './GameSummary'; // Commenting out to check for circular dependency crash
+import GameSummary from './GameSummary';
 import './BubbleGame.css';
 
 // Short silent MP3 to keep media session active
@@ -103,12 +103,15 @@ function HandsFreeGame() {
         const handleKeyDown = (e) => {
             log(`Key: ${e.code} (${e.key})`);
 
-            if (e.code === 'ArrowRight' || e.code === 'Space') {
+            if (e.code === 'ArrowRight' || e.code === 'Space' || e.code === 'MediaTrackNext') {
                 // Prevent scroll for space
                 if (e.code === 'Space') e.preventDefault();
                 handleCorrect();
-            } else if (e.code === 'ArrowLeft') {
+            } else if (e.code === 'ArrowLeft' || e.code === 'MediaTrackPrevious') {
                 handleIncorrect();
+            } else if (e.code === 'MediaPlayPause') {
+                e.preventDefault();
+                speak(currentCard ? (currentCard.displayQuestion || currentCard.displayAnswer) : '', 1.0);
             }
         };
 
@@ -255,8 +258,7 @@ function HandsFreeGame() {
 
     if (gameState === 'game_over' || gameState === 'won') {
         window.speechSynthesis.cancel(); // Stop any pending speech
-        return <div>Game Over (Summary Disabled for Debugging)</div>;
-        // return <GameSummary title="Hands Free Summary" />;
+        return <GameSummary title="Hands Free Summary" />;
     }
 
     if (!currentCard) return <div>Loading...</div>;
