@@ -97,7 +97,6 @@ const useDataStore = create(
         }),
         {
             name: 'bubble-flash-cards-storage', // unique name
-            partialize: (state) => ({ deckStats: state.deckStats }), // only persist stats, not the cards (which are in Drive)
         }
     )
 );
