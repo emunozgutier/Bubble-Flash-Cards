@@ -74,7 +74,7 @@ const useGameStore = create(
                         case 'chinese_english':
                             return { question: safeChinese, answer: safeEnglish };
                         case 'english_chinese':
-                            return { question: safeEnglish, answer: safeChinese };
+                            return { question: safeEnglish, answer: `${safeChinese}\n(${safePinyin})` };
                         case 'chinese_pinyin_english':
                             return { question: `${safeChinese}\n(${safePinyin})`, answer: safeEnglish };
                         case 'chinese_pinyin':

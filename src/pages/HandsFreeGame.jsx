@@ -47,15 +47,19 @@ function HandsFreeGame() {
     // Helper wrappers that log events
     const handleCorrect = () => {
         log("Action: Correct");
+        setShowAnswer(false); // Immediate reset
         window.speechSynthesis.cancel();
         markCorrect();
     };
 
     const handleIncorrect = () => {
         log("Action: Incorrect");
+        setShowAnswer(false); // Immediate reset
         window.speechSynthesis.cancel();
         markIncorrect();
     };
+
+
 
     const handleReplay = (rate = 1.0) => {
         if (currentCard) {
@@ -243,7 +247,7 @@ function HandsFreeGame() {
             />
 
             {/* Split Screen Layout */}
-            <div className="split-screen-container">
+            <div className="split-screen-container" key={currentCard?.id || 'empty'}>
                 {/* Top Half: Question */}
                 <div className="split-top">
                     <h1 className="question-text">
