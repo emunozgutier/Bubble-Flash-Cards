@@ -6,6 +6,7 @@ import useBubbleGameStore from '../stores/useBubbleGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import BubbleGameBubble from './submodules1/BubbleGameBubble';
 import BubbleGameSummary from './BubbleGameSummary';
+import CharacterDraw from './CharacterDraw';
 import './BubbleGame.css';
 
 function BubbleGame() {
@@ -30,6 +31,8 @@ function BubbleGame() {
     const [poppedBubbles, setPoppedBubbles] = useState(new Set());
     const [isRoundComplete, setIsRoundComplete] = useState(false);
 
+    const [isDrawing, setIsDrawing] = useState(false);
+
     // Reset to idle on mount if not already playing or to ensure fresh start logic if we want to force start screen
     // But if we want to keep state across navigations, we might not want to reset hard.
     // However, requirement implies selecting mode before playing.
@@ -43,6 +46,7 @@ function BubbleGame() {
     useEffect(() => {
         setPoppedBubbles(new Set());
         setIsRoundComplete(false);
+        // setIsDrawing(false); // Should strictly be handled by drawComplete, but safety here? No, might cause flicker.
     }, [currentCard]);
 
     // Redirect to setup if no game in progress (e.g. refresh)
@@ -59,6 +63,11 @@ function BubbleGame() {
         }
     }, [gameQueue, gameState, currentCard]);
 
+    const handleDrawComplete = () => {
+        setIsDrawing(false);
+        nextRound();
+    };
+
     const handleOptionClick = (option) => {
         if (isRoundComplete || poppedBubbles.has(option.id)) return;
 
@@ -67,9 +76,16 @@ function BubbleGame() {
         if (isCorrect) {
             // Trigger Fall Animation
             setIsRoundComplete(true);
-            // Wait for animation then next round
+            // Wait for animation then start drawing phase
             setTimeout(() => {
-                nextRound();
+                // Check if we have chinese characters to draw
+                const charsToDraw = currentCard.chinese || currentCard.front;
+                if (charsToDraw && typeof charsToDraw === 'string' && !charsToDraw.match(/[a-zA-Z]/)) { // basic check if it's not English
+                    setIsDrawing(true);
+                } else {
+                    // Skip drawing if no valid chinese
+                    nextRound();
+                }
             }, 1000);
         } else {
             // Trigger Pop Animation
@@ -95,6 +111,16 @@ function BubbleGame() {
     }
 
     const displayCardsLeft = cardsLeft + 1;
+
+    if (isDrawing && currentCard) {
+        return (
+            <CharacterDraw
+                characters={currentCard.chinese || currentCard.front}
+                englishDefinition={currentCard.english || currentCard.back}
+                onComplete={handleDrawComplete}
+            />
+        );
+    }
 
     return (
         <div className="bubble-game-container">

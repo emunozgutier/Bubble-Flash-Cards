@@ -1,0 +1,162 @@
+.character-draw-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--theme-bg, #f0f4f8);
+    color: var(--theme-text, #333);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.draw-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.draw-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #555;
+}
+
+.english-hint {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #2c3e50;
+    min-height: 2.4rem;
+}
+
+.progress-indicator {
+    font-size: 1rem;
+    color: #777;
+}
+
+.target-char {
+    font-weight: bold;
+    color: #e74c3c;
+    font-family: "KaiTi", "Kaiti SC", "STKaiti", serif;
+    /* Good font for Chinese chars */
+}
+
+.draw-area {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-bottom: 30px;
+    min-width: 300px;
+    /* Match writer width */
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .hanzi-target pointer-events handled by HanziWriter SVG */
+
+.loading-overlay,
+.error-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    z-index: 10;
+}
+
+.error-overlay p {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.draw-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.skip-btn,
+.next-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.skip-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.next-btn {
+    background: #3498db;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.next-btn:hover {
+    background: #2980b9;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    user-select: none;
+}
+
+.toggle-switch input {
+    display: none;
+}
+
+.slider {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #2ecc71;
+}
+
+input:checked+.slider:before {
+    transform: translateX(22px);
+}
+
+.label-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    min-width: 80px;
+}
