@@ -16,6 +16,7 @@ const useGameStore = create(
             questionMode: 'chinese', // 'chinese', 'pinyin', 'english'
             sessionResults: [], // { cardId, question, answer, userAnswer, isCorrect, card }
             enableDrawing: true,
+            practiceMode: true, // Enable voice recognition by default for Hands Free
 
             setQuestionMode: (mode) => set({ questionMode: mode }),
             setEnableDrawing: (enabled) => set({ enableDrawing: enabled }),
