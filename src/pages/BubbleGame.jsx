@@ -7,6 +7,7 @@ import GameTitleBar from './submodules1/GameTitleBar';
 import BubbleGameBubble from './submodules1/BubbleGameBubble';
 import GameSummary from './GameSummary';
 import CharacterDraw from './CharacterDraw';
+import './CommonPage.css';
 import './BubbleGame.css';
 
 function BubbleGame() {

@@ -3,7 +3,8 @@ import useNavigationStore from '../stores/useNavigationStore';
 import useDataStore from '../stores/useDataStore';
 import useGameStore from '../stores/useGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
-import './BubbleGame.css'; // Re-use Bubble Game styles
+import './CommonPage.css';
+import './BubbleGame.css'; // Re-use Bubble Game styles for container if needed
 
 function BubbleGameSetup() {
     const { navigateTo } = useNavigationStore();

@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import HanziWriter from 'hanzi-writer';
+import './CommonPage.css';
 import './CharacterDraw.css'; // We'll need some styles
 
 const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
