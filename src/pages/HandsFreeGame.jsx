@@ -3,10 +3,10 @@ import useNavigationStore from '../stores/useNavigationStore';
 import useGameStore from '../stores/useGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import GameSummary from './GameSummary';
+import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../utils/AudioManager';
+import { setupKeyboardListeners } from '../utils/KeyboardManager';
 import './BubbleGame.css';
-
-// Short silent MP3 to keep media session active
-const SILENT_MP3 = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//OEAAAAAAAAAAAAAAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA//OEMAAAAAAAEfAAAAAAAAAAASW5mbwAAAA8AAAAZAAABFwAAA0cAAAAAAAD/84QAAAAAAAAAAAAAAAAAAAAAALavZjgAAAAAABFwAAAAAAAAAAAA';
+import './HandsFreeGame.css';
 
 function HandsFreeGame() {
     const { navigateTo } = useNavigationStore();
@@ -38,29 +38,51 @@ function HandsFreeGame() {
     const recognitionRef = useRef(null);
     const audioRef = useRef(null);
 
-    // Debug: Listen for keyboard presses
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            const keyInfo = `${e.code} (${e.key})`;
-            setDebugKeys(prev => [keyInfo, ...prev].slice(0, 5)); // Keep last 5
-
-            // Optional: Map keys to actions for testing
-            if (e.code === 'Space' || e.code === 'Enter' || e.code === 'ArrowRight') {
-                // handleCorrect(); // Uncomment to enable control
-            }
-            if (e.code === 'ArrowLeft') {
-                // handleIncorrect(); // Uncomment to enable control
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
-
     const log = (msg) => {
         console.log(msg);
         setDebugLogs(prev => [msg, ...prev].slice(0, 10)); // Keep last 10
     };
+
+    // Helper wrappers that log events
+    const handleCorrect = () => {
+        log("Action: Correct");
+        window.speechSynthesis.cancel();
+        markCorrect();
+    };
+
+    const handleIncorrect = () => {
+        log("Action: Incorrect");
+        window.speechSynthesis.cancel();
+        markIncorrect();
+    };
+
+    const handleReplay = (rate = 1.0) => {
+        if (currentCard) {
+            speak(currentCard.displayQuestion || currentCard.displayAnswer, rate, log);
+        }
+    };
+
+    // Keyboard Listener
+    useEffect(() => {
+        // Log key presses for debug overlay
+        const debugListener = (e) => {
+            const keyInfo = `${e.code} (${e.key})`;
+            setDebugKeys(prev => [keyInfo, ...prev].slice(0, 5));
+        };
+        window.addEventListener('keydown', debugListener);
+
+        const cleanupKeyboard = setupKeyboardListeners({
+            onCorrect: handleCorrect,
+            onIncorrect: handleIncorrect,
+            onReplay: () => handleReplay(1.0),
+            log
+        });
+
+        return () => {
+            window.removeEventListener('keydown', debugListener);
+            cleanupKeyboard();
+        };
+    }, [currentCard]); // Re-bind when currentCard changes for closure
 
     // Initial Audio Playback to unlock Audio Context
     useEffect(() => {
@@ -70,83 +92,15 @@ function HandsFreeGame() {
         }
     }, [currentCard]);
 
-    // Helper: Speak Text
-    const speak = (text, rate = 1.0) => {
-        if (!text) return;
-        log(`Speaking: ${text.substring(0, 10)}... @ ${rate}`);
-
-        // Cancel persistent synthesis (or overlap?)
-        window.speechSynthesis.cancel();
-
-        // Use Chinese voice if text has Chinese, else English
-        // Heuristic: Check for Chinese characters
-        const isChinese = /[\u4E00-\u9FFF]/.test(text);
-
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = rate; // 1.0 = normal, 0.25 = slow
-
-        // Find voice
-        const voices = window.speechSynthesis.getVoices();
-        if (isChinese) {
-            const zhVoice = voices.find(v => v.lang.includes('zh')); // zh-CN, zh-HK, zh-TW
-            if (zhVoice) utterance.voice = zhVoice;
-        } else {
-            // Prefer English
-            const enVoice = voices.find(v => v.lang.startsWith('en'));
-            if (enVoice) utterance.voice = enVoice;
-        }
-
-        window.speechSynthesis.speak(utterance);
-    };
-
-    // Keyboard Listener (Standard Keys)
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            log(`Key: ${e.code} (${e.key})`);
-
-            if (e.code === 'ArrowRight' || e.code === 'Space' || e.code === 'MediaTrackNext') {
-                // Prevent scroll for space
-                if (e.code === 'Space') e.preventDefault();
-                handleCorrect();
-            } else if (e.code === 'ArrowLeft' || e.code === 'MediaTrackPrevious') {
-                handleIncorrect();
-            } else if (e.code === 'MediaPlayPause') {
-                e.preventDefault();
-                speak(currentCard ? (currentCard.displayQuestion || currentCard.displayAnswer) : '', 1.0);
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [currentCard]); // Needs currentCard via closure in handles
-
     // Initialize Media Session & Speech
     useEffect(() => {
-        // Media Session
-        if ('mediaSession' in navigator) {
-            log("MediaSession available");
-            navigator.mediaSession.metadata = new MediaMetadata({
-                title: 'Hands Free Practice',
-                artist: 'Flash Cards',
-                album: 'Bubble Game'
-            });
-
-            navigator.mediaSession.setActionHandler('nexttrack', () => { log("Media: Next"); handleCorrect(); });
-            navigator.mediaSession.setActionHandler('previoustrack', () => { log("Media: Prev"); handleIncorrect(); });
-
-            // Replay standard speed
-            navigator.mediaSession.setActionHandler('play', () => {
-                log("Media: Play");
-                if (currentCard) speak(currentCard.displayQuestion || currentCard.displayAnswer, 1.0);
-            });
-            // Replay slow speed
-            navigator.mediaSession.setActionHandler('pause', () => {
-                log("Media: Pause");
-                if (currentCard) speak(currentCard.displayQuestion || currentCard.displayAnswer, 0.25);
-            });
-        } else {
-            log("MediaSession NOT available");
-        }
+        const cleanupMedia = initMediaSession({
+            onNext: handleCorrect,
+            onPrev: handleIncorrect,
+            onPlay: () => handleReplay(1.0),
+            onPause: () => handleReplay(0.25),
+            log
+        });
 
         // Web Speech API
         if (practiceMode && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
@@ -187,20 +141,23 @@ function HandsFreeGame() {
         }
 
         return () => {
-            if (navigator.mediaSession) {
-                // Keep handlers? Removing might break persistence if component remounts quickly?
-                // But good practice to clean up if leaving the game.
-                navigator.mediaSession.setActionHandler('nexttrack', null);
-                navigator.mediaSession.setActionHandler('previoustrack', null);
-                navigator.mediaSession.setActionHandler('play', null);
-                navigator.mediaSession.setActionHandler('pause', null);
-            }
+            cleanupMedia();
             if (recognitionRef.current) {
                 recognitionRef.current.stop();
             }
         };
     }, [practiceMode, currentCard]);
-    // Handlers need latest closure values, so dependency on currentCard is vital unless using refs.
+
+    // Update Media Metadata
+    useEffect(() => {
+        if (currentCard) {
+            updateMediaMetadata(
+                currentCard.displayQuestion || 'Deep Focus',
+                `Lives: ${lives} | Left: ${cardsLeft + 1}`
+            );
+        }
+    }, [currentCard, lives, cardsLeft]);
+
 
     // Auto-Speak on Card Load with Delay
     useEffect(() => {
@@ -208,7 +165,7 @@ function HandsFreeGame() {
             setShowAnswer(false); // Reset answer visibility
             const timer = setTimeout(() => {
                 const textToSpeak = currentCard.displayQuestion;
-                speak(textToSpeak, 1.0);
+                speak(textToSpeak, 1.0, log);
             }, 500);
             return () => clearTimeout(timer);
         }
@@ -247,26 +204,6 @@ function HandsFreeGame() {
         setSpeechResult('');
     }, [currentCard, practiceMode, isListening]);
 
-    // Update Media Metadata
-    useEffect(() => {
-        if ('mediaSession' in navigator && currentCard) {
-            navigator.mediaSession.metadata.title = currentCard.displayQuestion || 'Deep Focus';
-            navigator.mediaSession.metadata.artist = `Lives: ${lives} | Left: ${cardsLeft + 1}`;
-        }
-    }, [currentCard, lives, cardsLeft]);
-
-
-    const handleCorrect = () => {
-        log("Action: Correct");
-        window.speechSynthesis.cancel();
-        markCorrect();
-    };
-
-    const handleIncorrect = () => {
-        log("Action: Incorrect");
-        window.speechSynthesis.cancel();
-        markIncorrect();
-    };
 
     if (gameState === 'idle') return null;
 
@@ -280,27 +217,14 @@ function HandsFreeGame() {
     const displayQuestion = currentCard.displayQuestion || '...';
 
     return (
-        <div className="bubble-game-container" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="hands-free-container">
             <GameTitleBar
                 title={`Hands Free - Lives: ${lives}`}
                 onExit={() => navigateTo('main')}
             />
 
             {/* Debug Window */}
-            <div style={{
-                position: 'absolute',
-                top: '50px',
-                right: '10px',
-                width: '200px',
-                background: 'rgba(0,0,0,0.7)',
-                color: '#0f0',
-                fontSize: '0.7em',
-                padding: '5px',
-                borderRadius: '5px',
-                pointerEvents: 'none',
-                fontFamily: 'monospace',
-                zIndex: 9999
-            }}>
+            <div className="debug-window">
                 <strong>Debug Log:</strong>
                 {debugLogs.map((l, i) => <div key={i}>{l}</div>)}
             </div>
@@ -315,63 +239,42 @@ function HandsFreeGame() {
                 style={{ display: 'none' }}
             />
 
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px', textAlign: 'center' }}>
-
-                <h1 style={{ fontSize: '3em', marginBottom: '20px', whiteSpace: 'pre-wrap' }}>
+            <div className="game-content">
+                <h1 className="question-text">
                     {displayQuestion}
                 </h1>
 
                 {/* Delayed Answer Reveal */}
-                <div style={{
-                    fontSize: '2em',
-                    color: 'var(--color-text-secondary)',
-                    opacity: showAnswer ? 1 : 0,
-                    transition: 'opacity 1s ease-in-out',
-                    minHeight: '1.2em',
-                    marginBottom: '20px'
-                }}>
+                <div className={`answer-text ${showAnswer ? 'visible' : 'hidden'}`}>
                     {currentCard?.displayAnswer || ''}
                 </div>
 
                 {/* Visual Audio Controls */}
-                <div style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
+                <div className="controls-container">
                     <button
-                        onClick={() => speak(currentCard.displayQuestion, 1.0)}
-                        style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', background: 'var(--color-primary)', color: 'white', cursor: 'pointer' }}
+                        onClick={() => handleReplay(1.0)}
+                        className="control-button primary"
                     >
                         🔊 Speak
                     </button>
                     <button
-                        onClick={() => speak(currentCard.displayQuestion, 0.25)}
-                        style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', background: 'var(--color-secondary)', color: 'white', cursor: 'pointer' }}
+                        onClick={() => handleReplay(0.25)}
+                        className="control-button secondary"
                     >
                         🐢 Slow
                     </button>
                 </div>
 
                 {practiceMode && (
-                    <div style={{ marginTop: '20px', padding: '10px', border: '1px solid var(--color-border)', borderRadius: '8px', width: '80%' }}>
-                        <div style={{ fontSize: '0.8em', textTransform: 'uppercase', color: 'var(--color-text-secondary)' }}>Listening ({recognitionRef.current?.lang})</div>
-                        <div style={{ fontStyle: 'italic', minHeight: '1.2em' }}>{speechResult || '...'}</div>
+                    <div className="speech-status">
+                        <div className="speech-status-label">Listening ({recognitionRef.current?.lang})</div>
+                        <div className="speech-result">{speechResult || '...'}</div>
                     </div>
                 )}
-
             </div>
 
             {/* Debug Overlay for Keyboard */}
-            <div style={{
-                position: 'fixed',
-                top: '10px',
-                right: '10px',
-                background: 'rgba(0, 0, 0, 0.8)',
-                color: '#0f0',
-                padding: '10px',
-                borderRadius: '5px',
-                fontSize: '12px',
-                fontFamily: 'monospace',
-                zIndex: 9999,
-                pointerEvents: 'none'
-            }}>
+            <div className="keyboard-debug-overlay">
                 <div>KEYBOARD DEBUG</div>
                 {debugKeys.length === 0 && <div style={{ opacity: 0.5 }}>(Press any key)</div>}
                 {debugKeys.map((k, i) => (
@@ -380,49 +283,17 @@ function HandsFreeGame() {
             </div>
 
             {/* Backup Controls */}
-            <div style={{
-                height: '150px',
-                width: '100%',
-                display: 'flex',
-                gap: '10px',
-                padding: '10px',
-                boxSizing: 'border-box',
-                background: 'rgba(0,0,0,0.2)'
-            }}>
+            <div className="backup-controls">
                 <button
                     onClick={handleIncorrect}
-                    style={{
-                        flex: 1,
-                        background: '#dc3545',
-                        color: 'white',
-                        fontSize: '1.5em',
-                        border: 'none',
-                        borderRadius: '10px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
+                    className="backup-button incorrect"
                 >
                     <span>⏮</span>
                     <span>Skip / Wrong</span>
                 </button>
                 <button
                     onClick={handleCorrect}
-                    style={{
-                        flex: 1,
-                        background: '#28a745',
-                        color: 'white',
-                        fontSize: '1.5em',
-                        border: 'none',
-                        borderRadius: '10px',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
+                    className="backup-button correct"
                 >
                     <span>Next / Correct</span>
                     <span>⏭</span>
