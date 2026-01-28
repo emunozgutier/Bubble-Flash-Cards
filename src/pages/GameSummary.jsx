@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import useNavigationStore from '../stores/useNavigationStore';
-import useBubbleGameStore from '../stores/useBubbleGameStore';
+import useGameStore from '../stores/useGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import useDataStore from '../stores/useDataStore';
 import './BubbleGame.css'; // Re-use bubble game css or add new ones
 
-function BubbleGameSummary() {
+function GameSummary({ title = 'Game Summary' }) {
     const { navigateTo } = useNavigationStore();
     const {
         score,
         continueGame,
         gameState,
         sessionResults
-    } = useBubbleGameStore();
+    } = useGameStore();
     const { cards } = useDataStore(); // To get updated proficiency if needed from state
 
     // Recalculate or just use session results. 
@@ -23,11 +23,16 @@ function BubbleGameSummary() {
         return card ? card.proficiency : 0;
     };
 
+    const handleExit = () => {
+        // Just navigate to main for now, or setup if we want
+        navigateTo('main');
+    };
+
     return (
         <div className="bubble-game-container">
             <GameTitleBar
-                title={`Game Summary`}
-                onExit={() => navigateTo('main')}
+                title={title}
+                onExit={handleExit}
             />
             <div className="summary-screen" style={{ overflowY: 'auto', padding: '20px', height: '100%', boxSizing: 'border-box' }}>
                 <div style={{ textAlign: 'center', marginBottom: '20px' }}>
@@ -41,6 +46,7 @@ function BubbleGameSummary() {
                             <tr style={{ borderBottom: '1px solid var(--color-border)', textAlign: 'left' }}>
                                 <th style={{ padding: '8px' }}>Question</th>
                                 <th style={{ padding: '8px' }}>Correct Answer</th>
+                                <th style={{ padding: '8px' }}>Your Answer</th>
                                 <th style={{ padding: '8px' }}>Result</th>
                                 <th style={{ padding: '8px' }}>Proficiency</th>
                             </tr>
@@ -55,6 +61,9 @@ function BubbleGameSummary() {
                                             <div style={{ whiteSpace: 'pre-wrap' }}>{result.question}</div>
                                         </td>
                                         <td style={{ padding: '8px' }}>{result.correctAnswer}</td>
+                                        <td style={{ padding: '8px', fontStyle: 'italic', color: 'var(--color-text-secondary)' }}>
+                                            {result.userAnswer || '-'}
+                                        </td>
                                         <td style={{ padding: '8px', color: isCorrect ? 'lime' : 'red' }}>
                                             {isCorrect ? '✓' : '✗'}
                                         </td>
@@ -77,7 +86,7 @@ function BubbleGameSummary() {
                         Play Again
                     </button>
                     <button
-                        onClick={() => navigateTo('main')}
+                        onClick={handleExit}
                         className="game-exit-button"
                     >
                         Exit
@@ -88,4 +97,4 @@ function BubbleGameSummary() {
     );
 }
 
-export default BubbleGameSummary;
+export default GameSummary;

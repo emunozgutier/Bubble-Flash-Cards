@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import useNavigationStore from '../stores/useNavigationStore';
 import useDataStore from '../stores/useDataStore';
-import useBubbleGameStore from '../stores/useBubbleGameStore';
+import useGameStore from '../stores/useGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import BubbleGameBubble from './submodules1/BubbleGameBubble';
-import BubbleGameSummary from './BubbleGameSummary';
+import GameSummary from './GameSummary';
 import CharacterDraw from './CharacterDraw';
 import './BubbleGame.css';
 
@@ -27,7 +27,7 @@ function BubbleGame() {
         // setQuestionMode // Not needed here anymore
         gameQueue,
         enableDrawing
-    } = useBubbleGameStore();
+    } = useGameStore();
 
     const [poppedBubbles, setPoppedBubbles] = useState(new Set());
     const [isRoundComplete, setIsRoundComplete] = useState(false);
@@ -40,7 +40,7 @@ function BubbleGame() {
     useEffect(() => {
         // If we just loaded and state is idle, we stay idle.
         // If cards changed, maybe we should reset?
-        // useBubbleGameStore.setState({ gameState: 'idle' }); // Optional: Force start screen on mount
+        // useGameStore.setState({ gameState: 'idle' }); // Optional: Force start screen on mount
     }, []);
 
     // Reset local state when card changes
@@ -104,7 +104,7 @@ function BubbleGame() {
     }
 
     if (gameState === 'game_over' || gameState === 'won') {
-        return <BubbleGameSummary />;
+        return <GameSummary title="Bubble Game Summary" />;
     }
 
     if (!currentCard) {

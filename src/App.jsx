@@ -3,6 +3,8 @@ import './App.css';
 import MainPage from './pages/MainPage';
 import BubbleGame from './pages/BubbleGame';
 import BubbleGameSetup from './pages/BubbleGameSetup';
+import HandsFreeGameSetup from './pages/HandsFreeGameSetup';
+import HandsFreeGame from './pages/HandsFreeGame';
 import MatchingGame from './pages/MatchingGame';
 import useNavigationStore from './stores/useNavigationStore';
 import useThemeStore from './stores/useThemeStore';
@@ -27,6 +29,8 @@ function App() {
       {currentPage === 'main' && <MainPage />}
       {currentPage === 'bubbleSetup' && <BubbleGameSetup />}
       {currentPage === 'bubble' && <BubbleGame />}
+      {currentPage === 'handsFreeSetup' && <HandsFreeGameSetup />}
+      {currentPage === 'handsFree' && <HandsFreeGame />}
       {currentPage === 'matching' && <MatchingGame />}
     </>
   );

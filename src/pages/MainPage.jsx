@@ -23,6 +23,7 @@ function MainPage() {
             {currentDeckName && (
                 <div className="game-selection">
                     <button onClick={() => navigateTo('bubbleSetup')}>Play Bubble Game</button>
+                    <button onClick={() => navigateTo('handsFreeSetup')}>Play Hands Free</button>
                     <button onClick={() => navigateTo('matching')}>Play Matching Game</button>
                 </div>
             )}

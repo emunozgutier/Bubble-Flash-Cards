@@ -1,14 +1,14 @@
 import React from 'react';
 import useNavigationStore from '../stores/useNavigationStore';
 import useDataStore from '../stores/useDataStore';
-import useBubbleGameStore from '../stores/useBubbleGameStore';
+import useGameStore from '../stores/useGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import './BubbleGame.css'; // Re-use Bubble Game styles
 
 function BubbleGameSetup() {
     const { navigateTo } = useNavigationStore();
     const { cards, currentDeckName } = useDataStore();
-    const { startGame } = useBubbleGameStore();
+    const { startGame } = useGameStore();
 
     const handleStart = (mode) => {
         if (cards.length > 0) {
@@ -37,8 +37,8 @@ function BubbleGameSetup() {
                     <label className="toggle-switch">
                         <input
                             type="checkbox"
-                            checked={useBubbleGameStore(state => state.enableDrawing)}
-                            onChange={(e) => useBubbleGameStore.getState().setEnableDrawing(e.target.checked)}
+                            checked={useGameStore(state => state.enableDrawing)}
+                            onChange={(e) => useGameStore.getState().setEnableDrawing(e.target.checked)}
                         />
                         <span className="slider round"></span>
                     </label>
