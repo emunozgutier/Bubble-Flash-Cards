@@ -218,17 +218,19 @@ function HandsFreeGame() {
     const displayQuestion = currentCard.displayQuestion || '...';
 
     return (
-        <div className="hands-free-container">
+        <div className="page-container">
             <GameTitleBar
                 title={`Hands Free - Lives: ${lives}`}
                 onExit={() => navigateTo('main')}
             />
 
-            {/* Debug Window */}
+            {/* Debug Window (Hidden) */}
+            {/* 
             <div className="debug-window">
                 <strong>Debug Log:</strong>
                 {debugLogs.map((l, i) => <div key={i}>{l}</div>)}
-            </div>
+            </div> 
+            */}
 
             {/* Hidden Audio Loop for Media Session Persistence */}
             <audio
@@ -240,48 +242,55 @@ function HandsFreeGame() {
                 style={{ display: 'none' }}
             />
 
-            <div className="game-content">
-                <h1 className="question-text">
-                    {displayQuestion}
-                </h1>
-
-                {/* Delayed Answer Reveal */}
-                <div className={`answer-text ${showAnswer ? 'visible' : 'hidden'}`}>
-                    {currentCard?.displayAnswer || ''}
+            {/* Split Screen Layout */}
+            <div className="split-screen-container">
+                {/* Top Half: Question */}
+                <div className="split-top">
+                    <h1 className="question-text">
+                        {displayQuestion}
+                    </h1>
                 </div>
 
-                {/* Visual Audio Controls */}
-                <div className="controls-container">
-                    <button
-                        onClick={() => handleReplay(1.0)}
-                        className="control-button primary"
-                    >
-                        🔊 Speak
-                    </button>
-                    <button
-                        onClick={() => handleReplay(0.25)}
-                        className="control-button secondary"
-                    >
-                        🐢 Slow
-                    </button>
-                </div>
-
-                {practiceMode && (
-                    <div className="speech-status">
-                        <div className="speech-status-label">Listening ({recognitionRef.current?.lang})</div>
-                        <div className="speech-result">{speechResult || '...'}</div>
+                {/* Bottom Half: Answer & Controls */}
+                <div className="split-bottom">
+                    <div className={`answer-text ${showAnswer ? 'visible' : 'hidden'}`}>
+                        {currentCard?.displayAnswer || ''}
                     </div>
-                )}
+
+                    <div className="controls-container">
+                        <button
+                            onClick={() => handleReplay(1.0)}
+                            className="control-button primary"
+                        >
+                            🔊 Speak
+                        </button>
+                        <button
+                            onClick={() => handleReplay(0.25)}
+                            className="control-button secondary"
+                        >
+                            🐢 Slow
+                        </button>
+                    </div>
+
+                    {practiceMode && (
+                        <div className="speech-status">
+                            <div className="speech-status-label">Listening ({recognitionRef.current?.lang})</div>
+                            <div className="speech-result">{speechResult || '...'}</div>
+                        </div>
+                    )}
+                </div>
             </div>
 
-            {/* Debug Overlay for Keyboard */}
+            {/* Debug Overlay for Keyboard (Hidden) */}
+            {/* 
             <div className="keyboard-debug-overlay">
                 <div>KEYBOARD DEBUG</div>
                 {debugKeys.length === 0 && <div style={{ opacity: 0.5 }}>(Press any key)</div>}
                 {debugKeys.map((k, i) => (
                     <div key={i}>{k}</div>
                 ))}
-            </div>
+            </div> 
+            */}
 
             {/* Backup Controls */}
             <div className="backup-controls">
