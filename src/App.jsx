@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import MainPage from './pages/MainPage';
 import BubbleGame from './pages/BubbleGame';
+import BubbleGameSetup from './pages/BubbleGameSetup';
 import MatchingGame from './pages/MatchingGame';
 import useNavigationStore from './stores/useNavigationStore';
 import useThemeStore from './stores/useThemeStore';
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       {currentPage === 'main' && <MainPage />}
+      {currentPage === 'bubbleSetup' && <BubbleGameSetup />}
       {currentPage === 'bubble' && <BubbleGame />}
       {currentPage === 'matching' && <MatchingGame />}
     </>

@@ -9,8 +9,11 @@ const useBubbleGameStore = create((set, get) => ({
     options: [],
     deck: [], // Full deck for distractors
     gameQueue: [], // The 16 cards to play
+    questionMode: 'chinese', // 'chinese', 'pinyin', 'english'
 
-    startGame: (allCards) => {
+    setQuestionMode: (mode) => set({ questionMode: mode }),
+
+    startGame: (allCards, mode = 'chinese') => {
         if (!allCards || allCards.length === 0) return;
 
         // Shuffle and pick 16 (or fewer if deck is small)
@@ -23,14 +26,15 @@ const useBubbleGameStore = create((set, get) => ({
             lives: 3,
             score: 0,
             gameState: 'playing',
-            cardsLeft: sessionCards.length
+            cardsLeft: sessionCards.length,
+            questionMode: mode
         });
 
         get().nextRound();
     },
 
     nextRound: () => {
-        const { gameQueue, deck } = get();
+        const { gameQueue, deck, questionMode } = get();
 
         if (gameQueue.length === 0) {
             set({ gameState: 'won', currentCard: null, options: [] });
@@ -45,16 +49,35 @@ const useBubbleGameStore = create((set, get) => ({
         const shuffledOthers = [...otherCards].sort(() => 0.5 - Math.random());
         const distractors = shuffledOthers.slice(0, 2);
 
+        // Helper to get text based on mode
+        const getModeContent = (card) => {
+            switch (questionMode) {
+                case 'chinese_english':
+                    return { question: card.chinese, answer: card.english || card.back };
+                case 'chinese_pinyin_english':
+                    return { question: `${card.chinese}\n(${card.pinyin})`, answer: card.english || card.back };
+                case 'chinese_pinyin':
+                    return { question: card.chinese, answer: card.pinyin };
+                case 'english_pinyin':
+                    return { question: card.english || card.back, answer: card.pinyin };
+                case 'chinese': // Backwards compatibility / default
+                default:
+                    return { question: card.chinese, answer: card.english || card.back };
+            }
+        };
+
+        const targetContent = getModeContent(nextCard);
+
         // Create options
         const correctOption = {
             id: nextCard.id,
-            text: nextCard.english || nextCard.back,
+            text: targetContent.answer,
             isCorrect: true
         };
 
         const wrongOptions = distractors.map(c => ({
             id: c.id,
-            text: c.english || c.back,
+            text: getModeContent(c).answer,
             isCorrect: false
         }));
 
@@ -62,12 +85,8 @@ const useBubbleGameStore = create((set, get) => ({
 
         set({
             gameQueue: remainingQueue,
-            currentCard: nextCard,
-            cardsLeft: remainingQueue.length, // Display count including the current one? Or remaining? Usually user wants to know how many tasks left. 
-            // If I pop it, it's "ongoing". Let's say cardsLeft is remainingQueue.length + 1 (the current one).
-            // Actually let's track cardsLeft as the queue size including current.
-            // If I pop first, cardsLeft is remaining.
-            // Let's refine: cardsLeft should probably include the current active card.
+            currentCard: { ...nextCard, displayQuestion: targetContent.question }, // Augment card with display text
+            cardsLeft: remainingQueue.length,
             options: allOptions
         });
     },
@@ -96,35 +115,39 @@ const useBubbleGameStore = create((set, get) => ({
             // Let's assume infinite retries per card until lives run out?
             // That matches "Try again!".
 
-            // Wait, if I stay, I should not decrement cardsLeft or queue.
-            nextRound();
-            return true;
-        } else {
-            const newLives = lives - 1;
-            set({ lives: newLives });
-            if (newLives <= 0) {
-                set({ gameState: 'game_over' });
-            }
-            return false;
-        }
-    },
+            submitAnswer: (option) => {
+                const { lives, score } = get(); // Removed nextRound destruction
 
-    continueGame: () => {
-        // "Asked if you want to continue"
-        // Usually "Continue" implies "Retry" or "Keep playing but reset lives"?
-        // User said: "asked if you want to continue".
-        // Use case: Child playing, lost. "Continue?" -> New game.
-        // Or "Continue" -> Reset lives to 3, keep current score/progress?
-        // "the game is gone and you are asked if you want to continue".
-        // This sounds like "Game Over. Play Again?".
-        // I will implement it as "Restart with new 16 cards".
+                if (option.isCorrect) {
+                    set({ score: score + 1 });
+                    // nextRound(); // Removed: Component handles timing
+                    return true;
+                } else {
+                    const newLives = lives - 1;
+                    set({ lives: newLives });
+                    if (newLives <= 0) {
+                        set({ gameState: 'game_over' });
+                    }
+                    return false;
+                }
+            },
 
-        // Actually, checking "Continue" in video games often means "Reset lives, keep level".
-        // But here "16 cards" is a session.
-        // I'll make continue restart the session (startGame).
-        const { deck, startGame } = get();
-        startGame(deck); // Restart with same deck
-    }
-}));
+                continueGame: () => {
+                    // "Asked if you want to continue"
+                    // Usually "Continue" implies "Retry" or "Keep playing but reset lives"?
+                    // User said: "asked if you want to continue".
+                    // Use case: Child playing, lost. "Continue?" -> New game.
+                    // Or "Continue" -> Reset lives to 3, keep current score/progress?
+                    // "the game is gone and you are asked if you want to continue".
+                    // This sounds like "Game Over. Play Again?".
+                    // I will implement it as "Restart with new 16 cards".
+
+                    // Actually, checking "Continue" in video games often means "Reset lives, keep level".
+                    // But here "16 cards" is a session.
+                    // I'll make continue restart the session (startGame).
+                    const { deck, startGame, questionMode } = get();
+                    startGame(deck, questionMode); // Restart with same deck and mode
+                }
+        }));
 
 export default useBubbleGameStore;
