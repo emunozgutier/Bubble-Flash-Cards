@@ -78,57 +78,48 @@
     line-height: 1.2;
 }
 
-/* Center Bubble (Main Question) */
+/* Center Bubble (Main Question) - NOW LEFT CENTER */
 .main-bubble {
     z-index: 10;
     top: 50%;
-    left: 50%;
+    left: 20%;
     transform: translate(-50%, -50%);
-    width: 200px;
-    /* Increased size */
-    height: 200px;
-    /* Increased size */
-    font-size: 1.8rem;
+    width: 220px;
+    height: 220px;
+    font-size: 2rem;
     background-color: var(--color-surface);
     border-color: var(--color-primary);
     color: var(--color-primary);
-    /* Highlight question text */
 }
 
-/* Top Bubble */
+/* Top Bubble - Option 0 (Longest) */
 .option-0 {
-    top: 15%;
-    /* Moved up */
-    left: 50%;
+    top: 20%;
+    left: 65%;
     transform: translate(-50%, -50%);
-    width: 140px;
-    /* Increased size */
-    height: 140px;
-    /* Increased size */
+    width: 160px;
+    height: 160px;
+    font-size: 1.1rem;
 }
 
-/* Bottom Left Bubble */
+/* Bottom Bubble - Option 1 (Medium/Long) */
 .option-1 {
     top: 80%;
-    left: 15%;
-    /* Moved out */
+    left: 65%;
     transform: translate(-50%, -50%);
-    width: 140px;
-    /* Increased size */
-    height: 140px;
-    /* Increased size */
+    width: 160px;
+    height: 160px;
+    font-size: 1.1rem;
 }
 
-/* Bottom Right Bubble */
+/* Right Center Bubble - Option 2 (Shortest) */
 .option-2 {
-    top: 80%;
+    top: 50%;
     left: 85%;
-    /* Moved out */
     transform: translate(-50%, -50%);
     width: 140px;
-    /* Increased size */
     height: 140px;
-    /* Increased size */
+    font-size: 1.2rem;
 }
 
 .score-board {

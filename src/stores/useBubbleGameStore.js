@@ -57,9 +57,39 @@ const useBubbleGameStore = create(
                 }
 
                 // Pick 2 distractors from the FULL deck
+                // Smart Distractor Logic
                 const otherCards = deck.filter(c => c && c.id !== nextCard.id);
-                const shuffledOthers = [...otherCards].sort(() => 0.5 - Math.random());
-                const distractors = shuffledOthers.slice(0, 2);
+
+                const getScore = (candidate, target) => {
+                    let score = 0;
+                    const targetText = target.chinese || target.front || '';
+                    const candidateText = candidate.chinese || candidate.front || '';
+
+                    // Length similarity (+10)
+                    if (targetText.length === candidateText.length) score += 10;
+
+                    // Shared characters (+5 each)
+                    const targetChars = new Set(targetText.split(''));
+                    const candidateChars = new Set(candidateText.split(''));
+                    let shared = 0;
+                    candidateChars.forEach(char => {
+                        if (targetChars.has(char)) shared++;
+                    });
+                    score += shared * 5;
+
+                    return score;
+                };
+
+                // Add randomness to top scorers to avoid same distractors every time
+                const scoredOthers = otherCards.map(c => ({
+                    card: c,
+                    score: getScore(c, nextCard) + Math.random() // Add small jitter
+                }));
+
+                scoredOthers.sort((a, b) => b.score - a.score);
+
+                // Pick top 2
+                const distractors = scoredOthers.slice(0, 2).map(item => item.card);
 
                 // Helper to get text based on mode
                 const getModeContent = (card) => {
@@ -101,7 +131,12 @@ const useBubbleGameStore = create(
                     isCorrect: false
                 }));
 
-                const allOptions = [correctOption, ...wrongOptions].sort(() => 0.5 - Math.random());
+                let allOptions = [correctOption, ...wrongOptions];
+
+                // Sort by text length descending so longest are first (Top/Bottom slots)
+                // We shuffle first to ensure if lengths are equal, position is random
+                allOptions.sort(() => 0.5 - Math.random());
+                allOptions.sort((a, b) => b.text.length - a.text.length);
 
                 set({
                     gameQueue: remainingQueue,
