@@ -23,12 +23,22 @@ const useBubbleGameStore = create(
             startGame: (allCards, mode = 'chinese') => {
                 if (!allCards || allCards.length === 0) return;
 
+                // Filter out the "Welcome" placeholder card
+                const validCards = allCards.filter(c => c.front !== 'Welcome' || c.back !== 'Login to save your cards to Google Drive!');
+
+                if (validCards.length === 0) {
+                    // If we only had the welcome card, we can't play.
+                    // But maybe we should alert? For now just return or let it fail gracefully?
+                    // If we return, nothing happens.
+                    return;
+                }
+
                 // Shuffle and pick 16 (or fewer if deck is small)
-                const shuffled = [...allCards].sort(() => 0.5 - Math.random());
+                const shuffled = [...validCards].sort(() => 0.5 - Math.random());
                 const sessionCards = shuffled.slice(0, 16);
 
                 set({
-                    deck: allCards,
+                    deck: validCards,
                     gameQueue: sessionCards,
                     lives: 3,
                     score: 0,
