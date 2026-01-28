@@ -144,42 +144,44 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
 
     return (
         <div className="character-draw-container">
-            <div className="draw-header">
-                <h2>Draw the Character</h2>
-                <div className="english-hint">{englishDefinition}</div>
-                <div className="progress-indicator">
-                    Character {currentIndex + 1} of {characters.length}: <span className="target-char">{currentChar}</span>
-                </div>
-            </div>
-
-            <div className="draw-area">
-                {/* SVG Container */}
-                <div ref={writerTargetRef} className="hanzi-target" />
-
-                {isLoading && <div className="loading-overlay">Loading stroke data...</div>}
-
-                {hasError && (
-                    <div className="error-overlay">
-                        <p>Could not load character data (Offline?).</p>
-                        <button onClick={handleSkip} className="skip-btn">Skip this Character</button>
+            <div className="draw-card">
+                <div className="draw-header">
+                    <h2>Draw the Character</h2>
+                    <div className="english-hint">{englishDefinition}</div>
+                    <div className="progress-indicator">
+                        Character {currentIndex + 1} of {characters.length}: <span className="target-char">{currentChar}</span>
                     </div>
-                )}
-            </div>
+                </div>
 
-            <div className="draw-controls">
-                <label className="toggle-switch">
-                    <input
-                        type="checkbox"
-                        checked={isGuided}
-                        onChange={(e) => setIsGuided(e.target.checked)}
-                    />
-                    <span className="slider round"></span>
-                    <span className="label-text">{isGuided ? "Guided" : "Unguided"}</span>
-                </label>
+                <div className="draw-area">
+                    {/* SVG Container */}
+                    <div ref={writerTargetRef} className="hanzi-target" />
 
-                <button onClick={handleNext} className="next-btn">
-                    Skip / Next
-                </button>
+                    {isLoading && <div className="loading-overlay">Loading stroke data...</div>}
+
+                    {hasError && (
+                        <div className="error-overlay">
+                            <p>Could not load character data (Offline?).</p>
+                            <button onClick={handleSkip} className="skip-btn">Skip this Character</button>
+                        </div>
+                    )}
+                </div>
+
+                <div className="draw-controls">
+                    <label className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            checked={isGuided}
+                            onChange={(e) => setIsGuided(e.target.checked)}
+                        />
+                        <span className="slider round"></span>
+                        <span className="label-text">{isGuided ? "Guided" : "Unguided"}</span>
+                    </label>
+
+                    <button onClick={handleNext} className="next-btn">
+                        Skip / Next
+                    </button>
+                </div>
             </div>
         </div>
     );

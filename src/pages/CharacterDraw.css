@@ -8,77 +8,124 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: var(--color-background);
-    color: var(--color-text);
+    /* Glassmorphism Backdrop */
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
     padding: 20px;
     box-sizing: border-box;
-    z-index: 1000;
-    /* Ensure it overlays everything */
+    animation: fadeIn 0.3s ease-out;
 }
 
-/* ... existing styles ... */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.draw-card {
+    background-color: var(--color-surface);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    /* Subtle border for popped look */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy pop-in */
+}
 
 .draw-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    width: 100%;
 }
 
 .draw-header h2 {
     margin: 0;
-    font-size: 1.5rem;
-    color: var(--color-text);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-secondary);
+    font-weight: 600;
 }
 
 .english-hint {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 10px 0;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 12px 0 8px 0;
     color: var(--color-primary);
-    min-height: 2.4rem;
+    line-height: 1.2;
 }
 
 .progress-indicator {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: var(--color-text-secondary);
+    background: rgba(128, 128, 128, 0.1);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    margin-top: 8px;
 }
 
 .target-char {
     font-weight: bold;
-    color: var(--color-primary);
+    color: var(--color-text);
     font-family: "KaiTi", "Kaiti SC", "STKaiti", serif;
+    margin-left: 4px;
 }
 
 .draw-area {
     position: relative;
     background-color: var(--color-surface);
-    border: 2px solid var(--color-primary);
-    border-radius: 4px;
-    /* Slightly less rounded for a grid feel */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Or maybe slightly lighter/darker than card? */
+    border: 2px solid var(--color-border);
+    border-radius: 16px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 0;
-    /* Remove padding to make grid fit perfectly if needed */
     margin-bottom: 30px;
     width: 300px;
-    /* Fixed size for consistency with writer */
     height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    /* Keep grid contained */
 
-    /* Mi Zi Ge (Rice Grid) Background */
+    /* Mi Zi Ge (Rice Grid) Background - Refined */
     background-image:
         /* Diagonal 1 */
-        linear-gradient(45deg, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%),
+        linear-gradient(45deg, transparent 49.6%, var(--color-border) 49.6%, var(--color-border) 50.4%, transparent 50.4%),
         /* Diagonal 2 */
-        linear-gradient(-45deg, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%),
+        linear-gradient(-45deg, transparent 49.6%, var(--color-border) 49.6%, var(--color-border) 50.4%, transparent 50.4%),
         /* Horizontal */
-        linear-gradient(to bottom, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%),
+        linear-gradient(to bottom, transparent 49.6%, var(--color-border) 49.6%, var(--color-border) 50.4%, transparent 50.4%),
         /* Vertical */
-        linear-gradient(to right, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%);
+        linear-gradient(to right, transparent 49.6%, var(--color-border) 49.6%, var(--color-border) 50.4%, transparent 50.4%);
     background-size: 100% 100%;
 }
-
-
 
 .loading-overlay,
 .error-overlay {
@@ -87,12 +134,15 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(var(--color-surface-rgb), 0.95);
+    /* We don't have rgb vars, fallback to color-surface */
+    background: var(--color-surface);
+    opacity: 0.95;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 14px;
     z-index: 10;
 }
 
@@ -104,42 +154,57 @@
 
 .draw-controls {
     display: flex;
-    gap: 20px;
+    gap: 30px;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .skip-btn,
 .next-btn {
-    padding: 10px 20px;
+    padding: 12px 28px;
     border: none;
-    border-radius: 20px;
+    border-radius: 50px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .skip-btn {
-    background: #e74c3c;
+    background: #ff5252;
     color: white;
 }
 
 .next-btn {
-    background: #3498db;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+    color: var(--color-text);
+    /* Usually text calls for contrast. If primary is bright, text might be dark? Assuming theme handles text on primary is tricky. Let's use hard white if standard primary */
     color: white;
-    font-size: 1.1rem;
 }
 
 .next-btn:hover {
-    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
 }
 
-/* Toggle Switch Styles */
+.next-btn:active {
+    transform: translateY(0);
+}
+
+/* Premium Toggle Switch */
 .toggle-switch {
     display: flex;
     align-items: center;
     cursor: pointer;
-    gap: 10px;
+    gap: 12px;
     user-select: none;
+    background: var(--color-background);
+    padding: 6px 12px 6px 6px;
+    border-radius: 30px;
+    border: 1px solid var(--color-border);
 }
 
 .toggle-switch input {
@@ -149,36 +214,38 @@
 .slider {
     position: relative;
     display: inline-block;
-    width: 50px;
-    height: 28px;
+    width: 44px;
+    height: 24px;
     background-color: #ccc;
-    transition: .4s;
+    transition: .3s;
     border-radius: 34px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 22px;
-    width: 22px;
+    height: 18px;
+    width: 18px;
     left: 3px;
     bottom: 3px;
     background-color: white;
-    transition: .4s;
+    transition: .3s cubic-bezier(0.4, 0.0, 0.2, 1);
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 input:checked+.slider {
-    background-color: #2ecc71;
+    background-color: #4CAF50;
+    /* Success green */
 }
 
 input:checked+.slider:before {
-    transform: translateX(22px);
+    transform: translateX(20px);
 }
 
 .label-text {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #555;
-    min-width: 80px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text);
+    min-width: 60px;
 }
