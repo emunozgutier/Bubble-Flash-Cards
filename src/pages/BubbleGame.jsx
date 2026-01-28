@@ -25,7 +25,8 @@ function BubbleGame() {
         continueGame,
         nextRound,
         // setQuestionMode // Not needed here anymore
-        gameQueue
+        gameQueue,
+        enableDrawing
     } = useBubbleGameStore();
 
     const [poppedBubbles, setPoppedBubbles] = useState(new Set());
@@ -80,7 +81,7 @@ function BubbleGame() {
             setTimeout(() => {
                 // Check if we have chinese characters to draw
                 const charsToDraw = currentCard.chinese || currentCard.front;
-                if (charsToDraw && typeof charsToDraw === 'string' && !charsToDraw.match(/[a-zA-Z]/)) { // basic check if it's not English
+                if (enableDrawing && charsToDraw && typeof charsToDraw === 'string' && !charsToDraw.match(/[a-zA-Z]/)) { // basic check if it's not English
                     setIsDrawing(true);
                 } else {
                     // Skip drawing if no valid chinese

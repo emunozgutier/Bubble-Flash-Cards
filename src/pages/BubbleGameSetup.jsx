@@ -33,6 +33,18 @@ function BubbleGameSetup() {
             <div className="game-over-screen" style={{ backgroundColor: 'var(--color-background)', position: 'relative' }}>
                 <h2 style={{ marginBottom: '30px' }}>Select Game Mode</h2>
 
+                <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <label className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            checked={useBubbleGameStore(state => state.enableDrawing)}
+                            onChange={(e) => useBubbleGameStore.getState().setEnableDrawing(e.target.checked)}
+                        />
+                        <span className="slider round"></span>
+                    </label>
+                    <span style={{ color: 'var(--color-text)', fontWeight: 'bold' }}>Enable Character Writing</span>
+                </div>
+
                 <div style={{ display: 'flex', gap: '15px', flexDirection: 'column', width: '300px' }}>
                     <button
                         onClick={() => handleStart('chinese_english')}

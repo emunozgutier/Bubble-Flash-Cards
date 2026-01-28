@@ -15,8 +15,10 @@ const useBubbleGameStore = create(
             gameQueue: [], // The 16 cards to play
             questionMode: 'chinese', // 'chinese', 'pinyin', 'english'
             sessionResults: [], // { cardId, question, answer, userAnswer, isCorrect, card }
+            enableDrawing: true,
 
             setQuestionMode: (mode) => set({ questionMode: mode }),
+            setEnableDrawing: (enabled) => set({ enableDrawing: enabled }),
 
             startGame: (allCards, mode = 'chinese') => {
                 if (!allCards || allCards.length === 0) return;
