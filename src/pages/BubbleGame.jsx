@@ -46,11 +46,18 @@ function BubbleGame() {
     }, [currentCard]);
 
     // Redirect to setup if no game in progress (e.g. refresh)
+    // Redirect to setup if no game in progress (e.g. refresh)
     useEffect(() => {
-        if (gameQueue.length === 0 && gameState !== 'won') {
+        // Only redirect if:
+        // 1. Queue is empty AND NO current card (so really nothing to do)
+        // 2. AND we haven't won (won state is valid end state)
+        // 3. Or simply if gameState is 'idle' (covers refresh case)
+        if (gameState === 'idle') {
+            navigateTo('bubbleSetup');
+        } else if (gameQueue.length === 0 && !currentCard && gameState !== 'won' && gameState !== 'game_over') {
             navigateTo('bubbleSetup');
         }
-    }, [gameQueue, gameState]);
+    }, [gameQueue, gameState, currentCard]);
 
     const handleOptionClick = (option) => {
         if (isRoundComplete || poppedBubbles.has(option.id)) return;

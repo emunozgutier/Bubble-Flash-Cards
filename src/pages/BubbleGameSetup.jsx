@@ -12,8 +12,13 @@ function BubbleGameSetup() {
 
     const handleStart = (mode) => {
         if (cards.length > 0) {
-            startGame(cards, mode);
-            navigateTo('bubble');
+            try {
+                startGame(cards, mode);
+                navigateTo('bubble');
+            } catch (error) {
+                console.error("Failed to start game:", error);
+                alert("Error starting game with this deck. Please try another deck.");
+            }
         } else {
             alert('No cards available in this deck!');
         }
