@@ -34,6 +34,7 @@ function HandsFreeGame() {
     const [isListening, setIsListening] = useState(false);
     const [debugKeys, setDebugKeys] = useState([]);
     const [debugLogs, setDebugLogs] = useState([]);
+    const [showAnswer, setShowAnswer] = useState(false);
     const recognitionRef = useRef(null);
     const audioRef = useRef(null);
 
@@ -201,12 +202,25 @@ function HandsFreeGame() {
     }, [practiceMode, currentCard]);
     // Handlers need latest closure values, so dependency on currentCard is vital unless using refs.
 
-    // Auto-Speak on Card Load
+    // Auto-Speak on Card Load with Delay
     useEffect(() => {
         if (currentCard) {
-            // Auto-play the question
-            const textToSpeak = currentCard.displayQuestion;
-            speak(textToSpeak, 1.0);
+            setShowAnswer(false); // Reset answer visibility
+            const timer = setTimeout(() => {
+                const textToSpeak = currentCard.displayQuestion;
+                speak(textToSpeak, 1.0);
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [currentCard]);
+
+    // Delayed Answer Reveal
+    useEffect(() => {
+        if (currentCard) {
+            const timer = setTimeout(() => {
+                setShowAnswer(true);
+            }, 3000);
+            return () => clearTimeout(timer);
         }
     }, [currentCard]);
 
@@ -306,6 +320,18 @@ function HandsFreeGame() {
                 <h1 style={{ fontSize: '3em', marginBottom: '20px', whiteSpace: 'pre-wrap' }}>
                     {displayQuestion}
                 </h1>
+
+                {/* Delayed Answer Reveal */}
+                <div style={{
+                    fontSize: '2em',
+                    color: 'var(--color-text-secondary)',
+                    opacity: showAnswer ? 1 : 0,
+                    transition: 'opacity 1s ease-in-out',
+                    minHeight: '1.2em',
+                    marginBottom: '20px'
+                }}>
+                    {currentCard?.displayAnswer || ''}
+                </div>
 
                 {/* Visual Audio Controls */}
                 <div style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
