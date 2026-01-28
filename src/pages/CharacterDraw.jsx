@@ -75,12 +75,23 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
 
     }, [currentChar]);
 
-    // Handle Guided/Unguided changes and Quiz restart
+    // Start Quiz once writer is ready
     useEffect(() => {
         if (writerInstance && !isLoading && !hasError) {
             startQuiz();
         }
-    }, [writerInstance, isLoading, isGuided, hasError]);
+    }, [writerInstance, isLoading, hasError]);
+
+    // Handle Guided/Unguided toggle dynamically
+    useEffect(() => {
+        if (!writerInstance) return;
+
+        if (isGuided) {
+            writerInstance.showOutline();
+        } else {
+            writerInstance.hideOutline();
+        }
+    }, [isGuided, writerInstance]);
 
     const startQuiz = () => {
         if (!writerInstance) return;
@@ -108,8 +119,10 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                     handleNext();
                 }, 1000);
             },
-            showOutline: isGuided, // If guided, show the gray background character
-            showHintAfterMisses: isGuided ? 1 : 3, // Show hint sooner if guided
+            // We set initial state here, but future toggles are handled by the other useEffect
+            // We removed dynamic 'isGuided' dependency from startQuiz so it doesn't reset
+            showOutline: isGuided,
+            showHintAfterMisses: 3, // Keep consistent or standard, since we can't easily update this mid-quiz without restart
             highlightOnComplete: true
         });
     };
