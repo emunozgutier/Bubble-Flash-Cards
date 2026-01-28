@@ -5,6 +5,7 @@ import useDataStore from '../stores/useDataStore';
 import useBubbleGameStore from '../stores/useBubbleGameStore';
 import GameTitleBar from './submodules1/GameTitleBar';
 import BubbleGameBubble from './submodules1/BubbleGameBubble';
+import BubbleGameSummary from './BubbleGameSummary';
 import './BubbleGame.css';
 
 function BubbleGame() {
@@ -78,58 +79,8 @@ function BubbleGame() {
         return null; // Should redirect
     }
 
-    if (gameState === 'game_over') {
-        return (
-            <div className="bubble-game-container">
-                <GameTitleBar
-                    title={`Bubble Game - ${currentDeckName}`}
-                    onExit={() => navigateTo('main')}
-                />
-                <div className="game-over-screen">
-                    <h2>Game Over</h2>
-                    <p>You ran out of lives!</p>
-                    <button
-                        onClick={continueGame}
-                        className="game-over-button"
-                    >
-                        Continue
-                    </button>
-                    <button
-                        onClick={() => navigateTo('main')}
-                        className="game-exit-button"
-                    >
-                        Exit
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
-    if (gameState === 'won') {
-        return (
-            <div className="bubble-game-container">
-                <GameTitleBar
-                    title={`Bubble Game - ${currentDeckName}`}
-                    onExit={() => navigateTo('main')}
-                />
-                <div className="game-over-screen">
-                    <h2>Session Complete!</h2>
-                    <p>Score: {score}</p>
-                    <button
-                        onClick={continueGame}
-                        className="game-over-button"
-                    >
-                        Play Again
-                    </button>
-                    <button
-                        onClick={() => navigateTo('main')}
-                        className="game-exit-button"
-                    >
-                        Exit
-                    </button>
-                </div>
-            </div>
-        );
+    if (gameState === 'game_over' || gameState === 'won') {
+        return <BubbleGameSummary />;
     }
 
     if (!currentCard) {

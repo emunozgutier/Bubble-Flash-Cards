@@ -53,6 +53,47 @@ const useDataStore = create(
                     }
                 }));
             },
+
+            updateCardProgress: (cardId, isCorrect) => {
+                set((state) => {
+                    const cards = state.cards.map(card => {
+                        if (card.id !== cardId) return card;
+
+                        const now = Date.now();
+                        let newProficiency = card.proficiency || 0;
+
+                        if (isCorrect) {
+                            newProficiency = Math.min((newProficiency || 0) + 1, 5); // Max proficiency 5
+                        } else {
+                            newProficiency = Math.max((newProficiency || 0) - 1, 0); // Min proficiency 0
+                        }
+
+                        return {
+                            ...card,
+                            lastSeen: now,
+                            proficiency: newProficiency
+                        };
+                    });
+
+                    // Trigger deck stats update after card update
+                    // We need to do this carefully as we are inside a setState. 
+                    // But we can just return the new state here and rely on subsequent calls or just accept stats update on next load/setCards. 
+                    // Ideally we should update stats immediately but let's keep it simple first.
+                    // Actually, let's try to update stats if we can identify the deck.
+                    const { currentDeckName, updateDeckStats } = get();
+                    // We can't call get() or external actions easily inside set() updater if we want to be pure, 
+                    // but here we can just update the cards.
+                    // To update stats properly we might need a useEffect or just fire it after.
+                    // Let's just update cards for now.
+                    return { cards };
+                });
+
+                // Fire and forget stats update
+                const { currentDeckName, cards, updateDeckStats } = get();
+                if (currentDeckName) {
+                    updateDeckStats(currentDeckName, cards);
+                }
+            },
         }),
         {
             name: 'bubble-flash-cards-storage', // unique name

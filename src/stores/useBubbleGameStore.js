@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import useDataStore from './useDataStore';
 
 const useBubbleGameStore = create((set, get) => ({
     gameState: 'idle', // idle, playing, game_over, won
@@ -10,6 +11,7 @@ const useBubbleGameStore = create((set, get) => ({
     deck: [], // Full deck for distractors
     gameQueue: [], // The 16 cards to play
     questionMode: 'chinese', // 'chinese', 'pinyin', 'english'
+    sessionResults: [], // { cardId, question, answer, userAnswer, isCorrect, card }
 
     setQuestionMode: (mode) => set({ questionMode: mode }),
 
@@ -27,7 +29,8 @@ const useBubbleGameStore = create((set, get) => ({
             score: 0,
             gameState: 'playing',
             cardsLeft: sessionCards.length,
-            questionMode: mode
+            questionMode: mode,
+            sessionResults: [] // Reset session results
         });
 
         get().nextRound();
@@ -92,14 +95,59 @@ const useBubbleGameStore = create((set, get) => ({
     },
 
     submitAnswer: (option) => {
-        const { lives, score } = get();
+        const { lives, score, currentCard, sessionResults } = get();
+        // Access useDataStore via direct import or assume it's available globally. 
+        // Best practice is to import the hook/store.
+        // We will assume 'useDataStore' is resolvable if we imported it at top.
+        // Wait, I didn't import useDataStore in the file view. I need to verify imports.
+        // I'll assume we need to import it. I'll add the import in a separate tool call if needed or just use `window` if it was global (unlikely).
+        // Standard practice: Import it.
+        // But I can't add imports with multi_replace easily if I don't target the top.
+        // I'll assume I can just use `require` or I'll do a separate replace for import.
+        // Actually, let's just assume I'll add the import first or use a dynamic import/access. 
+        // No, I should add the import. 
+        // Let's modify this chunk to just do the logic and I'll add import in another step or assume I can do it here if I target top.
+        // I'll stick to logic here and do import in next step to be safe, or just use the global store if I can.
+        // Better: I'll use `useDataStore.getState().updateCardProgress(currentCard.id, isCorrect)` but I need to import `useDataStore`. 
 
-        if (option.isCorrect) {
-            set({ score: score + 1 });
+        const isCorrect = option.isCorrect;
+
+        // Record Result
+        const result = {
+            cardId: currentCard.id,
+            question: currentCard.displayQuestion,
+            correctAnswer: option.isCorrect ? option.text : sessionResults.find(r => r.cardId === currentCard.id)?.correctAnswer, // Wait, logic for correct answer retrieval?
+            // Actually currentCard doesn't have the answer text directly stored in a generic way, but we know the correct option from the options logic.
+            // But 'options' might be shuffled. 
+            // The 'option' passed in is the one clicked. 
+            // If correct, it's correct. If wrong, we need to find the correct one? 
+            // In 'nextRound' we generated options. We didn't save the correct answer text explicitly separate from options.
+            // But we know 'currentCard' and 'questionMode'. 
+            // Let's just store what we know.
+            userAnswer: option.text,
+            isCorrect: isCorrect,
+            card: currentCard
+        };
+
+        // We need the correct answer text for the summary if the user got it wrong.
+        // Re-deriving it might be annoying.
+        // Let's look at 'options'. One of them is correct.
+        const currentOptions = get().options;
+        const correctOption = currentOptions.find(o => o.isCorrect);
+        result.correctAnswer = correctOption ? correctOption.text : 'Unknown';
+
+        const newSessionResults = [...sessionResults, result];
+
+
+
+        if (isCorrect) {
+            set({ score: score + 1, sessionResults: newSessionResults });
+            useDataStore.getState().updateCardProgress(currentCard.id, true);
             return true;
         } else {
             const newLives = lives - 1;
-            set({ lives: newLives });
+            set({ lives: newLives, sessionResults: newSessionResults });
+            useDataStore.getState().updateCardProgress(currentCard.id, false);
             if (newLives <= 0) {
                 set({ gameState: 'game_over' });
             }
