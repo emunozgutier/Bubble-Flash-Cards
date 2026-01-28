@@ -113,22 +113,21 @@ function BubbleGame() {
 
     const displayCardsLeft = cardsLeft + 1;
 
-    if (isDrawing && currentCard) {
-        return (
-            <CharacterDraw
-                characters={currentCard.chinese || currentCard.front}
-                englishDefinition={currentCard.english || currentCard.back}
-                onComplete={handleDrawComplete}
-            />
-        );
-    }
-
     return (
         <div className="bubble-game-container">
+            {isDrawing && currentCard && (
+                <CharacterDraw
+                    characters={currentCard.chinese || currentCard.front}
+                    englishDefinition={currentCard.english || currentCard.back}
+                    onComplete={handleDrawComplete}
+                />
+            )}
+
             <GameTitleBar
                 title={`Bubble Game - ${currentDeckName}`}
                 onExit={() => navigateTo('main')}
             />
+
 
             <div className="game-stats">
                 <span>Lives: {'❤️'.repeat(lives)}</span>

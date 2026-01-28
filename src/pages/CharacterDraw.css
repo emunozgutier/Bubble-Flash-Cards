@@ -4,11 +4,19 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: var(--theme-bg, #f0f4f8);
-    color: var(--theme-text, #333);
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
     padding: 20px;
     box-sizing: border-box;
+    z-index: 1000;
+    /* Ensure it overlays everything */
 }
+
+/* ... existing styles ... */
 
 .draw-header {
     text-align: center;
@@ -18,45 +26,59 @@
 .draw-header h2 {
     margin: 0;
     font-size: 1.5rem;
-    color: #555;
+    color: var(--color-text);
 }
 
 .english-hint {
     font-size: 2rem;
     font-weight: bold;
     margin: 10px 0;
-    color: #2c3e50;
+    color: var(--color-primary);
     min-height: 2.4rem;
 }
 
 .progress-indicator {
     font-size: 1rem;
-    color: #777;
+    color: var(--color-text-secondary);
 }
 
 .target-char {
     font-weight: bold;
-    color: #e74c3c;
+    color: var(--color-primary);
     font-family: "KaiTi", "Kaiti SC", "STKaiti", serif;
-    /* Good font for Chinese chars */
 }
 
 .draw-area {
     position: relative;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    /* Slightly less rounded for a grid feel */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 0;
+    /* Remove padding to make grid fit perfectly if needed */
     margin-bottom: 30px;
-    min-width: 300px;
-    /* Match writer width */
-    min-height: 300px;
+    width: 300px;
+    /* Fixed size for consistency with writer */
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* Mi Zi Ge (Rice Grid) Background */
+    background-image:
+        /* Diagonal 1 */
+        linear-gradient(45deg, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%),
+        /* Diagonal 2 */
+        linear-gradient(-45deg, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%),
+        /* Horizontal */
+        linear-gradient(to bottom, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%),
+        /* Vertical */
+        linear-gradient(to right, transparent 49.5%, var(--color-text-secondary) 49.5%, var(--color-text-secondary) 50.5%, transparent 50.5%);
+    background-size: 100% 100%;
 }
 
-/* .hanzi-target pointer-events handled by HanziWriter SVG */
+
 
 .loading-overlay,
 .error-overlay {
