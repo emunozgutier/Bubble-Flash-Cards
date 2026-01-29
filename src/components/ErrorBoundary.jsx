@@ -12,19 +12,25 @@ class ErrorBoundary extends React.Component {
 
     componentDidCatch(error, errorInfo) {
         this.setState({ error, errorInfo });
-        console.error("ErrorBoundary caught an error", error, errorInfo);
+        console.error("Uncaught Error:", error, errorInfo);
     }
 
     render() {
         if (this.state.hasError) {
             return (
-                <div style={{ padding: '20px', color: 'red' }}>
+                <div style={{ padding: '20px', color: 'red', textAlign: 'left', background: 'white' }}>
                     <h1>Something went wrong.</h1>
                     <details style={{ whiteSpace: 'pre-wrap' }}>
                         {this.state.error && this.state.error.toString()}
                         <br />
                         {this.state.errorInfo && this.state.errorInfo.componentStack}
                     </details>
+                    <button onClick={() => {
+                        localStorage.clear();
+                        window.location.href = '/';
+                    }} style={{ marginTop: '20px', padding: '10px' }}>
+                        Clear Data & Reload
+                    </button>
                 </div>
             );
         }

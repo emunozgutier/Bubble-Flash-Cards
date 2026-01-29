@@ -260,6 +260,17 @@ function HandsFreeGame() {
 
     if (!currentCard) return <div>Loading...</div>;
 
+    // Render shared elements (Audio) outside conditionals
+    const audioComponent = (
+        <audio
+            ref={audioRef}
+            src={SILENT_MP3}
+            loop
+            playsInline
+            style={{ display: 'none' }}
+        />
+    );
+
     if (!gameStarted) {
         return (
             <div className="page-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -285,8 +296,7 @@ function HandsFreeGame() {
                         Best experienced on Chrome or Safari
                     </div>
                 </div>
-                {/* Hidden Audio for context init */}
-                <audio ref={audioRef} src={SILENT_MP3} loop playsInline style={{ display: 'none' }} />
+                {audioComponent}
             </div>
         );
     }
@@ -300,15 +310,7 @@ function HandsFreeGame() {
                 onExit={() => navigateTo('main')}
             />
 
-            {/* Hidden Audio Loop for Media Session Persistence */}
-            <audio
-                ref={audioRef}
-                src={SILENT_MP3}
-                loop
-                autoPlay
-                playsInline
-                style={{ display: 'none' }}
-            />
+            {audioComponent}
 
             {/* Split Screen Layout */}
             <div className="split-screen-container" key={currentCard?.id || 'empty'}>
