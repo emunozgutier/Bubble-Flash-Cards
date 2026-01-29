@@ -13,7 +13,23 @@ function MainPage() {
 
     return (
         <div className="select-deck-page">
-            <h1>Flash Cards Manager</h1>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                <h1 style={{ margin: 0 }}>Flash Cards Manager</h1>
+                <button
+                    onClick={() => navigateTo('help')}
+                    style={{
+                        padding: '0.5rem 1rem',
+                        fontSize: '0.9rem',
+                        background: 'transparent',
+                        border: '1px solid var(--color-primary)',
+                        color: 'var(--color-primary)',
+                        borderRadius: '0.5rem',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Help & Version
+                </button>
+            </div>
 
             <div className="controls">
                 <MainPageSignin />

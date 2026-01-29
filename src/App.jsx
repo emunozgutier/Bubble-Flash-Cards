@@ -6,6 +6,7 @@ import BubbleGameSetup from './pages/BubbleGameSetup';
 import HandsFreeGameSetup from './pages/HandsFreeGameSetup';
 import HandsFreeGame from './pages/HandsFreeGame';
 import MatchingGame from './pages/MatchingGame';
+import HelpPage from './pages/submodules1/HelpPage';
 import useNavigationStore from './stores/useNavigationStore';
 import useThemeStore from './stores/useThemeStore';
 
@@ -32,6 +33,7 @@ function App() {
       {currentPage === 'handsFreeSetup' && <HandsFreeGameSetup />}
       {currentPage === 'handsFree' && <HandsFreeGame />}
       {currentPage === 'matching' && <MatchingGame />}
+      {currentPage === 'help' && <HelpPage />}
     </>
   );
 }
