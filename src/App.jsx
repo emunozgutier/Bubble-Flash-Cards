@@ -11,6 +11,8 @@ import ErrorBoundary from './components/ErrorBoundary';
 import useNavigationStore from './stores/useNavigationStore';
 import useThemeStore from './stores/useThemeStore';
 
+import PageBorder from './components/PageBorder';
+
 function App() {
   const { currentPage } = useNavigationStore();
   const { colors } = useThemeStore();
@@ -27,15 +29,17 @@ function App() {
   }, [colors]);
 
   return (
-    <ErrorBoundary>
-      {currentPage === 'main' && <MainPage />}
-      {currentPage === 'bubbleSetup' && <BubbleGameSetup />}
-      {currentPage === 'bubble' && <BubbleGame />}
-      {currentPage === 'handsFreeSetup' && <HandsFreeGameSetup />}
-      {currentPage === 'handsFree' && <HandsFreeGame />}
-      {currentPage === 'matching' && <MatchingGame />}
-      {currentPage === 'help' && <HelpPage />}
-    </ErrorBoundary>
+    <PageBorder>
+      <ErrorBoundary>
+        {currentPage === 'main' && <MainPage />}
+        {currentPage === 'bubbleSetup' && <BubbleGameSetup />}
+        {currentPage === 'bubble' && <BubbleGame />}
+        {currentPage === 'handsFreeSetup' && <HandsFreeGameSetup />}
+        {currentPage === 'handsFree' && <HandsFreeGame />}
+        {currentPage === 'matching' && <MatchingGame />}
+        {currentPage === 'help' && <HelpPage />}
+      </ErrorBoundary>
+    </PageBorder>
   );
 }
 
