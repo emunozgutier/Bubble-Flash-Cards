@@ -164,9 +164,51 @@ function HandsFreeGame() {
     }, [currentCard, lives, cardsLeft]);
 
 
-    // Auto-Speak on Card Load with Delay
+    const [gameStarted, setGameStarted] = useState(false);
+    const [permissionError, setPermissionError] = useState(null);
+
+    // ... (keep existing effects but modifying auto-start logic slightly in next steps or implicitly via gameStarted check)
+
+    const handleStartGame = async () => {
+        log("Game Starting... initializing audio/speech");
+
+        // 1. Resume Audio Context / Play Silent Audio
+        if (audioRef.current) {
+            try {
+                audioRef.current.volume = 0.1;
+                await audioRef.current.play();
+                log("Audio Context resumed");
+            } catch (e) {
+                log(`Audio Error: ${e.message}`);
+            }
+        }
+
+        // 2. Initialize Speech Recognition (if available)
+        if (practiceMode && recognitionRef.current) {
+            try {
+                recognitionRef.current.start();
+                setIsListening(true);
+                log("Speech Recognition started");
+            } catch (e) {
+                log(`Speech Start Error: ${e.message}`);
+                // Often error is 'no-speech' or 'aborted' if already started
+            }
+        } else if (practiceMode && !('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            setPermissionError("Speech Recognition not supported in this browser. Try Chrome or Safari.");
+        }
+
+        // 3. Warm up Speech Synthesis
+        window.speechSynthesis.cancel();
+        // Speak empty string to prompt permission prompt if needed
+        const utterance = new SpeechSynthesisUtterance('');
+        window.speechSynthesis.speak(utterance);
+
+        setGameStarted(true);
+    };
+
+    // Auto-Speak on Card Load - ONLY if game started
     useEffect(() => {
-        if (currentCard) {
+        if (currentCard && gameStarted) {
             setShowAnswer(false); // Reset answer visibility
             const timer = setTimeout(() => {
                 const textToSpeak = currentCard.displayQuestion;
@@ -174,21 +216,21 @@ function HandsFreeGame() {
             }, 500);
             return () => clearTimeout(timer);
         }
-    }, [currentCard]);
+    }, [currentCard, gameStarted]);
 
     // Delayed Answer Reveal
     useEffect(() => {
-        if (currentCard) {
+        if (currentCard && gameStarted) {
             const timer = setTimeout(() => {
                 setShowAnswer(true);
             }, 3000);
             return () => clearTimeout(timer);
         }
-    }, [currentCard]);
+    }, [currentCard, gameStarted]);
 
     // Update speech lang when card changes
     useEffect(() => {
-        if (recognitionRef.current && currentCard) {
+        if (recognitionRef.current && currentCard && gameStarted) {
             const hasChinese = (text) => /[\u4E00-\u9FFF]/.test(text);
             const answer = currentCard.displayAnswer || '';
             const newLang = hasChinese(answer) ? 'zh-CN' : 'en-US';
@@ -197,17 +239,16 @@ function HandsFreeGame() {
                 recognitionRef.current.lang = newLang;
             }
 
-            try {
-                if (!isListening) {
+            // Only attempt restart if not listening, avoiding loop
+            if (!isListening) {
+                try {
                     recognitionRef.current.start();
                     setIsListening(true);
-                }
-            } catch (e) {
-                // Ignore if already started
+                } catch (e) { /* ignore */ }
             }
         }
         setSpeechResult('');
-    }, [currentCard, practiceMode, isListening]);
+    }, [currentCard, practiceMode, isListening, gameStarted]);
 
 
     if (gameState === 'idle') return null;
@@ -219,6 +260,37 @@ function HandsFreeGame() {
 
     if (!currentCard) return <div>Loading...</div>;
 
+    if (!gameStarted) {
+        return (
+            <div className="page-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <GameTitleBar
+                    title={`Hands Free - Ready?`}
+                    onExit={() => navigateTo('main')}
+                />
+                <div className="start-overlay">
+                    <h2>Hands Free Mode</h2>
+                    <p style={{ maxWidth: '300px', textAlign: 'center', marginBottom: '20px' }}>
+                        This mode uses your microphone and audio.
+                        Please tap Start to enable permissions.
+                    </p>
+                    {permissionError && <div style={{ color: 'red', marginBottom: '10px' }}>{permissionError}</div>}
+                    <button
+                        className="control-button primary"
+                        style={{ fontSize: '1.5rem', padding: '20px 40px' }}
+                        onClick={handleStartGame}
+                    >
+                        START GAME
+                    </button>
+                    <div style={{ marginTop: '20px', opacity: 0.7, fontSize: '0.8rem' }}>
+                        Best experienced on Chrome or Safari
+                    </div>
+                </div>
+                {/* Hidden Audio for context init */}
+                <audio ref={audioRef} src={SILENT_MP3} loop playsInline style={{ display: 'none' }} />
+            </div>
+        );
+    }
+
     const displayQuestion = currentCard.displayQuestion || '...';
 
     return (
@@ -227,14 +299,6 @@ function HandsFreeGame() {
                 title={`Hands Free - Lives: ${lives}`}
                 onExit={() => navigateTo('main')}
             />
-
-            {/* Debug Window (Hidden) */}
-            {/* 
-            <div className="debug-window">
-                <strong>Debug Log:</strong>
-                {debugLogs.map((l, i) => <div key={i}>{l}</div>)}
-            </div> 
-            */}
 
             {/* Hidden Audio Loop for Media Session Persistence */}
             <audio
@@ -284,17 +348,6 @@ function HandsFreeGame() {
                     )}
                 </div>
             </div>
-
-            {/* Debug Overlay for Keyboard (Hidden) */}
-            {/* 
-            <div className="keyboard-debug-overlay">
-                <div>KEYBOARD DEBUG</div>
-                {debugKeys.length === 0 && <div style={{ opacity: 0.5 }}>(Press any key)</div>}
-                {debugKeys.map((k, i) => (
-                    <div key={i}>{k}</div>
-                ))}
-            </div> 
-            */}
 
             {/* Backup Controls */}
             <div className="backup-controls">
