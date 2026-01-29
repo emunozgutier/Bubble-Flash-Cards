@@ -84,7 +84,7 @@
     padding: 0 1rem;
     /* Reduced vertical padding since height is controlled by flex */
     font-size: 1.1rem;
-    animation: slideUp 0.3s ease-out;
+    animation: linkUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     flex: 1;
     /* Expand to fill share of container */
     max-height: 100%;
@@ -173,15 +173,23 @@
     /* Maintain layout but invisible */
 }
 
-@keyframes slideUp {
-    from {
+@keyframes linkUp {
+    0% {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(20px) scale(0.9);
+        box-shadow: 0 0 0 rgba(76, 175, 80, 0);
     }
 
-    to {
+    50% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+        /* Glow effect */
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 0 0 rgba(76, 175, 80, 0);
     }
 }
 
