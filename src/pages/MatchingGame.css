@@ -15,10 +15,12 @@
     margin-bottom: 1rem;
 }
 
-.matching-header h1 {
-    font-size: 1.5rem;
-    margin: 0;
-    color: var(--color-primary);
+.stats-bar {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--color-text);
 }
 
 .back-button {
@@ -36,18 +38,40 @@
     color: var(--color-background);
 }
 
+.action-button {
+    background: var(--color-primary);
+    color: var(--color-background);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s;
+}
+
+.action-button:hover {
+    background: var(--color-primary-hover);
+}
+
 /* Match container (Top area) */
 .matched-container {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    margin-bottom: 1rem;
     overflow-y: auto;
-    min-height: 100px;
-    /* Ensure some space even if empty */
-    border-bottom: 2px dashed var(--color-border);
-    padding-bottom: 1rem;
+    /* Removed min-height and flex:1 to allow it to shrink to 0 when empty/content-based */
+    flex-shrink: 0;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Only show border/padding if there are children? Handled by JSX or we can leave it transparent */
+.matched-container:empty {
+    height: 0;
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
 }
 
 .matched-pair {
@@ -57,9 +81,14 @@
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0 1rem;
+    /* Reduced vertical padding since height is controlled by flex */
     font-size: 1.1rem;
     animation: slideUp 0.3s ease-out;
+    flex: 1;
+    /* Expand to fill share of container */
+    max-height: 100%;
+    /* Ensure text truncation if needed */
 }
 
 .matched-pair.correct {
@@ -74,13 +103,14 @@
     color: #C62828;
 }
 
-/* Unmatched container (Bottom area) */
+/* Unmatched container (Bottom area) - Takes remaining space */
 .unmatched-container {
+    flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    height: 50%;
-    /* Adjust as needed */
+    min-height: 0;
+    /* Important for scroll/flex inside grid if needed */
 }
 
 .questions-column,
@@ -88,11 +118,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    height: 100%;
 }
 
 .card-item {
     flex: 1;
-    /* Distribute height equally */
+    /* Stretch to fill column */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,11 +138,14 @@
     overflow: hidden;
     position: relative;
     user-select: none;
+    max-height: 100%;
+    /* Ensure text truncation works */
 }
 
 .card-item span {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     /* Limit to 2 lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -160,5 +194,11 @@
     .card-item {
         font-size: 0.9rem;
         padding: 0.25rem;
+    }
+
+    .stats-bar {
+        font-size: 0.9rem;
+        flex-direction: column;
+        align-items: flex-end;
     }
 }

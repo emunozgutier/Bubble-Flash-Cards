@@ -13,14 +13,25 @@ function MatchingGame() {
     const [matchedPairs, setMatchedPairs] = useState([]);
     const [selectedQuestion, setSelectedQuestion] = useState(null);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [gameState, setGameState] = useState('playing'); // 'playing' | 'finished'
+
+    // 'playing' | 'round_finished' | 'game_over' | 'victory'
+    const [gameState, setGameState] = useState('playing');
+    const [round, setRound] = useState(1);
+    const [lives, setLives] = useState(3);
+    const [roundResult, setRoundResult] = useState(''); // 'Correct' or 'Wrong'
 
     // Initialize Game
     useEffect(() => {
         startNewGame();
-    }, [cards]); // Restart if deck changes, though usually we play with loaded deck
+    }, [cards]);
 
     const startNewGame = () => {
+        setRound(1);
+        setLives(3);
+        startRound();
+    };
+
+    const startRound = () => {
         // Need at least 4 cards, or take all if less
         if (!cards || cards.length === 0) return;
 
@@ -48,6 +59,7 @@ function MatchingGame() {
         setSelectedQuestion(null);
         setSelectedAnswer(null);
         setGameState('playing');
+        setRoundResult('');
     };
 
     const handleQuestionClick = (q) => {
@@ -91,8 +103,6 @@ function MatchingGame() {
         setMatchedPairs(newMatchedPairs);
 
         // Remove from available lists
-        // Note: filtered by text match or object equality to ensure we remove the exact item instance if needed, 
-        // but id check is safest if ids are unique per card.
         setAvailableQuestions(prev => prev.filter(item => item !== q));
         setAvailableAnswers(prev => prev.filter(item => item !== a));
 
@@ -101,16 +111,41 @@ function MatchingGame() {
         setSelectedAnswer(null);
 
         // Check completion
-        // We started with N pairs. logic: if available becomes empty.
-        // But since we update state asynchronously, we check length of new lists
-        if (availableQuestions.length === 1) { // 1 because we are about to remove 1, so it will be 0
-            setGameState('finished');
+        if (availableQuestions.length === 1) {
+            finishRound(newMatchedPairs);
+        }
+    };
+
+    const finishRound = (finalPairs) => {
+        setGameState('round_finished');
+
+        // Check correctness
+        const allCorrect = finalPairs.every(p => p.question.id === p.answer.id);
+
+        if (allCorrect) {
+            setRoundResult('Correct!');
+        } else {
+            setRoundResult('Wrong!');
+            const newLives = lives - 1;
+            setLives(newLives);
+            if (newLives === 0) {
+                setGameState('game_over');
+            }
+        }
+    };
+
+    const handleNextRound = () => {
+        if (round >= 10) {
+            setGameState('victory');
+        } else {
+            setRound(r => r + 1);
+            startRound();
         }
     };
 
     // Helper to get correctness class
     const getPairStatusClass = (pair) => {
-        if (gameState !== 'finished') return '';
+        if (gameState === 'playing') return '';
         return pair.question.id === pair.answer.id ? 'correct' : 'incorrect';
     };
 
@@ -118,13 +153,15 @@ function MatchingGame() {
         <div className="matching-game">
             <div className="matching-header">
                 <button className="back-button" onClick={() => navigateTo('main')}>← Deck</button>
-                <h1>Matching Game</h1>
+                <div className="stats-bar">
+                    <span>Round: {round}/10</span>
+                    <span style={{ marginLeft: '1rem' }}>Lives: {'❤️'.repeat(lives)}</span>
+                </div>
                 <button className="back-button" onClick={startNewGame}>Restart</button>
             </div>
 
             {/* Matched Pairs Area - Moves up here */}
-            <div className="matched-container">
-                {matchedPairs.length === 0 && <div className="placeholder" style={{ textAlign: 'center', color: 'gray', marginTop: '1rem' }}>Matches will appear here</div>}
+            <div className="matched-container" style={{ flex: matchedPairs.length }}>
                 {matchedPairs.map((pair, idx) => (
                     <div key={idx} className={`matched-pair ${getPairStatusClass(pair)}`}>
                         <span>{pair.question.text}</span>
@@ -135,9 +172,8 @@ function MatchingGame() {
             </div>
 
             {/* Unmatched Area */}
-            {/* Even if empty, we keep structure?? Or maybe hide if empty */}
             {gameState === 'playing' && (
-                <div className="unmatched-container">
+                <div className="unmatched-container" style={{ flex: availableQuestions.length }}>
                     <div className="questions-column">
                         {availableQuestions.map((q) => (
                             <div
@@ -148,7 +184,6 @@ function MatchingGame() {
                                 <span>{q.text}</span>
                             </div>
                         ))}
-                        {/* Pad with empty cells if arrays are unbalanced? (shouldn't happen in this logic) */}
                     </div>
 
                     <div className="answers-column">
@@ -165,10 +200,26 @@ function MatchingGame() {
                 </div>
             )}
 
-            {gameState === 'finished' && (
-                <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                    <h2>Game Over!</h2>
-                    <p>Check your results above.</p>
+            {gameState === 'round_finished' && (
+                <div className="round-summary" style={{ textAlign: 'center', marginTop: '1rem' }}>
+                    <h2 style={{ color: roundResult === 'Correct!' ? 'green' : 'red' }}>{roundResult}</h2>
+                    <button className="action-button" onClick={handleNextRound}>Next Round</button>
+                </div>
+            )}
+
+            {gameState === 'game_over' && (
+                <div className="round-summary" style={{ textAlign: 'center', marginTop: '1rem' }}>
+                    <h2 style={{ color: 'red' }}>Game Over!</h2>
+                    <p>You ran out of lives.</p>
+                    <button className="action-button" onClick={startNewGame}>Try Again</button>
+                </div>
+            )}
+
+            {gameState === 'victory' && (
+                <div className="round-summary" style={{ textAlign: 'center', marginTop: '1rem' }}>
+                    <h2 style={{ color: 'gold' }}>Victory!</h2>
+                    <p>You completed all 10 rounds!</p>
+                    <button className="action-button" onClick={startNewGame}>Play Again</button>
                 </div>
             )}
 
