@@ -8,7 +8,7 @@ import { setupKeyboardListeners } from '../utils/KeyboardManager';
 import './CommonPage.css';
 import './BubbleGame.css';
 import './HandsFreeGame.css';
-
+import HandsFreeGameReady from './HandsFreeGameReady';
 function HandsFreeGame() {
     const { navigateTo } = useNavigationStore();
     console.log('HandsFreeGame: Imported useGameStore:', useGameStore);
@@ -273,31 +273,14 @@ function HandsFreeGame() {
 
     if (!gameStarted) {
         return (
-            <div className="page-container" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                <GameTitleBar
-                    title={`Hands Free - Ready?`}
+            <>
+                <HandsFreeGameReady
+                    onStart={handleStartGame}
                     onExit={() => navigateTo('main')}
+                    permissionError={permissionError}
                 />
-                <div className="start-overlay">
-                    <h2>Hands Free Mode</h2>
-                    <p style={{ maxWidth: '300px', textAlign: 'center', marginBottom: '20px' }}>
-                        This mode uses your microphone and audio.
-                        Please tap Start to enable permissions.
-                    </p>
-                    {permissionError && <div style={{ color: 'red', marginBottom: '10px' }}>{permissionError}</div>}
-                    <button
-                        className="control-button primary"
-                        style={{ fontSize: '1.5rem', padding: '20px 40px' }}
-                        onClick={handleStartGame}
-                    >
-                        START GAME
-                    </button>
-                    <div style={{ marginTop: '20px', opacity: 0.7, fontSize: '0.8rem' }}>
-                        Best experienced on Chrome or Safari
-                    </div>
-                </div>
                 {audioComponent}
-            </div>
+            </>
         );
     }
 
