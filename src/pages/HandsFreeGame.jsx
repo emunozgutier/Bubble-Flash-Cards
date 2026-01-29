@@ -251,6 +251,13 @@ function HandsFreeGame() {
     }, [currentCard, practiceMode, isListening, gameStarted]);
 
 
+    // Redirect if game state is idle (e.g. refresh or direct navigation)
+    useEffect(() => {
+        if (gameState === 'idle') {
+            navigateTo('handsFreeSetup'); // Redirect to setup if no game active
+        }
+    }, [gameState]);
+
     if (gameState === 'idle') return null;
 
     if (gameState === 'game_over' || gameState === 'won') {
