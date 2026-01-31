@@ -18,14 +18,13 @@ a {
   color: var(--color-primary);
   text-decoration: inherit;
 }
+
 a:hover {
   color: var(--color-primary-hover);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--color-background);
@@ -50,11 +49,13 @@ button {
   cursor: pointer;
   transition: all 0.25s;
 }
+
 button:hover {
   background-color: var(--color-primary);
   color: var(--color-text);
   border-color: var(--color-primary);
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -66,6 +67,7 @@ button:focus-visible {
     color: var(--color-text);
     background-color: var(--color-background);
   }
+
   button {
     background-color: transparent;
     color: var(--color-primary);

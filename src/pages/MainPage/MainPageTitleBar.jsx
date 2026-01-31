@@ -1,9 +1,11 @@
 import React from 'react';
 import useNavigationStore from '../../stores/useNavigationStore';
+import useThemeStore from '../../stores/useThemeStore';
 import MainPageSignin from './MainPageSignin';
 
 const MainPageTitleBar = () => {
     const { navigateTo } = useNavigationStore();
+    const { colors } = useThemeStore();
 
     return (
         <div className="main-page-title-bar" style={{
@@ -12,7 +14,9 @@ const MainPageTitleBar = () => {
             alignItems: 'center',
             padding: '10px 20px',
             width: '100%',
-            boxSizing: 'border-box'
+            boxSizing: 'border-box',
+            backgroundColor: colors.surface,
+            borderBottom: `1px solid ${colors.border}`
         }}>
             <button
                 onClick={() => navigateTo('help')}
@@ -24,7 +28,7 @@ const MainPageTitleBar = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--color-text-primary, #ffffff)' // Fallback white
+                    color: colors.text
                 }}
                 title="Help & Version"
             >

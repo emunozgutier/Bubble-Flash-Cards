@@ -22,8 +22,8 @@
 
 .page-border-content {
     width: 100%;
-    max-width: 600px;
-    /* Fixed width simulation */
+    max-width: 100%;
+    /* Allow full width */
     height: 100%;
     background-color: var(--color-background);
     position: relative;
