@@ -15,7 +15,7 @@ function MainPage() {
     return (
         <div className="select-deck-page">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                <h1 style={{ margin: 0 }}>Flash Cards Manager</h1>
+                <h1 style={{ margin: 0 }}>Bubble Flash Cards</h1>
                 <button
                     onClick={() => navigateTo('help')}
                     style={{
