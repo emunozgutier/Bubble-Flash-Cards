@@ -3,9 +3,8 @@ import useNavigationStore from '../../stores/useNavigationStore';
 import FlashCard from '../../components/FlashCard';
 import useDriveStore from '../../stores/useDriveStore';
 import useDataStore from '../../stores/useDataStore';
-// MainPageSignin is now used in MainPageTitleBar
 import MainPageDeckList from './MainPageDeckList';
-import MainPageTitleBar from '../../components/MainPageTitleBar';
+import MainPageTitleBar from './MainPageTitleBar';
 import '../CommonPage.css';
 
 import './MainPage.css';

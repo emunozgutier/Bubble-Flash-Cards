@@ -1,6 +1,6 @@
 import React from 'react';
-import useNavigationStore from '../stores/useNavigationStore';
-import MainPageSignin from '../pages/MainPage/MainPageSignin';
+import useNavigationStore from '../../stores/useNavigationStore';
+import MainPageSignin from './MainPageSignin';
 
 const MainPageTitleBar = () => {
     const { navigateTo } = useNavigationStore();
