@@ -7,6 +7,8 @@ import MainPageSignin from './MainPageSignin';
 import MainPageDeckList from './MainPageDeckList';
 import '../CommonPage.css';
 
+import './MainPage.css';
+
 function MainPage() {
     const { navigateTo } = useNavigationStore();
     const { isAuthorized } = useDriveStore();
@@ -14,7 +16,7 @@ function MainPage() {
 
     return (
         <div className="select-deck-page">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <div className="main-header">
                 <h1 style={{ margin: 0 }}>Bubble Flash Cards</h1>
                 <button
                     onClick={() => navigateTo('help')}

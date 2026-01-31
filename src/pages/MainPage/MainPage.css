@@ -1,0 +1,84 @@
+/* MainPage Layout */
+.select-deck-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    /* Prevent body scroll */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 1. Header Space */
+.main-header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    /* Ensure header doesn't shrink */
+}
+
+/* 2. Content Space (Sign in + Deck List) */
+.controls {
+    flex: 1;
+    /* Take up remaining space */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Prevent overflow here, handle it in children */
+    margin-bottom: 1rem;
+}
+
+/* Signin uses its own component, just ensure it doesn't shrink aggressively */
+.controls>div:first-child {
+    flex-shrink: 0;
+}
+
+/* Target the DeckList component's root */
+.controls .deck-list-container {
+    flex: 1;
+    /* Take remaining space in controls */
+    overflow-y: auto;
+    /* Scroll if content (list) is too long */
+    min-height: 0;
+    /* Crucial for flex nested scrolling */
+    margin-top: 10px;
+    /* Add a border or background if needed to distinguish the scroll area */
+}
+
+/* Ensure the list inside deck-list-container behaves nicely */
+.deck-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 3. Footer Space (Play Buttons) */
+.game-selection {
+    flex-shrink: 0;
+    /* Never shrink or hide */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-border);
+    /* Optional visual separator */
+    background-color: var(--color-background);
+    /* Ensure it sits on top if using absolute z-index, but with flex it's fine */
+}
+
+.game-selection button {
+    padding: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: opacity 0.2s;
+}
+
+.game-selection button:hover {
+    opacity: 0.9;
+}
