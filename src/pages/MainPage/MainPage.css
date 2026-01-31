@@ -79,6 +79,15 @@
     transition: opacity 0.2s;
 }
 
+
 .game-selection button:hover {
     opacity: 0.9;
+}
+
+/* MainPageTitleBar specific styles */
+.main-page-title-bar {
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    margin-bottom: 1rem;
+    border-radius: 8px;
 }

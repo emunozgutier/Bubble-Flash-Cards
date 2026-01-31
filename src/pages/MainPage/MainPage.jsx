@@ -3,8 +3,9 @@ import useNavigationStore from '../../stores/useNavigationStore';
 import FlashCard from '../../components/FlashCard';
 import useDriveStore from '../../stores/useDriveStore';
 import useDataStore from '../../stores/useDataStore';
-import MainPageSignin from './MainPageSignin';
+// MainPageSignin is now used in MainPageTitleBar
 import MainPageDeckList from './MainPageDeckList';
+import MainPageTitleBar from '../../components/MainPageTitleBar';
 import '../CommonPage.css';
 
 import './MainPage.css';
@@ -16,26 +17,9 @@ function MainPage() {
 
     return (
         <div className="select-deck-page">
-            <div className="main-header">
-                <h1 style={{ margin: 0 }}>Bubble Flash Cards</h1>
-                <button
-                    onClick={() => navigateTo('help')}
-                    style={{
-                        padding: '0.5rem 1rem',
-                        fontSize: '0.9rem',
-                        background: 'transparent',
-                        border: '1px solid var(--color-primary)',
-                        color: 'var(--color-primary)',
-                        borderRadius: '0.5rem',
-                        cursor: 'pointer'
-                    }}
-                >
-                    Help & Version
-                </button>
-            </div>
+            <MainPageTitleBar />
 
             <div className="controls">
-                <MainPageSignin />
                 <MainPageDeckList />
             </div>
 
