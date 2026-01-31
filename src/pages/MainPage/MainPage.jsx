@@ -45,16 +45,6 @@ function MainPage() {
                 </div>
             )}
 
-            <div className="card-grid">
-                {cards.map(card => (
-                    <FlashCard
-                        key={card.id}
-                        card={card}
-                        front={card.front}
-                        back={card.back}
-                    />
-                ))}
-            </div>
         </div>
     );
 }

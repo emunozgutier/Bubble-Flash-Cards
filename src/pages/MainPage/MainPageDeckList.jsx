@@ -161,11 +161,6 @@ const MainPageDeckList = () => {
                     );
                 })}
             </div>
-            <div className="deck-actions">
-                <button onClick={handleSaveToDrive} disabled={isLoading || !currentDeckName}>
-                    {isLoading ? 'Saving...' : 'Save Current Deck'}
-                </button>
-            </div>
         </div>
     );
 };
