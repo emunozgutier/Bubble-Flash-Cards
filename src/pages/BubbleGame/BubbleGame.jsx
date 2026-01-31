@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import useNavigationStore from '../stores/useNavigationStore';
-import useDataStore from '../stores/useDataStore';
-import useGameStore from '../stores/useGameStore';
-import GameTitleBar from './submodules1/GameTitleBar';
-import BubbleGameBubble from './submodules1/BubbleGameBubble';
-import GameSummary from './GameSummary';
-import CharacterDraw from './CharacterDraw';
-import './CommonPage.css';
+import useNavigationStore from '../../stores/useNavigationStore';
+import useDataStore from '../../stores/useDataStore';
+import useGameStore from '../../stores/useGameStore';
+import GameTitleBar from '../../components/GameTitleBar';
+import BubbleGameBubble from './BubbleGameBubble';
+import GameSummary from '../GameSummary';
+import CharacterDraw from '../CharacterDraw/CharacterDraw';
+import '../CommonPage.css';
 import './BubbleGame.css';
 
 function BubbleGame() {

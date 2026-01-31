@@ -8,13 +8,13 @@ const mockNavigateTo = vi.fn();
 const mockSubmitAnswer = vi.fn();
 const mockNextRound = vi.fn();
 
-vi.mock('../stores/useNavigationStore', () => ({
+vi.mock('../../stores/useNavigationStore', () => ({
     default: () => ({
         navigateTo: mockNavigateTo,
     }),
 }));
 
-vi.mock('../stores/useDataStore', () => ({
+vi.mock('../../stores/useDataStore', () => ({
     default: () => ({
         cards: [],
         currentDeckName: 'Test Deck',
@@ -46,11 +46,13 @@ const mockBubbleGameStore = {
     sessionResults: [],
 };
 
-vi.mock('../stores/useGameStore', () => ({
+vi.mock('../../stores/useGameStore', () => ({
     default: vi.fn(() => mockBubbleGameStore),
 }));
 
-vi.mock('./submodules1/BubbleGameBubble', () => ({
+// Mock submodules
+vi.mock('../../components/GameTitleBar', () => ({ default: () => <div data-testid="game-title-bar" /> }));
+vi.mock('./BubbleGameBubble', () => ({
     default: ({ text, onClick, className }) => (
         <div data-testid="bubble" onClick={onClick} className={className}>
             {text}
@@ -59,12 +61,12 @@ vi.mock('./submodules1/BubbleGameBubble', () => ({
 }));
 
 // Mock submodules
-vi.mock('./CharacterDraw', () => ({ default: () => <div data-testid="character-draw" /> }));
+vi.mock('../CharacterDraw/CharacterDraw', () => ({ default: () => <div data-testid="character-draw" /> }));
 
 describe('BubbleGame', () => {
     beforeEach(async () => {
         vi.clearAllMocks();
-        vi.mocked(await import('../stores/useGameStore')).default.mockReturnValue(mockBubbleGameStore);
+        vi.mocked(await import('../../stores/useGameStore')).default.mockReturnValue(mockBubbleGameStore);
     });
 
     it('renders game board with bubbles', () => {
@@ -95,7 +97,7 @@ describe('BubbleGame', () => {
     });
 
     it('shows summary when game over', async () => {
-        vi.mocked(await import('../stores/useGameStore')).default.mockReturnValue({
+        vi.mocked(await import('../../stores/useGameStore')).default.mockReturnValue({
             ...mockBubbleGameStore,
             gameState: 'game_over'
         });
@@ -105,7 +107,7 @@ describe('BubbleGame', () => {
     });
 
     it('redirects if idle', async () => {
-        vi.mocked(await import('../stores/useGameStore')).default.mockReturnValue({
+        vi.mocked(await import('../../stores/useGameStore')).default.mockReturnValue({
             ...mockBubbleGameStore,
             gameState: 'idle'
         });

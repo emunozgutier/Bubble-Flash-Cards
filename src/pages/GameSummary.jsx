@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useNavigationStore from '../stores/useNavigationStore';
 import useGameStore from '../stores/useGameStore';
-import GameTitleBar from './submodules1/GameTitleBar';
+import GameTitleBar from '../components/GameTitleBar';
 import useDataStore from '../stores/useDataStore';
 import './CommonPage.css'; // Re-use bubble game css or add new ones
 

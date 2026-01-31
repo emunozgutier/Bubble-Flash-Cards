@@ -1,10 +1,11 @@
 import React from 'react';
-import useNavigationStore from '../stores/useNavigationStore';
-import FlashCard from '../components/FlashCard';
-import useDriveStore from '../stores/useDriveStore';
-import useDataStore from '../stores/useDataStore';
-import MainPageSignin from './submodules1/MainPageSignin';
-import MainPageDeckList from './submodules1/MainPageDeckList';
+import useNavigationStore from '../../stores/useNavigationStore';
+import FlashCard from '../../components/FlashCard';
+import useDriveStore from '../../stores/useDriveStore';
+import useDataStore from '../../stores/useDataStore';
+import MainPageSignin from './MainPageSignin';
+import MainPageDeckList from './MainPageDeckList';
+import '../CommonPage.css';
 
 function MainPage() {
     const { navigateTo } = useNavigationStore();

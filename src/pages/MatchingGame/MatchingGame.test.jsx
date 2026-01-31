@@ -1,13 +1,13 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import React from 'react';
 import MatchingGame from './MatchingGame';
-import useDataStore from '../stores/useDataStore';
-import useNavigationStore from '../stores/useNavigationStore';
+import useDataStore from '../../stores/useDataStore';
+import useNavigationStore from '../../stores/useNavigationStore';
 import { vi } from 'vitest';
 
 // Mock the stores
-vi.mock('../stores/useDataStore');
-vi.mock('../stores/useNavigationStore');
+vi.mock('../../stores/useDataStore');
+vi.mock('../../stores/useNavigationStore');
 
 describe('MatchingGame', () => {
     const mockNavigateTo = vi.fn();

@@ -8,21 +8,21 @@ const mockNavigateTo = vi.fn();
 const mockMarkCorrect = vi.fn();
 const mockMarkIncorrect = vi.fn();
 
-vi.mock('../stores/useNavigationStore', () => ({
+vi.mock('../../stores/useNavigationStore', () => ({
     default: () => ({
         navigateTo: mockNavigateTo,
     }),
 }));
 
 // Mock Audio Manager and Keyboard Manager
-vi.mock('../utils/AudioManager', () => ({
+vi.mock('../../utils/AudioManager', () => ({
     SILENT_MP3: 'silent.mp3',
     speak: vi.fn(),
     initMediaSession: vi.fn(() => vi.fn()), // Returns cleanup function
     updateMediaMetadata: vi.fn(),
 }));
 
-vi.mock('../utils/KeyboardManager', () => ({
+vi.mock('../../utils/KeyboardManager', () => ({
     setupKeyboardListeners: vi.fn(() => vi.fn()), // Returns cleanup function
 }));
 
@@ -43,7 +43,7 @@ const mockGameStore = {
     sessionResults: [],
 };
 
-vi.mock('../stores/useGameStore', () => ({
+vi.mock('../../stores/useGameStore', () => ({
     default: vi.fn(() => mockGameStore),
 }));
 
@@ -51,7 +51,7 @@ describe('HandsFreeGame', () => {
     beforeEach(async () => {
         vi.clearAllMocks();
         // Default mocks
-        vi.mocked(await import('../stores/useGameStore')).default.mockReturnValue(mockGameStore);
+        vi.mocked(await import('../../stores/useGameStore')).default.mockReturnValue(mockGameStore);
 
         // Mock SpeechSynthesis
         window.speechSynthesis = {
@@ -129,7 +129,7 @@ describe('HandsFreeGame', () => {
 
     it('shows game summary when game is over (won or game_over)', async () => {
         // Override store for this test
-        vi.mocked(await import('../stores/useGameStore')).default.mockReturnValue({
+        vi.mocked(await import('../../stores/useGameStore')).default.mockReturnValue({
             ...mockGameStore,
             gameState: 'won'
         });

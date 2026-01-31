@@ -1,6 +1,6 @@
 import React from 'react';
-import GameTitleBar from './submodules1/GameTitleBar';
-import './CommonPage.css';
+import GameTitleBar from '../../components/GameTitleBar';
+import '../CommonPage.css';
 import './HandsFreeGame.css';
 
 const HandsFreeGameReady = ({ onStart, onExit, permissionError }) => {

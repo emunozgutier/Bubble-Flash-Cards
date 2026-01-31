@@ -1,7 +1,7 @@
 import React from 'react';
-import useNavigationStore from '../../stores/useNavigationStore';
-import versionInfo from '../../version.json';
-import '../CommonPage.css';
+import useNavigationStore from '../stores/useNavigationStore';
+import versionInfo from '../version.json';
+import './CommonPage.css';
 
 function HelpPage() {
     const { navigateTo } = useNavigationStore();

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
-import useNavigationStore from '../stores/useNavigationStore';
-import useGameStore from '../stores/useGameStore';
-import GameTitleBar from './submodules1/GameTitleBar';
-import GameSummary from './GameSummary';
-import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../utils/AudioManager';
-import { setupKeyboardListeners } from '../utils/KeyboardManager';
-import './CommonPage.css';
-import './BubbleGame.css';
+import useNavigationStore from '../../stores/useNavigationStore';
+import useGameStore from '../../stores/useGameStore';
+import GameTitleBar from '../../components/GameTitleBar';
+import GameSummary from '../GameSummary';
+import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../../utils/AudioManager';
+import { setupKeyboardListeners } from '../../utils/KeyboardManager';
+import '../CommonPage.css';
+import '../BubbleGame/BubbleGame.css';
 import './HandsFreeGame.css';
 import HandsFreeGameReady from './HandsFreeGameReady';
 function HandsFreeGame() {

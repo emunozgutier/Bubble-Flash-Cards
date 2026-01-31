@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import useNavigationStore from '../stores/useNavigationStore';
-import useDataStore from '../stores/useDataStore';
+import useNavigationStore from '../../stores/useNavigationStore';
+import useGameStore from '../../stores/useGameStore';
+import GameTitleBar from '../../components/GameTitleBar';
 import './MatchingGame.css';
+import '../CommonPage.css';
 
 function MatchingGame() {
     const { navigateTo } = useNavigationStore();
