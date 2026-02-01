@@ -32,8 +32,8 @@ const HandsFreeGameInputDiagnostics = ({ show, onHide }) => {
             <Modal.Header closeButton style={{ backgroundColor: colors.surface, color: colors.text, borderColor: colors.border }}>
                 <Modal.Title>Input Diagnostic</Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{ backgroundColor: colors.surface, color: colors.text, padding: '30px' }}>
-                <p className="text-center mb-4" style={{ fontSize: '1.1rem', opacity: 0.8 }}>
+            <Modal.Body style={{ backgroundColor: colors.surface, color: colors.text }}>
+                <p className="text-center mb-4 p-4 opacity-75" style={{ fontSize: '1.1rem' }}>
                     Press any key or button on your remote to see its identifier.
                 </p>
 
@@ -48,23 +48,23 @@ const HandsFreeGameInputDiagnostics = ({ show, onHide }) => {
                 >
                     {lastInput ? (
                         <>
-                            <div className="mb-2" style={{ fontSize: '0.9rem', color: colors.primary, fontWeight: 'bold' }}>
+                            <div className="mb-2 fw-bold small text-uppercase" style={{ color: colors.primary }}>
                                 LAST DETECTED ({lastInput.type.toUpperCase()}):
                             </div>
-                            <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: colors.text, textAlign: 'center' }}>
+                            <div className="display-4 fw-bold text-center mb-1" style={{ color: colors.text }}>
                                 {lastInput.code}
                             </div>
-                            <div style={{ fontSize: '1.2rem', opacity: 0.7 }}>
+                            <div className="fs-5 opacity-75">
                                 {lastInput.type === 'Keyboard' ? `(Key: "${lastInput.key}")` : `(${lastInput.key})`}
                             </div>
-                            <div className="mt-3" style={{ fontSize: '0.8rem', opacity: 0.5 }}>
+                            <div className="mt-3 small opacity-50">
                                 {lastInput.timestamp}
                             </div>
                         </>
                     ) : (
-                        <div style={{ fontSize: '1.2rem', opacity: 0.5, fontStyle: 'italic', textAlign: 'center' }}>
+                        <div className="fs-5 opacity-50 fst-italic text-center">
                             Waiting for input...<br />
-                            (Keyboard, Mouse, or Wheel)
+                            <small>(Keyboard, Mouse, or Wheel)</small>
                         </div>
                     )}
                 </div>

@@ -14,6 +14,20 @@ vi.mock('../../stores/useNavigationStore', () => ({
     }),
 }));
 
+vi.mock('../../stores/useThemeStore', () => ({
+    default: () => ({
+        colors: {
+            primary: '#007bff',
+            secondary: '#6c757d',
+            surface: '#ffffff',
+            background: '#f8f9fa',
+            text: '#212529',
+            textSecondary: '#6c757d',
+            border: '#dee2e6',
+        },
+    }),
+}));
+
 // Mock Audio Manager and Keyboard Manager
 vi.mock('../../utils/AudioManager', () => ({
     SILENT_MP3: 'silent.mp3',

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import useNavigationStore from '../../stores/useNavigationStore';
 import useGameStore from '../../stores/useGameStore';
+import useThemeStore from '../../stores/useThemeStore';
 import GameTitleBar from '../../components/GameTitleBar';
 import GameSummary from '../GameSummary';
 import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../../utils/AudioManager';
@@ -13,11 +14,12 @@ import HandsFreeGameInputDiagnostics from './HandsFreeGameInputDiagnostics';
 function HandsFreeGame() {
     const { navigateTo } = useNavigationStore();
     const gameStore = useGameStore();
+    const { colors, fontSizes } = useThemeStore();
 
     // Debugging Crash
     if (!gameStore) {
         console.error("CRITICAL: useGameStore() returned undefined or useGameStore hook is missing.");
-        return <div style={{ color: 'red', padding: '20px' }}>Error: Game Store not initialized. Please check console.</div>;
+        return <div className="p-4" style={{ color: colors.primary }}>Error: Game Store not initialized. Please check console.</div>;
     }
 
     const {
@@ -280,7 +282,7 @@ function HandsFreeGame() {
             src={SILENT_MP3}
             loop
             playsInline
-            style={{ display: 'none' }}
+            className="d-none"
         />
     );
 
@@ -313,18 +315,21 @@ function HandsFreeGame() {
             <div className="split-screen-container" key={currentCard?.id || 'empty'}>
                 {/* Top Half: Question */}
                 <div className="split-top">
-                    <h1 className="question-text">
+                    <h1 className="question-text mb-4 text-center" style={{ fontSize: '3rem', color: colors.text }}>
                         {displayQuestion}
                     </h1>
                 </div>
 
                 {/* Bottom Half: Answer & Controls */}
                 <div className="split-bottom">
-                    <div className={`answer-text ${showAnswer ? 'visible' : 'hidden'}`}>
+                    <div
+                        className={`answer-text mb-4 ${showAnswer ? 'visible' : 'hidden'}`}
+                        style={{ fontSize: '2rem', color: colors.textSecondary }}
+                    >
                         {currentCard?.displayAnswer || ''}
                     </div>
 
-                    <div className="controls-container">
+                    <div className="controls-container d-flex gap-3 mb-4 justify-content-center">
                         <button
                             onClick={() => handleReplay(1.0)}
                             className="control-button primary"
@@ -340,9 +345,13 @@ function HandsFreeGame() {
                     </div>
 
                     {practiceMode && (
-                        <div className="speech-status">
-                            <div className="speech-status-label">Listening ({recognitionRef.current?.lang})</div>
-                            <div className="speech-result">{speechResult || '...'}</div>
+                        <div className="speech-status mt-3 p-2 border rounded w-75" style={{ borderColor: colors.border }}>
+                            <div className="speech-status-label small text-uppercase" style={{ color: colors.textSecondary }}>
+                                Listening ({recognitionRef.current?.lang})
+                            </div>
+                            <div className="speech-result fst-italic" style={{ color: colors.text }}>
+                                {speechResult || '...'}
+                            </div>
                         </div>
                     )}
                 </div>

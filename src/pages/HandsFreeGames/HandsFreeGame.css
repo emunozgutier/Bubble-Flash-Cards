@@ -1,14 +1,9 @@
 .question-text {
-    font-size: 3em;
-    margin-bottom: 20px;
     white-space: pre-wrap;
 }
 
 .answer-text {
-    font-size: 2em;
-    color: var(--color-text-secondary);
     min-height: 1.2em;
-    margin-bottom: 20px;
     transition: opacity 1s ease-in-out;
 }
 
@@ -20,27 +15,10 @@
     opacity: 1;
 }
 
-.controls-container {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.speech-status {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    width: 80%;
-}
-
 .speech-status-label {
-    font-size: 0.8em;
-    text-transform: uppercase;
-    color: var(--color-text-secondary);
+    letter-spacing: 1px;
 }
 
 .speech-result {
-    font-style: italic;
     min-height: 1.2em;
 }

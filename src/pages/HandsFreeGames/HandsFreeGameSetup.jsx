@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useNavigationStore from '../../stores/useNavigationStore';
 import useDataStore from '../../stores/useDataStore';
 import useGameStore from '../../stores/useGameStore';
+import useThemeStore from '../../stores/useThemeStore';
 import GameTitleBar from '../../components/GameTitleBar';
 import '../CommonPage.css';
 import '../BubbleGame/BubbleGame.css'; // Re-use Bubble Game styles for consistency
@@ -10,6 +11,7 @@ function HandsFreeGameSetup() {
     const { navigateTo } = useNavigationStore();
     const { cards, currentDeckName } = useDataStore();
     const { startGame } = useGameStore();
+    const { colors } = useThemeStore();
 
     // Local state for practice mode since it's specific to this session until started
     const [practiceMode, setPracticeMode] = useState(false);
@@ -44,10 +46,10 @@ function HandsFreeGameSetup() {
                 title={`Hands Free Setup - ${currentDeckName}`}
                 onExit={() => navigateTo('main')}
             />
-            <div className="game-over-screen" style={{ backgroundColor: 'var(--color-background)', position: 'relative' }}>
-                <h2 style={{ marginBottom: '30px' }}>Select Mode</h2>
+            <div className="game-over-screen w-100 h-100 d-flex flex-column align-items-center justify-content-center" style={{ backgroundColor: colors.background, position: 'relative' }}>
+                <h2 className="mb-4" style={{ color: colors.text }}>Select Mode</h2>
 
-                <div style={{ marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '15px', padding: '10px', background: 'var(--color-surface)', borderRadius: '10px' }}>
+                <div className="mb-4 d-flex align-items-center gap-3 p-3 rounded" style={{ backgroundColor: colors.surface }}>
                     <label className="toggle-switch">
                         <input
                             type="checkbox"
@@ -56,33 +58,30 @@ function HandsFreeGameSetup() {
                         />
                         <span className="slider round"></span>
                     </label>
-                    <div style={{ textAlign: 'left' }}>
-                        <span style={{ color: 'var(--color-text)', fontWeight: 'bold', display: 'block' }}>Voice Practice Mode</span>
-                        <span style={{ fontSize: '0.8em', color: 'var(--color-text-secondary)' }}>
+                    <div className="text-start">
+                        <span className="fw-bold d-block" style={{ color: colors.text }}>Voice Practice Mode</span>
+                        <span className="small d-block" style={{ color: colors.textSecondary }}>
                             Listen & match your voice (Chrome/Safari)
                         </span>
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '15px', flexDirection: 'column', width: '300px' }}>
+                <div className="d-flex flex-column gap-3" style={{ width: '300px' }}>
                     <button
                         onClick={() => handleStart('chinese_english')}
-                        className="game-over-button"
-                        style={{ marginTop: 0 }}
+                        className="game-over-button m-0"
                     >
                         Chinese ➔ English
                     </button>
                     <button
                         onClick={() => handleStart('english_chinese')}
-                        className="game-over-button"
-                        style={{ marginTop: 0 }}
+                        className="game-over-button m-0"
                     >
                         English ➔ Chinese
                     </button>
                     <button
                         onClick={() => handleStart('chinese')}
-                        className="game-over-button"
-                        style={{ marginTop: 0 }}
+                        className="game-over-button m-0"
                     >
                         Random Mixed
                     </button>
@@ -90,8 +89,7 @@ function HandsFreeGameSetup() {
 
                 <button
                     onClick={() => navigateTo('main')}
-                    className="game-exit-button"
-                    style={{ marginTop: '40px' }}
+                    className="game-exit-button mt-5"
                 >
                     Back
                 </button>

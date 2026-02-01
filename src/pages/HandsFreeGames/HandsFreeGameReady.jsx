@@ -1,9 +1,11 @@
-import React from 'react';
 import GameTitleBar from '../../components/GameTitleBar';
+import useThemeStore from '../../stores/useThemeStore';
 import '../CommonPage.css';
 import './HandsFreeGame.css';
 
 const HandsFreeGameReady = ({ onStart, onExit, permissionError }) => {
+    const { colors } = useThemeStore();
+
     return (
         <div className="page-container">
             <GameTitleBar
@@ -11,26 +13,26 @@ const HandsFreeGameReady = ({ onStart, onExit, permissionError }) => {
                 onExit={onExit}
             />
             <div className="game-content-center">
-                <h2>Hands Free Mode</h2>
-                <p style={{ maxWidth: '300px', textAlign: 'center', marginBottom: '20px' }}>
+                <h2 style={{ color: colors.text }}>Hands Free Mode</h2>
+                <p className="text-center mb-4" style={{ maxWidth: '300px', color: colors.text }}>
                     This mode uses your microphone and audio.
                     Please tap Start to enable permissions.
                 </p>
-                {permissionError && <div style={{ color: 'red', marginBottom: '10px' }}>{permissionError}</div>}
+                {permissionError && (
+                    <div className="mb-3" style={{ color: colors.primary }}>
+                        {permissionError}
+                    </div>
+                )}
                 <button
-                    className="control-button primary"
-                    style={{ fontSize: '1.5rem', padding: '20px 40px' }}
+                    className="control-button primary fs-4 py-3 px-5"
                     onClick={onStart}
                 >
                     START GAME
                 </button>
-                <div style={{ marginTop: '20px', opacity: 0.7, fontSize: '0.8rem' }}>
+                <div className="mt-4 opacity-75 small" style={{ color: colors.textSecondary }}>
                     Best experienced on Chrome or Safari
                 </div>
             </div>
-            {/* Audio element is handled by parent, but we might want to ensure it's mounted if needed here, 
-                though usually it's better in the parent to persist across re-renders. 
-                For this refactor, we keep the audio in the parent as per the plan. */}
         </div>
     );
 };
