@@ -2,6 +2,9 @@ import React, { useEffect, useState, useRef } from 'react';
 import useNavigationStore from '../../stores/useNavigationStore';
 import useGameStore from '../../stores/useGameStore';
 import useThemeStore from '../../stores/useThemeStore';
+import { FaVolumeUp } from 'react-icons/fa';
+import { GiTurtle } from 'react-icons/gi';
+import { MdSkipPrevious, MdSkipNext } from 'react-icons/md';
 import GameTitleBar from '../../components/GameTitleBar';
 import GameSummary from '../GameSummary';
 import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../../utils/AudioManager';
@@ -332,15 +335,15 @@ function HandsFreeGame() {
                     <div className="controls-container d-flex gap-3 mb-4 justify-content-center">
                         <button
                             onClick={() => handleReplay(1.0)}
-                            className="control-button primary"
+                            className="control-button primary d-flex align-items-center"
                         >
-                            🔊 Speak
+                            <FaVolumeUp className="me-2" /> Speak
                         </button>
                         <button
                             onClick={() => handleReplay(0.25)}
-                            className="control-button secondary"
+                            className="control-button secondary d-flex align-items-center"
                         >
-                            🐢 Slow
+                            <GiTurtle className="me-2" /> Slow
                         </button>
                     </div>
 
@@ -363,15 +366,15 @@ function HandsFreeGame() {
                     onClick={handleIncorrect}
                     className="backup-button incorrect"
                 >
-                    <span>⏮</span>
-                    <span>Skip / Wrong</span>
+                    <MdSkipPrevious size={32} />
+                    <span className="mt-1">Skip / Wrong</span>
                 </button>
                 <button
                     onClick={handleCorrect}
                     className="backup-button correct"
                 >
-                    <span>Next / Correct</span>
-                    <span>⏭</span>
+                    <span className="mb-1">Next / Correct</span>
+                    <MdSkipNext size={32} />
                 </button>
             </div>
             <HandsFreeGameInputDiagnostics
