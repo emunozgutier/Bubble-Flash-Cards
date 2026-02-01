@@ -1,7 +1,7 @@
 {
-  "hash": "c0d0c24",
-  "date": "2026-01-31T17:53:54-08:00",
-  "title": "Update version.json hash and date",
-  "message": "Bump src/version.json to hash \"ed50aba\" and update the timestamp to 2026-02-01T01:47:07Z. This reflects the latest recorded build/deploy metadata; other fields (title, message, source) remain unchanged.",
+  "hash": "934d4f6",
+  "date": "2026-01-31T17:59:40-08:00",
+  "title": "Generate version.json from local git",
+  "message": "Replace GitHub API-based fetching with local git commands using child_process.execSync to generate src/version.json. The script now reads the short hash, commit date, title, and body from the local repository, writes version.json, and logs the result; if git is unavailable it writes a minimal fallback entry. Also updates src/version.json metadata to reflect the new local-git-derived values. This change avoids relying on the GitHub API (rate limits/auth) and supports offline builds.",
   "source": "Local Git"
 }
