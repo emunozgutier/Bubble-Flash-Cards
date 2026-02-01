@@ -3,7 +3,7 @@ import useNavigationStore from '../../stores/useNavigationStore';
 import useDataStore from '../../stores/useDataStore';
 import useDriveStore from '../../stores/useDriveStore';
 import useThemeStore from '../../stores/useThemeStore';
-import { loadFile, saveFile } from '../../services/googleDriveService';
+import { loadFile } from '../../services/googleDriveService';
 import MainPageDeckList from './MainPageDeckList';
 import MainPageTitleBar from './MainPageTitleBar';
 import GameSelectionModal from '../../components/GameSelectionModal';
@@ -32,13 +32,11 @@ const DEFAULT_DECKS = {
 
 function MainPage() {
     const { setCurrentDeckName, setCards } = useDataStore();
-    const { isAuthorized, deckFileIds, setIsLoading, appFolderId, updateDeckFileId } = useDriveStore();
+    const { isAuthorized, deckFileIds, setIsLoading, appFolderId } = useDriveStore();
     const { colors, fontSizes } = useThemeStore();
     const [showModal, setShowModal] = useState(false);
     const [selectedDeck, setSelectedDeck] = useState(null);
 
-    // Duplicated load logic from previous MainPageDeckList (now handled here or shared)
-    // For simplicity, we'll implement a load function here to ensuring cards are loaded when "Playing"
     const loadDeckData = async (deckName) => {
         setIsLoading(true);
         const fileId = deckFileIds[deckName];
@@ -47,20 +45,14 @@ function MainPage() {
             if (isAuthorized && fileId) {
                 const data = await loadFile(fileId);
                 setCards(data && data.cards ? data.cards : []);
-            } else if (isAuthorized && appFolderId) {
-                // Should exist if auth'd, but fallback to create/load default
-                const defaultData = DEFAULT_DECKS[deckName] || { cards: [] };
-                // Lazy create if needed? For now just load default to memory
-                setCards(defaultData.cards || []);
             } else {
-                // Local default
+                // Local default or fallback
                 const defaultData = DEFAULT_DECKS[deckName];
                 setCards(defaultData ? defaultData.cards : []);
             }
             setCurrentDeckName(deckName);
         } catch (err) {
             console.error("Error loading deck", err);
-            // Fallback
             const defaultData = DEFAULT_DECKS[deckName];
             setCards(defaultData ? defaultData.cards : []);
             setCurrentDeckName(deckName);
@@ -70,14 +62,11 @@ function MainPage() {
 
     const handlePlay = async (deckName) => {
         setSelectedDeck(deckName);
-        // Load the deck data so it's ready for the game
         await loadDeckData(deckName);
         setShowModal(true);
     };
 
     const handleEdit = async (deckName) => {
-        // For now, edit just selects the deck. 
-        // Future: could navigate to a dedicated edit page.
         await loadDeckData(deckName);
         alert(`Edit ${deckName} (Feature coming soon!)`);
     };

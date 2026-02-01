@@ -7,6 +7,7 @@ import GameTitleBar from '../../components/GameTitleBar';
 import BubbleGameBubble from './BubbleGameBubble';
 import GameSummary from '../GameSummary';
 import CharacterDraw from '../CharacterDraw/CharacterDraw';
+import { FaHeart } from 'react-icons/fa';
 import '../CommonPage.css';
 import './BubbleGame.css';
 
@@ -29,6 +30,7 @@ function BubbleGame() {
         gameQueue,
         enableDrawing
     } = useGameStore();
+    const { colors } = useThemeStore();
 
     const [poppedBubbles, setPoppedBubbles] = useState(new Set());
     const [isRoundComplete, setIsRoundComplete] = useState(false);
@@ -115,7 +117,7 @@ function BubbleGame() {
     const displayCardsLeft = cardsLeft + 1;
 
     return (
-        <div className="bubble-game-container">
+        <div className="bubble-game-container d-flex flex-column vh-100 overflow-hidden">
             {isDrawing && currentCard && (
                 <CharacterDraw
                     characters={currentCard.chinese || currentCard.front}
@@ -130,43 +132,55 @@ function BubbleGame() {
             />
 
 
-            <div className="game-stats">
-                <span>Lives: {'❤️'.repeat(lives)}</span>
-                <span>Cards Left: {displayCardsLeft}</span>
-            </div>
+            <div className="flex-grow-1 overflow-hidden d-flex justify-content-center">
+                <div className="d-flex flex-column h-100 px-3" style={{ width: '100%', maxWidth: '600px' }}>
+                    <div className="game-stats d-flex justify-content-around p-2 border-bottom flex-shrink-0"
+                        style={{
+                            backgroundColor: 'rgba(0,0,0,0.2)',
+                            borderColor: 'var(--color-border)'
+                        }}>
+                        <span className="d-flex align-items-center gap-2">
+                            Lives: {[...Array(lives)].map((_, i) => (
+                                <FaHeart key={i} style={{ color: colors.primary }} />
+                            ))}
+                        </span>
+                        <span>Cards Left: {displayCardsLeft}</span>
+                    </div>
 
-            <div className="game-board">
-                {/* Main Question Bubble */}
-                <div className="main-bubble-container">
-                    <BubbleGameBubble
-                        text={currentCard.displayQuestion || currentCard.chinese || currentCard.front} // Question is Chinese/Front
-                        className="main-bubble"
-                    />
-                </div>
-
-                {/* Answer Bubbles - Positioned around */}
-                <div className="options-container">
-                    {options.map((opt, index) => {
-                        let animationClass = '';
-                        if (poppedBubbles.has(opt.id)) {
-                            animationClass = 'bubble-pop';
-                        } else if (isRoundComplete) {
-                            if (!opt.isCorrect) {
-                                animationClass = 'bubble-fall';
-                            } else {
-                                animationClass = 'bubble-correct';
-                            }
-                        }
-
-                        return (
+                    <div className="game-board position-relative flex-grow-1 w-100 mt-2">
+                        {/* Main Question Bubble */}
+                        <div className="main-bubble-container">
                             <BubbleGameBubble
-                                key={opt.id}
-                                text={opt.text}
-                                onClick={() => handleOptionClick(opt)}
-                                className={`option-bubble option-${index} ${animationClass}`}
+                                text={currentCard.displayQuestion || currentCard.chinese || currentCard.front}
+                                className="main-bubble"
                             />
-                        );
-                    })}
+                        </div>
+
+                        {/* Answer Bubbles - Positioned around */}
+                        <div className="options-container">
+                            {options.map((opt, index) => {
+                                let animationClass = '';
+                                if (poppedBubbles.has(opt.id)) {
+                                    animationClass = 'bubble-pop';
+                                } else if (isRoundComplete) {
+                                    if (!opt.isCorrect) {
+                                        animationClass = 'bubble-fall';
+                                    } else {
+                                        animationClass = 'bubble-correct';
+                                    }
+                                }
+
+                                return (
+                                    <BubbleGameBubble
+                                        key={opt.id}
+                                        text={opt.text}
+                                        onClick={() => handleOptionClick(opt)}
+                                        className={`option-bubble option-${index} ${animationClass}`}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

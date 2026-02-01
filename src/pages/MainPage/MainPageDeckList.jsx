@@ -3,14 +3,14 @@ import useDriveStore from '../../stores/useDriveStore';
 import useDataStore from '../../stores/useDataStore';
 import MainPageDeckButton from './MainPageDeckButton';
 
-// Only used for the names list now, effectively
+// Default deck names
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
 const MainPageDeckList = ({ onPlay, onEdit }) => {
     const { deckFileIds } = useDriveStore();
     const { deckStats, currentDeckName, setCurrentDeckName } = useDataStore();
 
-    // Use state for 'now' to ensure rendering is pure
+    // Use state for 'now' to ensure rendering is stable relative to timestamps
     const [now, setNow] = React.useState(() => Date.now());
 
     React.useEffect(() => {
@@ -44,7 +44,7 @@ const MainPageDeckList = ({ onPlay, onEdit }) => {
                         currentDeckName={currentDeckName}
                         onPlay={onPlay}
                         onEdit={onEdit}
-                        onSelect={(name) => setCurrentDeckName(name)}
+                        onSelect={(id) => setCurrentDeckName(id)}
                     />
                 );
             })}
