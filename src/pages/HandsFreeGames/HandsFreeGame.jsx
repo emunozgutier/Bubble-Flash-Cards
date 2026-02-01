@@ -4,8 +4,8 @@ import useGameStore from '../../stores/useGameStore';
 import useThemeStore from '../../stores/useThemeStore';
 import GameTitleBar from '../../components/GameTitleBar';
 import GameSummary from '../GameSummary';
-import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../../utils/AudioManager';
-import { setupInputListeners } from '../../utils/InputManager';
+import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata, warmupAudio, setupSpeechRecognition } from '../../utils/AudioManager';
+import { setupInputListeners, setupDebugKeyboardListener } from '../../utils/InputManager';
 import HandsFreeGameButtons from './HandsFreeGameButtons';
 import FlashCard from '../../components/FlashCard';
 import '../CommonPage.css';
@@ -79,12 +79,9 @@ function HandsFreeGame() {
 
     // Keyboard Listener
     useEffect(() => {
-        // Log key presses for debug overlay
-        const debugListener = (e) => {
-            const keyInfo = `${e.code} (${e.key})`;
+        const cleanupDebug = setupDebugKeyboardListener((keyInfo) => {
             setDebugKeys(prev => [keyInfo, ...prev].slice(0, 5));
-        };
-        window.addEventListener('keydown', debugListener);
+        });
 
         const cleanupKeyboard = setupInputListeners({
             onCorrect: handleCorrect,
@@ -94,7 +91,7 @@ function HandsFreeGame() {
         });
 
         return () => {
-            window.removeEventListener('keydown', debugListener);
+            cleanupDebug();
             cleanupKeyboard();
         };
     }, [currentCard]); // Re-bind when currentCard changes for closure
@@ -117,42 +114,28 @@ function HandsFreeGame() {
             log
         });
 
-        // Web Speech API
-        if (practiceMode && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            recognition.continuous = true;
-            recognition.interimResults = true;
-            recognition.lang = 'en-US';
-
-            recognition.onresult = (event) => {
-                let interimTranscript = '';
-                let finalTranscript = '';
-
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                    if (event.results[i].isFinal) {
-                        finalTranscript += event.results[i][0].transcript;
-                    } else {
-                        interimTranscript += event.results[i][0].transcript;
+        // Decentralized Speech Recognition
+        if (practiceMode) {
+            const recognition = setupSpeechRecognition({
+                onResult: (final, interim) => {
+                    setSpeechResult(final || interim);
+                    if (currentCard && final) {
+                        const answer = currentCard.displayAnswer || '';
+                        if (answer && final.toLowerCase().includes(answer.toLowerCase())) {
+                            log("Voice Match!");
+                        }
                     }
-                }
-                setSpeechResult(finalTranscript || interimTranscript);
+                },
+                onError: (err) => {
+                    setIsListening(false);
+                    log(`Speech Error: ${err}`);
+                },
+                log
+            });
 
-                if (currentCard && finalTranscript) {
-                    const answer = currentCard.displayAnswer || '';
-                    if (answer && finalTranscript.toLowerCase().includes(answer.toLowerCase())) {
-                        log("Voice Match!");
-                    }
-                }
-            };
-
-            recognition.onerror = (event) => {
-                console.error('Speech recognition error', event.error);
-                log(`Speech Error: ${event.error}`);
-                setIsListening(false);
-            };
-
-            recognitionRef.current = recognition;
+            if (recognition) {
+                recognitionRef.current = recognition;
+            }
         }
 
         return () => {
@@ -180,18 +163,11 @@ function HandsFreeGame() {
     // ... (keep existing effects but modifying auto-start logic slightly in next steps or implicitly via gameStarted check)
 
     const handleStartGame = async () => {
-        log("Game Starting... initializing audio/speech");
+        log("Game Starting... warming up audio systems");
 
-        // 1. Resume Audio Context / Play Silent Audio
-        // We do NOT await this to avoid blocking the UI thread if play() delays
-        if (audioRef.current) {
-            audioRef.current.volume = 0.1;
-            audioRef.current.play()
-                .then(() => log("Audio Context resumed"))
-                .catch(e => log(`Audio Error: ${e.message}`));
-        }
+        warmupAudio(audioRef.current, log);
 
-        // 2. Initialize Speech Recognition (if available)
+        // Start Speech Recognition if available
         if (practiceMode && recognitionRef.current) {
             try {
                 recognitionRef.current.start();
@@ -200,21 +176,10 @@ function HandsFreeGame() {
             } catch (e) {
                 log(`Speech Recognition already running or error: ${e.message}`);
             }
-        } else if (practiceMode && !('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        } else if (practiceMode && !recognitionRef.current) {
             setPermissionError("Speech Recognition not supported in this browser.");
         }
 
-        // 3. Warm up Speech Synthesis
-        try {
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance('');
-            window.speechSynthesis.speak(utterance);
-            log("Speech Synthesis warmed up");
-        } catch (e) {
-            log(`Speech Synthesis Error: ${e.message}`);
-        }
-
-        // 4. Signal game started IMMEDIATELY
         setGameStarted(true);
     };
 

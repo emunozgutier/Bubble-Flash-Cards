@@ -62,3 +62,13 @@ export const setupDiagnosticListeners = (onInput) => {
         window.removeEventListener('mousedown', handleMouseDown);
     };
 };
+
+export const setupDebugKeyboardListener = (onKeyUpdate) => {
+    const debugListener = (e) => {
+        const keyInfo = `${e.code} (${e.key})`;
+        onKeyUpdate(keyInfo);
+    };
+    window.addEventListener('keydown', debugListener);
+    return () => window.removeEventListener('keydown', debugListener);
+};
+

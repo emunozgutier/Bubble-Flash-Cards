@@ -60,3 +60,58 @@ export const updateMediaMetadata = (title, artist) => {
         if (artist) navigator.mediaSession.metadata.artist = artist;
     }
 };
+
+export const warmupAudio = (audioElement, log = console.log) => {
+    if (!audioElement) return;
+
+    // 1. Resume Audio Context / Play Silent Audio
+    audioElement.volume = 0.1;
+    audioElement.play()
+        .then(() => log("Audio Context resumed"))
+        .catch(e => log(`Audio Error: ${e.message}`));
+
+    // 2. Warm up Speech Synthesis
+    try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance('');
+        window.speechSynthesis.speak(utterance);
+        log("Speech Synthesis warmed up");
+    } catch (e) {
+        log(`Speech Synthesis Error: ${e.message}`);
+    }
+};
+
+export const setupSpeechRecognition = ({ onResult, onError, log = console.log }) => {
+    if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+        log("Speech Recognition NOT supported");
+        return null;
+    }
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event) => {
+        let interimTranscript = '';
+        let finalTranscript = '';
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                finalTranscript += event.results[i][0].transcript;
+            } else {
+                interimTranscript += event.results[i][0].transcript;
+            }
+        }
+        onResult(finalTranscript, interimTranscript);
+    };
+
+    recognition.onerror = (event) => {
+        log(`Speech Error: ${event.error}`);
+        if (onError) onError(event.error);
+    };
+
+    return recognition;
+};
+
