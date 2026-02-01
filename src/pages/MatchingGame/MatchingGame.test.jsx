@@ -8,6 +8,12 @@ import { vi } from 'vitest';
 // Mock the stores
 vi.mock('../../stores/useDataStore');
 vi.mock('../../stores/useNavigationStore');
+vi.mock('../../components/GameTitleBar', () => ({
+    default: ({ title }) => <div>{title}</div>
+}));
+vi.mock('react-icons/fa', () => ({
+    FaQuestionCircle: () => <div>Help</div>
+}));
 
 describe('MatchingGame', () => {
     const mockNavigateTo = vi.fn();
