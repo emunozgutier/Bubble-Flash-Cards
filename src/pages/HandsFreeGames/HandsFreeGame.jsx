@@ -54,6 +54,11 @@ function HandsFreeGame() {
     // Helper wrappers that log events
     const handleCorrect = () => {
         if (showHelpModal) return;
+        if (gameState === 'game_over' || gameState === 'won') {
+            log("Action: Continue Study");
+            gameStore.continueGame();
+            return;
+        }
         log("Action: Correct");
         setShowAnswer(false); // Immediate reset
         window.speechSynthesis.cancel();
@@ -62,6 +67,11 @@ function HandsFreeGame() {
 
     const handleIncorrect = () => {
         if (showHelpModal) return;
+        if (gameState === 'game_over' || gameState === 'won') {
+            log("Action: Exit to Main");
+            navigateTo('main');
+            return;
+        }
         log("Action: Incorrect");
         setShowAnswer(false); // Immediate reset
         window.speechSynthesis.cancel();
@@ -94,7 +104,7 @@ function HandsFreeGame() {
             cleanupDebug();
             cleanupKeyboard();
         };
-    }, [currentCard]); // Re-bind when currentCard changes for closure
+    }, [currentCard, gameState, showHelpModal]); // Re-bind when state changes for closure
 
     // Initial Audio Playback to unlock Audio Context
     useEffect(() => {
@@ -144,7 +154,7 @@ function HandsFreeGame() {
                 recognitionRef.current.stop();
             }
         };
-    }, [practiceMode, currentCard]);
+    }, [practiceMode, currentCard, gameState]); // Re-bind when state changes for closure
 
     // Update Media Metadata
     useEffect(() => {

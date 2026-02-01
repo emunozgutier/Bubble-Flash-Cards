@@ -2,6 +2,8 @@ import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import HandsFreeGame from './HandsFreeGame';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { setupInputListeners } from '../../utils/InputManager';
+import useGameStore from '../../stores/useGameStore';
 
 // Mock stores
 const mockNavigateTo = vi.fn();
@@ -70,7 +72,7 @@ describe('HandsFreeGame', () => {
     beforeEach(async () => {
         vi.clearAllMocks();
         // Default mocks
-        vi.mocked(await import('../../stores/useGameStore')).default.mockReturnValue(mockGameStore);
+        vi.mocked(useGameStore).mockReturnValue(mockGameStore);
 
         // Mock SpeechSynthesis
         window.speechSynthesis = {
@@ -148,7 +150,7 @@ describe('HandsFreeGame', () => {
 
     it('shows game summary when game is over (won or game_over)', async () => {
         // Override store for this test
-        vi.mocked(await import('../../stores/useGameStore')).default.mockReturnValue({
+        vi.mocked(useGameStore).mockReturnValue({
             ...mockGameStore,
             gameState: 'won'
         });
@@ -168,5 +170,23 @@ describe('HandsFreeGame', () => {
 
         expect(screen.getByText('Input Diagnostic')).toBeInTheDocument();
         expect(screen.getByText('Waiting for input...')).toBeInTheDocument();
+    });
+
+    it('calls continueGame when Next is pressed in summary', async () => {
+        const mockContinueGame = vi.fn();
+        vi.mocked(useGameStore).mockReturnValue({
+            ...mockGameStore,
+            gameState: 'won',
+            continueGame: mockContinueGame
+        });
+
+        render(<HandsFreeGame />);
+
+        // setupInputListeners should be called with our handlers
+        const handlers = vi.mocked(setupInputListeners).mock.calls.find(call => call[0].onCorrect)?.[0];
+
+        expect(handlers).toBeDefined();
+        handlers.onCorrect();
+        expect(mockContinueGame).toHaveBeenCalled();
     });
 });
