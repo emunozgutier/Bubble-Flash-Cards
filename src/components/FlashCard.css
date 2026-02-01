@@ -9,11 +9,8 @@
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
 }
 
 .flash-card.flipped {
@@ -27,24 +24,33 @@
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
   box-sizing: border-box;
-  font-size: 1.2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.flash-card-front {
-  background-color: var(--color-surface);
-  color: var(--color-text);
-  border: 2px solid var(--color-border);
+/* Custom Scrollbar for FlashCards */
+.flash-card-front::-webkit-scrollbar,
+.flash-card-back::-webkit-scrollbar {
+  width: 6px;
+}
+
+.flash-card-front::-webkit-scrollbar-track,
+.flash-card-back::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.flash-card-front::-webkit-scrollbar-thumb,
+.flash-card-back::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.flash-card-front:hover::-webkit-scrollbar-thumb,
+.flash-card-back:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .flash-card-back {
-  background-color: var(--color-primary);
-  color: var(--color-text);
   transform: rotateY(180deg);
-  border: 2px solid var(--color-primary);
 }
