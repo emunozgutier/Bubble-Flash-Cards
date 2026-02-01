@@ -1,7 +1,7 @@
 {
-  "hash": "6b55b4e",
-  "date": "2026-01-31T22:04:33-08:00",
-  "title": "Improve deck list layout and overflow handling",
-  "message": "Fix layout/overflow issues in the main decks UI. Added minWidth: 0 to column and deck button content to allow proper flex item truncation, removed extra bottom margin on deck buttons for consistent spacing, and made the deck list container full width. Also replaced generic overflow with overflow-y-auto/overflow-x-hidden, added padding and scrollbarGutter: 'stable' to prevent layout shifts when scrolling.\n\nFiles changed: MainPage.jsx, MainPageDeckButton.jsx, MainPageDeckList.jsx.",
+  "hash": "e4d9eb7",
+  "date": "2026-02-01T11:31:27-08:00",
+  "title": "Handle end-game input and update tests",
+  "message": "When the game is finished (game_over or won), input handlers now perform summary actions: handleCorrect triggers gameStore.continueGame(), and handleIncorrect navigates to main. Effect hooks were re-bound to include gameState and showHelpModal so listeners update correctly when state changes. Tests were updated to import setupInputListeners and useGameStore directly, to use vi.mocked(useGameStore) for store stubbing, and a new test verifies that pressing Next in the summary calls continueGame.",
   "source": "Local Git"
 }
