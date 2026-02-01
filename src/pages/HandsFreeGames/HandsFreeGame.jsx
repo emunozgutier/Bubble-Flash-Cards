@@ -2,18 +2,19 @@ import React, { useEffect, useState, useRef } from 'react';
 import useNavigationStore from '../../stores/useNavigationStore';
 import useGameStore from '../../stores/useGameStore';
 import useThemeStore from '../../stores/useThemeStore';
-import { FaVolumeUp } from 'react-icons/fa';
-import { GiTurtle } from 'react-icons/gi';
-import { MdSkipPrevious, MdSkipNext } from 'react-icons/md';
 import GameTitleBar from '../../components/GameTitleBar';
 import GameSummary from '../GameSummary';
 import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../../utils/AudioManager';
 import { setupInputListeners } from '../../utils/InputManager';
+import HandsFreeGameButtons from './HandsFreeGameButtons';
+import FlashCard from '../../components/FlashCard';
 import '../CommonPage.css';
 import '../BubbleGame/BubbleGame.css';
 import './HandsFreeGame.css';
 import HandsFreeGameReady from './HandsFreeGameReady';
 import HandsFreeGameInputDiagnostics from './HandsFreeGameInputDiagnostics';
+
+
 function HandsFreeGame() {
     const { navigateTo } = useNavigationStore();
     const gameStore = useGameStore();
@@ -302,8 +303,6 @@ function HandsFreeGame() {
         );
     }
 
-    const displayQuestion = currentCard.displayQuestion || '...';
-
     return (
         <div className="page-container">
             <GameTitleBar
@@ -314,41 +313,25 @@ function HandsFreeGame() {
 
             {audioComponent}
 
-            {/* Split Screen Layout */}
-            <div className="split-screen-container" key={currentCard?.id || 'empty'}>
-                {/* Top Half: Question */}
-                <div className="split-top">
-                    <h1 className="question-text mb-4 text-center" style={{ fontSize: fontSizes.xxxlarge, color: colors.text }}>
-                        {displayQuestion}
-                    </h1>
+            <div className="game-content-center p-0 flex-column justify-content-between overflow-hidden">
+                {/* Visual Card Display */}
+                <div className="w-100 flex-grow-1 d-flex align-items-center justify-content-center p-3">
+                    <FlashCard
+                        card={currentCard}
+                        front={currentCard.chinese}
+                        back={
+                            <div className="text-center">
+                                <div className="mb-2" style={{ fontSize: fontSizes.xlarge }}>{currentCard.pinyin}</div>
+                                <div style={{ fontSize: fontSizes.xxlarge }}>{currentCard.english}</div>
+                            </div>
+                        }
+                    />
                 </div>
 
-                {/* Bottom Half: Answer & Controls */}
-                <div className="split-bottom">
-                    <div
-                        className={`answer-text mb-4 ${showAnswer ? 'visible' : 'hidden'}`}
-                        style={{ fontSize: fontSizes.xxlarge, color: colors.textSecondary }}
-                    >
-                        {currentCard?.displayAnswer || ''}
-                    </div>
-
-                    <div className="controls-container d-flex gap-3 mb-4 justify-content-center">
-                        <button
-                            onClick={() => handleReplay(1.0)}
-                            className="control-button primary d-flex align-items-center"
-                        >
-                            <FaVolumeUp className="me-2" /> Speak
-                        </button>
-                        <button
-                            onClick={() => handleReplay(0.25)}
-                            className="control-button secondary d-flex align-items-center"
-                        >
-                            <GiTurtle className="me-2" /> Slow
-                        </button>
-                    </div>
-
-                    {practiceMode && (
-                        <div className="speech-status mt-3 p-2 border rounded w-75" style={{ borderColor: colors.border }}>
+                {/* Speech Status Overlay (if active) */}
+                {practiceMode && (
+                    <div className="px-3 w-100">
+                        <div className="speech-status p-2 border rounded mx-auto" style={{ borderColor: colors.border, maxWidth: '500px' }}>
                             <div className="speech-status-label small text-uppercase" style={{ color: colors.textSecondary }}>
                                 Listening ({recognitionRef.current?.lang})
                             </div>
@@ -356,27 +339,19 @@ function HandsFreeGame() {
                                 {speechResult || '...'}
                             </div>
                         </div>
-                    )}
+                    </div>
+                )}
+
+                {/* Extracted Buttons Component */}
+                <div className="w-100 p-3 pt-0">
+                    <HandsFreeGameButtons
+                        onReplay={handleReplay}
+                        onCorrect={handleCorrect}
+                        onIncorrect={handleIncorrect}
+                    />
                 </div>
             </div>
 
-            {/* Backup Controls */}
-            <div className="backup-controls">
-                <button
-                    onClick={handleIncorrect}
-                    className="backup-button incorrect"
-                >
-                    <MdSkipPrevious size={32} />
-                    <span className="mt-1">Skip / Wrong</span>
-                </button>
-                <button
-                    onClick={handleCorrect}
-                    className="backup-button correct"
-                >
-                    <span className="mb-1">Next / Correct</span>
-                    <MdSkipNext size={32} />
-                </button>
-            </div>
             <HandsFreeGameInputDiagnostics
                 show={showHelpModal}
                 onHide={() => setShowHelpModal(false)}
@@ -384,5 +359,6 @@ function HandsFreeGame() {
         </div>
     );
 }
+
 
 export default HandsFreeGame;
