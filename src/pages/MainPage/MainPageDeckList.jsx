@@ -29,7 +29,7 @@ const MainPageDeckList = ({ onPlay, onEdit }) => {
     };
 
     return (
-        <div className="d-flex flex-column gap-3">
+        <div className="d-flex flex-column gap-3 w-100">
             {availableDecks.map(name => {
                 const stats = deckStats[name] || {};
                 const lastStudied = formatLastStudied(stats.lastStudied);

@@ -81,14 +81,17 @@ function MainPage() {
             {/* Main Content Area */}
             <Container fluid className="flex-grow-1 overflow-hidden p-3">
                 <Row className="h-100 justify-content-center">
-                    <Col md={10} lg={8} className="d-flex flex-column h-100 overflow-hidden">
+                    <Col md={10} lg={8} className="d-flex flex-column h-100 overflow-hidden" style={{ minWidth: 0 }}>
                         <div className="border rounded p-3 h-100 d-flex flex-column shadow-sm overflow-hidden"
                             style={{
                                 backgroundColor: colors.surface,
                                 borderColor: colors.border
                             }}>
                             <h5 className="mb-3" style={{ color: colors.primary, fontSize: fontSizes.large }}>Your Decks</h5>
-                            <div className="flex-grow-1 overflow-auto">
+                            <div className="flex-grow-1 overflow-y-auto overflow-x-hidden p-4"
+                                style={{
+                                    scrollbarGutter: 'stable'
+                                }}>
                                 <MainPageDeckList onPlay={handlePlay} onEdit={handleEdit} />
                             </div>
                         </div>

@@ -17,7 +17,7 @@ const MainPageDeckButton = ({
 
     return (
         <div
-            className={`d-flex align-items-center p-3 mb-3 border rounded deck-button-hover-effect ${isSelected ? 'selected' : ''}`}
+            className={`d-flex align-items-center p-3 border rounded deck-button-hover-effect ${isSelected ? 'selected' : ''}`}
             style={{
                 backgroundColor: isSelected ? colors.primary : colors.surface,
                 borderColor: isSelected ? 'white' : colors.border,
@@ -29,7 +29,7 @@ const MainPageDeckButton = ({
             onClick={() => onSelect && onSelect(name)}
         >
             {/* Left Column: Deck Info */}
-            <div className="flex-grow-1 d-flex flex-column justify-content-center">
+            <div className="flex-grow-1 d-flex flex-column justify-content-center" style={{ minWidth: 0 }}>
                 <span className="fw-bold mb-1" style={{
                     fontSize: fontSizes.large,
                     color: isSelected ? 'white' : colors.primary
