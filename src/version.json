@@ -1,7 +1,7 @@
 {
-  "hash": "ed50aba",
-  "date": "2026-02-01T01:47:07Z",
-  "title": "Updates",
-  "message": "",
-  "source": "GitHub API (gh-pages)"
+  "hash": "c0d0c24",
+  "date": "2026-01-31T17:53:54-08:00",
+  "title": "Update version.json hash and date",
+  "message": "Bump src/version.json to hash \"ed50aba\" and update the timestamp to 2026-02-01T01:47:07Z. This reflects the latest recorded build/deploy metadata; other fields (title, message, source) remain unchanged.",
+  "source": "Local Git"
 }
