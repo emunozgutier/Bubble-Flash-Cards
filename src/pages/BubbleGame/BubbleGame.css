@@ -1,4 +1,4 @@
-/* Bubble Game Styles */
+/* Bubble Game Styles - Fluid Scaling */
 
 /* Bubble Base Class */
 .bubble-game-bubble {
@@ -7,16 +7,18 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 3cqi;
     cursor: pointer;
     background-color: var(--color-surface);
     color: var(--color-text);
-    border: 2px solid var(--color-border);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    border: 0.5cqi solid var(--color-border);
+    box-shadow: 0 0.5cqi 1cqi rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, background-color 0.2s;
     user-select: none;
     position: absolute;
     overflow: hidden;
+    font-family: var(--font-family);
+    /* Use cqi (container query inline size) for fluid scaling */
 }
 
 .bubble-game-bubble:hover {
@@ -30,59 +32,59 @@
     pointer-events: none;
     overflow-wrap: break-word;
     word-break: break-word;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90%;
+    max-height: 90%;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     line-clamp: 5;
     -webkit-box-orient: vertical;
     line-height: 1.2;
+    font-size: 5cqi;
 }
 
-/* Center Bubble (Main Question) - LEFT CENTER */
+/* Center Bubble (Main Question) - Focused and very large (~55% of container) */
 .main-bubble {
     z-index: 10;
     top: 50%;
     left: 20%;
     transform: translate(-50%, -50%);
-    width: 220px;
-    height: 220px;
-    font-size: 2rem;
+    width: 55cqi;
+    height: 55cqi;
+    font-size: 7cqi;
     background-color: var(--color-surface);
     border-color: var(--color-primary);
     color: var(--color-primary);
 }
 
-/* Option Bubbles Positioning */
+/* Option Bubbles Positioning - Large (~40% of container) */
 .option-0 {
-    top: 20%;
-    left: 65%;
+    top: 22%;
+    left: 72%;
     transform: translate(-50%, -50%);
-    width: 160px;
-    height: 160px;
-    font-size: 1.1rem;
+    width: 40cqi;
+    height: 40cqi;
+    font-size: 4cqi;
 }
 
 .option-1 {
-    top: 80%;
-    left: 65%;
+    top: 78%;
+    left: 72%;
     transform: translate(-50%, -50%);
-    width: 160px;
-    height: 160px;
-    font-size: 1.1rem;
+    width: 40cqi;
+    height: 40cqi;
+    font-size: 4cqi;
 }
 
+/* Rightmost Option - Medium (~35% of container) */
 .option-2 {
     top: 50%;
-    left: 85%;
+    left: 92%;
     transform: translate(-50%, -50%);
-    width: 140px;
-    height: 140px;
-    font-size: 1.2rem;
+    width: 35cqi;
+    height: 35cqi;
+    font-size: 3.5cqi;
 }
-
-/* Animations follow... */
 
 /* Animations */
 @keyframes pop {
@@ -132,7 +134,7 @@
 
     70% {
         transform: translate(-50%, -50%) scale(1.1);
-        box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
+        box-shadow: 0 0 0 3cqi rgba(76, 175, 80, 0);
     }
 
     100% {
@@ -147,41 +149,4 @@
     color: white !important;
     border-color: #388E3C !important;
     z-index: 20;
-}
-
-/* Mobile & Narrow Layout Responsiveness */
-@media (max-width: 650px) {
-
-    /* Resize and reposition bubbles for smaller screens/narrower columns */
-    .main-bubble {
-        width: 150px;
-        height: 150px;
-        font-size: 1.3rem;
-        left: 20%;
-        top: 45%;
-    }
-
-    .option-0 {
-        width: 100px;
-        height: 100px;
-        font-size: 0.9rem;
-        left: 70%;
-        top: 20%;
-    }
-
-    .option-1 {
-        width: 100px;
-        height: 100px;
-        font-size: 0.9rem;
-        left: 70%;
-        top: 80%;
-    }
-
-    .option-2 {
-        width: 90px;
-        height: 90px;
-        font-size: 0.8rem;
-        left: 85%;
-        top: 50%;
-    }
 }

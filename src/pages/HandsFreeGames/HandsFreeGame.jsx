@@ -11,8 +11,7 @@ import './HandsFreeGame.css';
 import HandsFreeGameReady from './HandsFreeGameReady';
 function HandsFreeGame() {
     const { navigateTo } = useNavigationStore();
-    console.log('HandsFreeGame: Imported useGameStore:', useGameStore);
-    const gameStore = useGameStore && typeof useGameStore === 'function' ? useGameStore() : null;
+    const gameStore = useGameStore();
 
     // Debugging Crash
     if (!gameStore) {
@@ -173,14 +172,12 @@ function HandsFreeGame() {
         log("Game Starting... initializing audio/speech");
 
         // 1. Resume Audio Context / Play Silent Audio
+        // We do NOT await this to avoid blocking the UI thread if play() delays
         if (audioRef.current) {
-            try {
-                audioRef.current.volume = 0.1;
-                await audioRef.current.play();
-                log("Audio Context resumed");
-            } catch (e) {
-                log(`Audio Error: ${e.message}`);
-            }
+            audioRef.current.volume = 0.1;
+            audioRef.current.play()
+                .then(() => log("Audio Context resumed"))
+                .catch(e => log(`Audio Error: ${e.message}`));
         }
 
         // 2. Initialize Speech Recognition (if available)
@@ -190,19 +187,23 @@ function HandsFreeGame() {
                 setIsListening(true);
                 log("Speech Recognition started");
             } catch (e) {
-                log(`Speech Start Error: ${e.message}`);
-                // Often error is 'no-speech' or 'aborted' if already started
+                log(`Speech Recognition already running or error: ${e.message}`);
             }
         } else if (practiceMode && !('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
-            setPermissionError("Speech Recognition not supported in this browser. Try Chrome or Safari.");
+            setPermissionError("Speech Recognition not supported in this browser.");
         }
 
         // 3. Warm up Speech Synthesis
-        window.speechSynthesis.cancel();
-        // Speak empty string to prompt permission prompt if needed
-        const utterance = new SpeechSynthesisUtterance('');
-        window.speechSynthesis.speak(utterance);
+        try {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance('');
+            window.speechSynthesis.speak(utterance);
+            log("Speech Synthesis warmed up");
+        } catch (e) {
+            log(`Speech Synthesis Error: ${e.message}`);
+        }
 
+        // 4. Signal game started IMMEDIATELY
         setGameStarted(true);
     };
 

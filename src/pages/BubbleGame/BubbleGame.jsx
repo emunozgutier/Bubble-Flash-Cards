@@ -8,29 +8,57 @@ import BubbleGameBubble from './BubbleGameBubble';
 import GameSummary from '../GameSummary';
 import CharacterDraw from '../CharacterDraw/CharacterDraw';
 import { FaHeart } from 'react-icons/fa';
+import useThemeStore from '../../stores/useThemeStore';
 import '../CommonPage.css';
 import './BubbleGame.css';
 
 function BubbleGame() {
-    const { navigateTo } = useNavigationStore();
-    const { cards, currentDeckName } = useDataStore();
+    console.log('BubbleGame: Initializing stores...');
+    let navigateTo, cards, currentDeckName, gameStore, colors;
+
+    try {
+        const nav = useNavigationStore();
+        navigateTo = nav?.navigateTo;
+
+        const data = useDataStore();
+        cards = data?.cards;
+        currentDeckName = data?.currentDeckName;
+
+        gameStore = useGameStore();
+
+        const theme = useThemeStore();
+        colors = theme?.colors;
+
+        console.log('BubbleGame: Stores loaded successfully', {
+            hasNav: !!navigateTo,
+            hasCards: !!cards,
+            hasGame: !!gameStore,
+            hasColors: !!colors
+        });
+    } catch (err) {
+        console.error('BubbleGame: Error during store initialization', err);
+        throw err; // Re-throw to be caught by ErrorBoundary
+    }
+
+    if (!gameStore) {
+        return <div className="p-4 text-danger">Error: Game Store not available.</div>;
+    }
 
     const {
-        lives,
-        cardsLeft,
+        lives = 3,
+        cardsLeft = 0,
         currentCard,
-        options,
-        score,
-        gameState,
-        // startGame, // Not needed here anymore
+        options = [],
+        gameState = 'idle',
         submitAnswer,
-        continueGame,
         nextRound,
-        // setQuestionMode // Not needed here anymore
-        gameQueue,
-        enableDrawing
-    } = useGameStore();
-    const { colors } = useThemeStore();
+        gameQueue = [],
+        enableDrawing = true
+    } = gameStore;
+
+    if (!colors) {
+        console.warn('BubbleGame: Colors not available from theme store.');
+    }
 
     const [poppedBubbles, setPoppedBubbles] = useState(new Set());
     const [isRoundComplete, setIsRoundComplete] = useState(false);
@@ -140,14 +168,15 @@ function BubbleGame() {
                             borderColor: 'var(--color-border)'
                         }}>
                         <span className="d-flex align-items-center gap-2">
-                            Lives: {[...Array(lives)].map((_, i) => (
-                                <FaHeart key={i} style={{ color: colors.primary }} />
+                            Lives: {Array.from({ length: Math.max(0, lives || 0) }).map((_, i) => (
+                                <FaHeart key={i} style={{ color: colors?.primary || 'red' }} />
                             ))}
                         </span>
                         <span>Cards Left: {displayCardsLeft}</span>
                     </div>
 
-                    <div className="game-board position-relative flex-grow-1 w-100 mt-2">
+                    <div className="game-board position-relative flex-grow-1 w-100 mt-2"
+                        style={{ containerType: 'inline-size' }}>
                         {/* Main Question Bubble */}
                         <div className="main-bubble-container">
                             <BubbleGameBubble

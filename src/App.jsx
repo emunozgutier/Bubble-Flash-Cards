@@ -15,17 +15,26 @@ import PageBorder from './components/PageBorder';
 
 function App() {
   const { currentPage } = useNavigationStore();
-  const { colors } = useThemeStore();
+  const { colors, fontFamily } = useThemeStore();
 
   useEffect(() => {
+    if (!colors) {
+      console.warn('App: Colors not available yet.');
+      return;
+    }
     const root = document.documentElement;
-    root.style.setProperty('--color-background', colors.background);
-    root.style.setProperty('--color-surface', colors.surface);
-    root.style.setProperty('--color-primary', colors.primary);
-    root.style.setProperty('--color-primary-hover', colors.primaryHover);
-    root.style.setProperty('--color-text', colors.text);
-    root.style.setProperty('--color-text-secondary', colors.textSecondary);
-    root.style.setProperty('--color-border', colors.border);
+    try {
+      root.style.setProperty('--color-background', colors.background || '#000');
+      root.style.setProperty('--color-surface', colors.surface || '#111');
+      root.style.setProperty('--color-primary', colors.primary || '#D32F2F');
+      root.style.setProperty('--color-primary-hover', colors.primaryHover || '#B71C1C');
+      root.style.setProperty('--color-text', colors.text || '#FFF');
+      root.style.setProperty('--color-text-secondary', colors.textSecondary || '#EEE');
+      root.style.setProperty('--color-border', colors.border || '#D32F2F');
+      root.style.setProperty('--font-family', fontFamily || "system-ui, sans-serif");
+    } catch (e) {
+      console.error('App: Error setting CSS variables', e);
+    }
   }, [colors]);
 
   return (

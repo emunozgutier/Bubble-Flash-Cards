@@ -14,6 +14,7 @@ const useThemeStore = create(
                 textSecondary: '#E0E0E0',   // Off-white for secondary text
                 border: '#D32F2F'           // Red borders
             },
+            fontFamily: "'Outfit', 'Inter', system-ui, sans-serif",
             fontSizes: {
                 small: '0.85rem',
                 medium: '1rem',
