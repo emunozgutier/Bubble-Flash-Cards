@@ -19,7 +19,9 @@ const useThemeStore = create(
                 small: '0.85rem',
                 medium: '1rem',
                 large: '1.25rem',
-                xlarge: '1.5rem'
+                xlarge: '1.5rem',
+                xxlarge: '2rem',
+                xxxlarge: '3rem'
             },
             setTheme: (theme) => set({ theme }),
         }),

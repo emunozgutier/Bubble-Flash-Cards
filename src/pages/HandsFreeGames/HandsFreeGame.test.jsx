@@ -25,6 +25,10 @@ vi.mock('../../stores/useThemeStore', () => ({
             textSecondary: '#6c757d',
             border: '#dee2e6',
         },
+        fontSizes: {
+            xxlarge: '2rem',
+            xxxlarge: '3rem',
+        },
     }),
 }));
 

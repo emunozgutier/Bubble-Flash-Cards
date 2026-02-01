@@ -318,7 +318,7 @@ function HandsFreeGame() {
             <div className="split-screen-container" key={currentCard?.id || 'empty'}>
                 {/* Top Half: Question */}
                 <div className="split-top">
-                    <h1 className="question-text mb-4 text-center" style={{ fontSize: '3rem', color: colors.text }}>
+                    <h1 className="question-text mb-4 text-center" style={{ fontSize: fontSizes.xxxlarge, color: colors.text }}>
                         {displayQuestion}
                     </h1>
                 </div>
@@ -327,7 +327,7 @@ function HandsFreeGame() {
                 <div className="split-bottom">
                     <div
                         className={`answer-text mb-4 ${showAnswer ? 'visible' : 'hidden'}`}
-                        style={{ fontSize: '2rem', color: colors.textSecondary }}
+                        style={{ fontSize: fontSizes.xxlarge, color: colors.textSecondary }}
                     >
                         {currentCard?.displayAnswer || ''}
                     </div>
