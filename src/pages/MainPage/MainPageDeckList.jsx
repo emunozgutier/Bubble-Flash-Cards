@@ -29,27 +29,25 @@ const MainPageDeckList = ({ onPlay, onEdit }) => {
     };
 
     return (
-        <div className="deck-list-container">
-            <div className="deck-list">
-                {availableDecks.map(name => {
-                    const stats = deckStats[name] || {};
-                    const lastStudied = formatLastStudied(stats.lastStudied);
-                    const progress = stats.progress || 0;
+        <div className="d-flex flex-column gap-3">
+            {availableDecks.map(name => {
+                const stats = deckStats[name] || {};
+                const lastStudied = formatLastStudied(stats.lastStudied);
+                const progress = stats.progress || 0;
 
-                    return (
-                        <MainPageDeckButton
-                            key={name}
-                            name={name}
-                            lastStudied={lastStudied}
-                            progress={progress}
-                            currentDeckName={currentDeckName}
-                            onPlay={onPlay}
-                            onEdit={onEdit}
-                            onSelect={(name) => setCurrentDeckName(name)}
-                        />
-                    );
-                })}
-            </div>
+                return (
+                    <MainPageDeckButton
+                        key={name}
+                        name={name}
+                        lastStudied={lastStudied}
+                        progress={progress}
+                        currentDeckName={currentDeckName}
+                        onPlay={onPlay}
+                        onEdit={onEdit}
+                        onSelect={(name) => setCurrentDeckName(name)}
+                    />
+                );
+            })}
         </div>
     );
 };

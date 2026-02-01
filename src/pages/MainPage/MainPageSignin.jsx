@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { initGapi, initGis, findFile, saveFile, loadFile, createFolder, listFiles, signIn } from '../../services/googleDriveService';
 import useDriveStore from '../../stores/useDriveStore';
 import useDataStore from '../../stores/useDataStore';
+import useThemeStore from '../../stores/useThemeStore';
 
 const ROOT_FOLDER_NAME = 'breadBoardApps';
 const APP_FOLDER_NAME = 'BubbleFlashCards';
@@ -106,12 +107,24 @@ const MainPageSignin = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const { colors, fontSizes } = useThemeStore();
+
     if (isAuthorized) {
-        return <span className="auth-status">✅ Connected</span>;
+        return <span className="fw-medium" style={{ color: colors.text, fontSize: fontSizes.medium }}>✅ Connected</span>;
     }
 
     return (
-        <button onClick={signIn}>Sign In with Google</button>
+        <button
+            className="btn btn-outline-primary px-3 py-1"
+            onClick={signIn}
+            style={{
+                color: colors.text,
+                borderColor: colors.border,
+                fontSize: fontSizes.medium
+            }}
+        >
+            Sign In with Google
+        </button>
     );
 
 };

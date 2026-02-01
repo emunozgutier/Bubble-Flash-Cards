@@ -1,141 +1,18 @@
-/* MainPage Layout */
-.select-deck-page {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-    /* Prevent body scroll */
-    padding: 0;
-    /* REMOVED PADDING */
-    box-sizing: border-box;
+/* Custom Hover Effects and Transitions for MainPage Components */
+
+.deck-button-hover-effect:hover:not(.selected) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* 1. Header Space */
-.main-header {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    /* Ensure header doesn't shrink */
+.deck-edit-btn:hover {
+    opacity: 1 !important;
 }
 
-/* 2. Content Space (Sign in + Deck List) */
-.controls {
-    flex: 1;
-    /* Take up remaining space */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    /* Prevent overflow here, handle it in children */
-    margin-bottom: 1rem;
+.deck-play-btn:hover {
+    transform: scale(1.2);
 }
 
-/* Signin uses its own component, just ensure it doesn't shrink aggressively */
-.controls>div:first-child {
-    flex-shrink: 0;
-}
-
-/* Target the DeckList component's root */
-.controls .deck-list-container {
-    flex: 1;
-    /* Take remaining space in controls */
-    overflow-y: auto;
-    /* Scroll if content (list) is too long */
-    min-height: 0;
-    /* Crucial for flex nested scrolling */
-    margin-top: 10px;
-    /* Add a border or background if needed to distinguish the scroll area */
-}
-
-/* Ensure the list inside deck-list-container behaves nicely */
-.deck-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* 3. Footer Space (Play Buttons) */
-.game-selection {
-    flex-shrink: 0;
-    /* Never shrink or hide */
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 10px;
-    border-top: 1px solid var(--color-border);
-    /* Optional visual separator */
-    background-color: var(--color-background);
-    /* Ensure it sits on top if using absolute z-index, but with flex it's fine */
-}
-
-.game-selection button {
-    padding: 12px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    background-color: var(--color-primary);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    transition: opacity 0.2s;
-}
-
-
-.game-selection button:hover {
-    opacity: 0.9;
-}
-
-/* MainPageTitleBar specific styles */
-.main-page-title-bar {
-    border-bottom: 1px solid var(--color-border);
-    background-color: var(--color-surface);
-    margin-bottom: 1rem;
-    border-radius: 8px;
-}
-
-/* Deck Item (Button-like) */
-.deck-item {
-    cursor: pointer;
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    user-select: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.deck-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-    border-color: var(--color-primary);
-}
-
-.deck-item:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.deck-item.selected {
-    background-color: var(--color-primary);
-    border: 2px solid var(--color-surface);
-    box-shadow: 0 0 15px var(--color-primary);
-    color: white;
-}
-
-.deck-item.selected span,
-.deck-item.selected div {
-    color: white !important;
-}
-
-/* Specific button overrides inside deck-item */
-.deck-item .btn-circle-edit {
-    transition: all 0.2s ease;
-}
-
-.deck-item.selected .btn-circle-edit {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: white;
-    color: white;
+.title-bar-help-btn:hover {
+    opacity: 0.7;
 }

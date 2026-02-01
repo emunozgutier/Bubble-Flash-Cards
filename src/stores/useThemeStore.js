@@ -14,6 +14,12 @@ const useThemeStore = create(
                 textSecondary: '#E0E0E0',   // Off-white for secondary text
                 border: '#D32F2F'           // Red borders
             },
+            fontSizes: {
+                small: '0.85rem',
+                medium: '1rem',
+                large: '1.25rem',
+                xlarge: '1.5rem'
+            },
             setTheme: (theme) => set({ theme }),
         }),
         {

@@ -8,26 +8,14 @@ const MainPageTitleBar = () => {
     const { colors } = useThemeStore();
 
     return (
-        <div className="main-page-title-bar" style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '10px 20px',
-            width: '100%',
-            boxSizing: 'border-box',
+        <div className="d-flex justify-content-between align-items-center px-4 py-2 w-100 border-bottom" style={{
             backgroundColor: colors.surface,
-            borderBottom: `1px solid ${colors.border}`
+            borderColor: colors.border
         }}>
             <button
                 onClick={() => navigateTo('help')}
+                className="title-bar-help-btn"
                 style={{
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                     color: colors.text
                 }}
                 title="Help & Version"

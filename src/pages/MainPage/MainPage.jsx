@@ -33,7 +33,7 @@ const DEFAULT_DECKS = {
 function MainPage() {
     const { setCurrentDeckName, setCards } = useDataStore();
     const { isAuthorized, deckFileIds, setIsLoading, appFolderId, updateDeckFileId } = useDriveStore();
-    const { colors } = useThemeStore();
+    const { colors, fontSizes } = useThemeStore();
     const [showModal, setShowModal] = useState(false);
     const [selectedDeck, setSelectedDeck] = useState(null);
 
@@ -83,7 +83,7 @@ function MainPage() {
     };
 
     return (
-        <div className="select-deck-page d-flex flex-column vh-100">
+        <div className="d-flex flex-column vh-100 overflow-hidden bg-black">
             {/* Header / Title Bar */}
             <div className="flex-shrink-0">
                 <MainPageTitleBar />
@@ -92,14 +92,13 @@ function MainPage() {
             {/* Main Content Area */}
             <Container fluid className="flex-grow-1 overflow-hidden p-3">
                 <Row className="h-100 justify-content-center">
-                    <Col md={10} lg={8} className="d-flex flex-column h-100">
-                        <div className="border rounded p-3 h-100 d-flex flex-column shadow-sm"
+                    <Col md={10} lg={8} className="d-flex flex-column h-100 overflow-hidden">
+                        <div className="border rounded p-3 h-100 d-flex flex-column shadow-sm overflow-hidden"
                             style={{
                                 backgroundColor: colors.surface,
-                                borderColor: colors.border,
-                                overflow: 'hidden'
+                                borderColor: colors.border
                             }}>
-                            <h5 className="mb-3" style={{ color: colors.primary }}>Your Decks</h5>
+                            <h5 className="mb-3" style={{ color: colors.primary, fontSize: fontSizes.large }}>Your Decks</h5>
                             <div className="flex-grow-1 overflow-auto">
                                 <MainPageDeckList onPlay={handlePlay} onEdit={handleEdit} />
                             </div>
