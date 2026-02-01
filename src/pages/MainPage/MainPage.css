@@ -92,3 +92,50 @@
     margin-bottom: 1rem;
     border-radius: 8px;
 }
+
+/* Deck Item (Button-like) */
+.deck-item {
+    cursor: pointer;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    user-select: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.deck-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+    border-color: var(--color-primary);
+}
+
+.deck-item:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.deck-item.selected {
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-surface);
+    box-shadow: 0 0 15px var(--color-primary);
+    color: white;
+}
+
+.deck-item.selected span,
+.deck-item.selected div {
+    color: white !important;
+}
+
+/* Specific button overrides inside deck-item */
+.deck-item .btn-circle-edit {
+    transition: all 0.2s ease;
+}
+
+.deck-item.selected .btn-circle-edit {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    color: white;
+}
