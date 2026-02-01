@@ -1,7 +1,7 @@
 {
-  "hash": "934d4f6",
-  "date": "2026-01-31T17:59:40-08:00",
+  "hash": "6e5ac83",
+  "date": "2026-01-31T18:05:24-08:00",
   "title": "Generate version.json from local git",
-  "message": "Replace GitHub API-based fetching with local git commands using child_process.execSync to generate src/version.json. The script now reads the short hash, commit date, title, and body from the local repository, writes version.json, and logs the result; if git is unavailable it writes a minimal fallback entry. Also updates src/version.json metadata to reflect the new local-git-derived values. This change avoids relying on the GitHub API (rate limits/auth) and supports offline builds.",
+  "message": "Stop using the GitHub API to populate src/version.json and instead gather metadata from the local repository via git (using child_process.execSync). The generator now extracts short hash, commit date, title, and body, writes version.json and logs the result; it falls back to a minimal entry if git is unavailable. This removes reliance on API auth/rate limits and enables offline builds, and updates src/version.json metadata accordingly.",
   "source": "Local Git"
 }
