@@ -1,7 +1,7 @@
 {
-  "hash": "39e1334",
-  "date": "2026-01-31T18:27:11-08:00",
-  "title": "chore: deploy-time version update",
-  "message": "",
+  "hash": "6b55b4e",
+  "date": "2026-01-31T22:04:33-08:00",
+  "title": "Improve deck list layout and overflow handling",
+  "message": "Fix layout/overflow issues in the main decks UI. Added minWidth: 0 to column and deck button content to allow proper flex item truncation, removed extra bottom margin on deck buttons for consistent spacing, and made the deck list container full width. Also replaced generic overflow with overflow-y-auto/overflow-x-hidden, added padding and scrollbarGutter: 'stable' to prevent layout shifts when scrolling.\n\nFiles changed: MainPage.jsx, MainPageDeckButton.jsx, MainPageDeckList.jsx.",
   "source": "Local Git"
 }
