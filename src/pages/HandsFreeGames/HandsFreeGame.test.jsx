@@ -22,8 +22,9 @@ vi.mock('../../utils/AudioManager', () => ({
     updateMediaMetadata: vi.fn(),
 }));
 
-vi.mock('../../utils/KeyboardManager', () => ({
-    setupKeyboardListeners: vi.fn(() => vi.fn()), // Returns cleanup function
+vi.mock('../../utils/InputManager', () => ({
+    setupInputListeners: vi.fn(() => vi.fn()), // Returns cleanup function
+    setupDiagnosticListeners: vi.fn(() => vi.fn()),
 }));
 
 // Mock useGameStore
@@ -136,5 +137,18 @@ describe('HandsFreeGame', () => {
 
         render(<HandsFreeGame />);
         expect(screen.getByText('Hands Free Summary')).toBeInTheDocument();
+    });
+
+    it('opens Help modal when Help button is clicked', async () => {
+        render(<HandsFreeGame />);
+        await act(async () => {
+            fireEvent.click(screen.getByText('START GAME'));
+        });
+
+        const helpButton = screen.getByTitle('Input Help');
+        fireEvent.click(helpButton);
+
+        expect(screen.getByText('Input Diagnostic')).toBeInTheDocument();
+        expect(screen.getByText('Waiting for input...')).toBeInTheDocument();
     });
 });

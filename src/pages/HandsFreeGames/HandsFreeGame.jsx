@@ -4,11 +4,12 @@ import useGameStore from '../../stores/useGameStore';
 import GameTitleBar from '../../components/GameTitleBar';
 import GameSummary from '../GameSummary';
 import { SILENT_MP3, speak, initMediaSession, updateMediaMetadata } from '../../utils/AudioManager';
-import { setupKeyboardListeners } from '../../utils/KeyboardManager';
+import { setupInputListeners } from '../../utils/InputManager';
 import '../CommonPage.css';
 import '../BubbleGame/BubbleGame.css';
 import './HandsFreeGame.css';
 import HandsFreeGameReady from './HandsFreeGameReady';
+import HandsFreeGameInputDiagnostics from './HandsFreeGameInputDiagnostics';
 function HandsFreeGame() {
     const { navigateTo } = useNavigationStore();
     const gameStore = useGameStore();
@@ -35,6 +36,7 @@ function HandsFreeGame() {
     const [debugKeys, setDebugKeys] = useState([]);
     const [debugLogs, setDebugLogs] = useState([]);
     const [showAnswer, setShowAnswer] = useState(false);
+    const [showHelpModal, setShowHelpModal] = useState(false);
     const recognitionRef = useRef(null);
     const audioRef = useRef(null);
 
@@ -45,6 +47,7 @@ function HandsFreeGame() {
 
     // Helper wrappers that log events
     const handleCorrect = () => {
+        if (showHelpModal) return;
         log("Action: Correct");
         setShowAnswer(false); // Immediate reset
         window.speechSynthesis.cancel();
@@ -52,6 +55,7 @@ function HandsFreeGame() {
     };
 
     const handleIncorrect = () => {
+        if (showHelpModal) return;
         log("Action: Incorrect");
         setShowAnswer(false); // Immediate reset
         window.speechSynthesis.cancel();
@@ -61,6 +65,7 @@ function HandsFreeGame() {
 
 
     const handleReplay = (rate = 1.0) => {
+        if (showHelpModal) return;
         if (currentCard) {
             speak(currentCard.displayQuestion || currentCard.displayAnswer, rate, log);
         }
@@ -75,7 +80,7 @@ function HandsFreeGame() {
         };
         window.addEventListener('keydown', debugListener);
 
-        const cleanupKeyboard = setupKeyboardListeners({
+        const cleanupKeyboard = setupInputListeners({
             onCorrect: handleCorrect,
             onIncorrect: handleIncorrect,
             onReplay: () => handleReplay(1.0),
@@ -299,6 +304,7 @@ function HandsFreeGame() {
             <GameTitleBar
                 title={`Hands Free - Lives: ${lives}`}
                 onExit={() => navigateTo('main')}
+                onHelp={() => setShowHelpModal(true)}
             />
 
             {audioComponent}
@@ -359,6 +365,10 @@ function HandsFreeGame() {
                     <span>⏭</span>
                 </button>
             </div>
+            <HandsFreeGameInputDiagnostics
+                show={showHelpModal}
+                onHide={() => setShowHelpModal(false)}
+            />
         </div>
     );
 }
