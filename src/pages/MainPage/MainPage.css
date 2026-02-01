@@ -1,5 +1,31 @@
 /* Custom Hover Effects and Transitions for MainPage Components */
 
+@keyframes shake-and-wait {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    5% {
+        transform: rotate(-15deg);
+    }
+
+    10% {
+        transform: rotate(15deg);
+    }
+
+    15% {
+        transform: rotate(-15deg);
+    }
+
+    20% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
 .deck-button-hover-effect:hover:not(.selected) {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
@@ -7,10 +33,11 @@
 
 .deck-edit-btn:hover {
     opacity: 1 !important;
+    animation: shake-and-wait 2.5s infinite;
 }
 
 .deck-play-btn:hover {
-    transform: scale(1.2);
+    animation: shake-and-wait 2.5s infinite;
 }
 
 .title-bar-help-btn:hover {
