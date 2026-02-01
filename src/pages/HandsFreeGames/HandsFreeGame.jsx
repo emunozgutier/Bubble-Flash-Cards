@@ -235,7 +235,7 @@ function HandsFreeGame() {
         if (currentCard && gameStarted) {
             const timer = setTimeout(() => {
                 setShowAnswer(true);
-            }, 3000);
+            }, 2000); // 2 second delay as requested
             return () => clearTimeout(timer);
         }
     }, [currentCard, gameStarted]);
@@ -314,18 +314,31 @@ function HandsFreeGame() {
             {audioComponent}
 
             <div className="game-content-center p-0 flex-column justify-content-between overflow-hidden">
-                {/* Visual Card Display */}
-                <div className="w-100 flex-grow-1 d-flex align-items-center justify-content-center p-3">
+                {/* Visual Card Display - Dual Cards */}
+                <div className="w-100 flex-grow-1 d-flex flex-column align-items-center justify-content-center p-3 gap-3 overflow-auto">
+                    {/* Question Card */}
                     <FlashCard
-                        card={currentCard}
-                        front={currentCard.chinese}
-                        back={
-                            <div className="text-center">
-                                <div className="mb-2" style={{ fontSize: fontSizes.xlarge }}>{currentCard.pinyin}</div>
-                                <div style={{ fontSize: fontSizes.xxlarge }}>{currentCard.english}</div>
-                            </div>
-                        }
+                        card={null}
+                        front={<div className="text-center" style={{ fontSize: fontSizes.xxxlarge }}>{currentCard.displayQuestion}</div>}
+                        flippable={false}
                     />
+
+                    {/* Answer Card - Visible after delay */}
+                    <div
+                        className="w-100 d-flex justify-content-center transition-opacity duration-500"
+                        style={{ opacity: showAnswer ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}
+                    >
+                        <FlashCard
+                            card={null}
+                            front={
+                                <div className="text-center">
+                                    <div className="mb-2" style={{ fontSize: fontSizes.xlarge, color: colors.textSecondary }}>{currentCard.pinyin}</div>
+                                    <div style={{ fontSize: fontSizes.xxlarge, color: colors.text }}>{currentCard.displayAnswer}</div>
+                                </div>
+                            }
+                            flippable={false}
+                        />
+                    </div>
                 </div>
 
                 {/* Speech Status Overlay (if active) */}

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './FlashCard.css';
 
-export default function FlashCard({ card, front, back }) {
+export default function FlashCard({ card, front, back, flippable = true }) {
     const [isFlipped, setIsFlipped] = useState(false);
 
     const handleClick = () => {
-        setIsFlipped(!isFlipped);
+        if (flippable) {
+            setIsFlipped(!isFlipped);
+        }
     };
 
     const displayFront = card ? card.chinese : front;
