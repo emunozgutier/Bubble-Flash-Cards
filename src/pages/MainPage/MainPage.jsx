@@ -31,11 +31,16 @@ const DEFAULT_DECKS = {
 };
 
 function MainPage() {
+    const { navigateTo } = useNavigationStore();
     const { setCurrentDeckName, setCards } = useDataStore();
     const { isAuthorized, deckFileIds, setIsLoading, appFolderId } = useDriveStore();
     const { colors, fontSizes } = useThemeStore();
     const [showModal, setShowModal] = useState(false);
     const [selectedDeck, setSelectedDeck] = useState(null);
+
+    const handleInfo = (deckName) => {
+        navigateTo('deckInfo');
+    };
 
     const loadDeckData = async (deckName) => {
         setIsLoading(true);
@@ -92,7 +97,7 @@ function MainPage() {
                                 style={{
                                     scrollbarGutter: 'stable'
                                 }}>
-                                <MainPageDeckList onPlay={handlePlay} onEdit={handleEdit} />
+                                <MainPageDeckList onPlay={handlePlay} onEdit={handleEdit} onInfo={handleInfo} />
                             </div>
                         </div>
                     </Col>

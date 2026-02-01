@@ -1,0 +1,116 @@
+.deck-info-page {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-family);
+}
+
+.deck-info-header {
+    background-color: var(--color-surface);
+    border-bottom: 2px solid var(--color-border);
+    padding: 1rem;
+}
+
+.deck-info-back-btn {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s;
+}
+
+.deck-info-back-btn:hover {
+    transform: translateX(-5px);
+}
+
+.deck-info-content {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.card-progress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+    justify-items: center;
+}
+
+.progress-container {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.proficiency-indicator {
+    display: flex;
+    gap: 4px;
+}
+
+.proficiency-star {
+    color: #ffd700;
+    font-size: 0.9rem;
+}
+
+.proficiency-star.empty {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.card-front-text {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.card-back-text {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+.last-seen-text {
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+}
+
+/* Proficiency Colors */
+.progress-container[data-proficiency="5"] {
+    border-left: 5px solid #4CAF50;
+}
+
+.progress-container[data-proficiency="4"] {
+    border-left: 5px solid #8BC34A;
+}
+
+.progress-container[data-proficiency="3"] {
+    border-left: 5px solid #FFEB3B;
+}
+
+.progress-container[data-proficiency="2"] {
+    border-left: 5px solid #FFC107;
+}
+
+.progress-container[data-proficiency="1"] {
+    border-left: 5px solid #FF9800;
+}
+
+.progress-container[data-proficiency="0"] {
+    border-left: 5px solid #F44336;
+}

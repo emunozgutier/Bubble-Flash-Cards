@@ -40,6 +40,11 @@
     animation: shake-and-wait 2.5s infinite;
 }
 
+.deck-info-btn:hover {
+    opacity: 1 !important;
+    animation: shake-and-wait 2.5s infinite;
+}
+
 .title-bar-help-btn:hover {
     opacity: 0.7;
 }

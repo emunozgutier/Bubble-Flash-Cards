@@ -6,6 +6,7 @@ import BubbleGameSetup from './pages/BubbleGame/BubbleGameSetup';
 import HandsFreeGameSetup from './pages/HandsFreeGames/HandsFreeGameSetup';
 import HandsFreeGame from './pages/HandsFreeGames/HandsFreeGame';
 import MatchingGame from './pages/MatchingGame/MatchingGame';
+import DeckInfoPage from './pages/DeckInfoPage/DeckInfoPage';
 import HelpPage from './pages/HelpPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import useNavigationStore from './stores/useNavigationStore';
@@ -46,6 +47,7 @@ function App() {
         {currentPage === 'handsFreeSetup' && <HandsFreeGameSetup />}
         {currentPage === 'handsFree' && <HandsFreeGame />}
         {currentPage === 'matching' && <MatchingGame />}
+        {currentPage === 'deckInfo' && <DeckInfoPage />}
         {currentPage === 'help' && <HelpPage />}
       </ErrorBoundary>
     </PageBorder>

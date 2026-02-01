@@ -6,7 +6,7 @@ import MainPageDeckButton from './MainPageDeckButton';
 // Default deck names
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
-const MainPageDeckList = ({ onPlay, onEdit }) => {
+const MainPageDeckList = ({ onPlay, onEdit, onInfo }) => {
     const { deckFileIds } = useDriveStore();
     const { deckStats, currentDeckName, setCurrentDeckName } = useDataStore();
 
@@ -44,6 +44,7 @@ const MainPageDeckList = ({ onPlay, onEdit }) => {
                         currentDeckName={currentDeckName}
                         onPlay={onPlay}
                         onEdit={onEdit}
+                        onInfo={onInfo}
                         onSelect={(id) => setCurrentDeckName(id)}
                     />
                 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { FaGear, FaPlay } from 'react-icons/fa6';
+import { FaGear, FaPlay, FaCircleInfo } from 'react-icons/fa6';
 import useThemeStore from '../../stores/useThemeStore';
 
 const MainPageDeckButton = ({
@@ -10,6 +10,7 @@ const MainPageDeckButton = ({
     currentDeckName,
     onPlay,
     onEdit,
+    onInfo,
     onSelect
 }) => {
     const { colors, fontSizes } = useThemeStore();
@@ -47,6 +48,26 @@ const MainPageDeckButton = ({
 
             {/* Right Column: Actions */}
             <div className="d-flex align-items-center gap-2">
+                {/* Info Button (i icon) */}
+                <div
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onInfo && onInfo(name);
+                    }}
+                    title="Deck Info"
+                    className="d-flex align-items-center justify-content-center deck-info-btn"
+                    style={{
+                        width: '36px',
+                        height: '36px',
+                        cursor: 'pointer',
+                        color: isSelected ? 'white' : colors.primary,
+                        transition: 'opacity 0.2s',
+                        opacity: isSelected ? 1 : 0.7
+                    }}
+                >
+                    <FaCircleInfo size={24} />
+                </div>
+
                 {/* Edit Button (Gear icon) */}
                 <div
                     onClick={(e) => {

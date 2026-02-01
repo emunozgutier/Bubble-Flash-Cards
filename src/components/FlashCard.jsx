@@ -23,19 +23,21 @@ export default function FlashCard({ card, front, back, flippable = true }) {
         }
     };
 
-    const displayFront = card ? card.chinese : front;
+    const displayFront = card ? (card.chinese || card.front) : front;
     const displayBack = card ? (
-        <div className="card-back-content text-center">
-            <div
-                className="pinyin mb-2"
-                style={{ color: colors.textSecondary, fontSize: fontSizes.small }}
-            >
-                {card.pinyin}
+        card.chinese ? (
+            <div className="card-back-content text-center">
+                <div
+                    className="pinyin mb-2"
+                    style={{ color: colors.textSecondary, fontSize: fontSizes.small }}
+                >
+                    {card.pinyin}
+                </div>
+                <div className="english" style={{ fontSize: fontSizes.medium }}>
+                    {card.english}
+                </div>
             </div>
-            <div className="english" style={{ fontSize: fontSizes.medium }}>
-                {card.english}
-            </div>
-        </div>
+        ) : card.back
     ) : back;
 
     // Card face style
