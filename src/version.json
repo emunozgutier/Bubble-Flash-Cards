@@ -1,7 +1,7 @@
 {
-  "hash": "e4d9eb7",
-  "date": "2026-02-01T11:31:27-08:00",
-  "title": "Handle end-game input and update tests",
-  "message": "When the game is finished (game_over or won), input handlers now perform summary actions: handleCorrect triggers gameStore.continueGame(), and handleIncorrect navigates to main. Effect hooks were re-bound to include gameState and showHelpModal so listeners update correctly when state changes. Tests were updated to import setupInputListeners and useGameStore directly, to use vi.mocked(useGameStore) for store stubbing, and a new test verifies that pressing Next in the summary calls continueGame.",
+  "hash": "0997d6e",
+  "date": "2026-02-01T12:10:52-08:00",
+  "title": "Add Deck Info page and deck info button",
+  "message": "Introduce a new DeckInfoPage with accompanying CSS to show per-card progress for the current deck (sorted by proficiency then lastSeen), render proficiency stars, and display a FlashCard preview. Integrate the page into navigation (App.jsx + useNavigationStore) and wire an info action from MainPage -> MainPageDeckList -> MainPageDeckButton so users can open the deck info view. Also: adjust FlashCard rendering to handle cards with alternate front/back fields and add minor MainPage CSS for the info button hover animation.",
   "source": "Local Git"
 }
