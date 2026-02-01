@@ -1,7 +1,7 @@
 {
-  "hash": "6e5ac83",
-  "date": "2026-01-31T18:05:24-08:00",
-  "title": "Generate version.json from local git",
-  "message": "Stop using the GitHub API to populate src/version.json and instead gather metadata from the local repository via git (using child_process.execSync). The generator now extracts short hash, commit date, title, and body, writes version.json and logs the result; it falls back to a minimal entry if git is unavailable. This removes reliance on API auth/rate limits and enables offline builds, and updates src/version.json metadata accordingly.",
+  "hash": "92a38b2",
+  "date": "2026-01-31T18:05:35-08:00",
+  "title": "chore: update version.json",
+  "message": "",
   "source": "Local Git"
 }

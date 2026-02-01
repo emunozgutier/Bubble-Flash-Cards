@@ -12,6 +12,11 @@ const shouldPush = process.argv.includes('--push');
 console.log('Generating version info from local git...');
 
 try {
+    if (shouldPush) {
+        console.log('Staging all changes...');
+        execSync('git add .');
+    }
+
     const hash = execSync('git rev-parse --short HEAD').toString().trim();
     const date = execSync('git log -1 --format=%cI').toString().trim();
     const title = execSync('git log -1 --format=%s').toString().trim();
@@ -33,20 +38,30 @@ try {
         existingContent = fs.readFileSync(outputPath, 'utf8');
     }
 
-    if (newContent !== existingContent) {
-        fs.writeFileSync(outputPath, newContent);
-        console.log('version.json generated successfully from local git.');
-        console.log(versionInfo);
+    if (newContent !== existingContent || shouldPush) {
+        if (newContent !== existingContent) {
+            fs.writeFileSync(outputPath, newContent);
+            console.log('version.json generated successfully from local git.');
+            console.log(versionInfo);
+        }
 
         if (shouldPush) {
-            console.log('Committing and pushing version.json...');
+            console.log('Committing and pushing all changes...');
             try {
+                // Ensure version.json is staged even if it was just created/updated
                 execSync(`git add "${outputPath}"`);
-                execSync('git commit -m "chore: update version.json"');
-                execSync('git push');
-                console.log('Successfully pushed version.json to remote.');
+
+                // Check if there are staged changes to commit
+                const status = execSync('git status --porcelain').toString().trim();
+                if (status) {
+                    execSync('git commit -m "chore: deploy-time version update"');
+                    execSync('git push');
+                    console.log('Successfully pushed changes to remote.');
+                } else {
+                    console.log('No changes to commit.');
+                }
             } catch (gitError) {
-                console.error('Git push failed (maybe no changes or network error):', gitError.message);
+                console.error('Git operation failed:', gitError.message);
             }
         }
     } else {
