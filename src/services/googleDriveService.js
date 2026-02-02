@@ -48,7 +48,7 @@ export const initGis = (onTokenCallback) => {
                 scope: SCOPES,
                 callback: (tokenResponse) => {
                     if (tokenResponse && tokenResponse.access_token) {
-                        onTokenCallback(tokenResponse.access_token);
+                        onTokenCallback(tokenResponse.access_token, tokenResponse.expires_in);
                     }
                 },
             });
@@ -65,7 +65,7 @@ export const initGis = (onTokenCallback) => {
                 scope: SCOPES,
                 callback: (tokenResponse) => {
                     if (tokenResponse && tokenResponse.access_token) {
-                        onTokenCallback(tokenResponse.access_token);
+                        onTokenCallback(tokenResponse.access_token, tokenResponse.expires_in);
                     }
                 },
             });

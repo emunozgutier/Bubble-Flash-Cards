@@ -1,18 +1,40 @@
 import { create } from 'zustand';
 
-const useDriveStore = create((set) => ({
-    isAuthorized: false,
-    appFolderId: null,
-    deckFileIds: {},
-    isLoading: false,
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-    setAuthorized: (isAuthorized) => set({ isAuthorized }),
-    setAppFolderId: (appFolderId) => set({ appFolderId }),
-    setDeckFileIds: (deckFileIds) => set({ deckFileIds }),
-    updateDeckFileId: (deckName, fileId) => set((state) => ({
-        deckFileIds: { ...state.deckFileIds, [deckName]: fileId }
-    })),
-    setIsLoading: (isLoading) => set({ isLoading }),
-}));
+const useDriveStore = create(
+    persist(
+        (set, get) => ({
+            isAuthorized: false,
+            accessToken: null,
+            tokenExpiry: null,
+            appFolderId: null,
+            deckFileIds: {},
+            isLoading: false,
+
+            setAuthorized: (isAuthorized) => set({ isAuthorized }),
+            setAccessToken: (accessToken, expiresIn = 3599) => {
+                const expiry = Date.now() + (expiresIn * 1000);
+                set({ accessToken, tokenExpiry: expiry, isAuthorized: true });
+            },
+            setAppFolderId: (appFolderId) => set({ appFolderId }),
+            setDeckFileIds: (deckFileIds) => set({ deckFileIds }),
+            updateDeckFileId: (deckName, fileId) => set((state) => ({
+                deckFileIds: { ...state.deckFileIds, [deckName]: fileId }
+            })),
+            setIsLoading: (isLoading) => set({ isLoading }),
+        }),
+        {
+            name: 'bubble-flash-cards-drive-storage',
+            partialize: (state) => ({
+                appFolderId: state.appFolderId,
+                deckFileIds: state.deckFileIds,
+                accessToken: state.accessToken,
+                tokenExpiry: state.tokenExpiry
+            }),
+        }
+    )
+);
 
 export default useDriveStore;

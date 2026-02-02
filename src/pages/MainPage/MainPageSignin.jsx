@@ -9,7 +9,7 @@ const APP_FOLDER_NAME = 'BubbleFlashCards';
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
 const MainPageSignin = () => {
-    const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading } = useDriveStore();
+    const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading, accessToken, tokenExpiry, setAccessToken } = useDriveStore();
     const { setCards, setCurrentDeckName } = useDataStore();
 
     const loadDeck = async (deckName, fileId) => {
@@ -95,7 +95,29 @@ const MainPageSignin = () => {
         const initializeGoogleModules = async () => {
             try {
                 await initGapi();
-                await initGis(() => {
+
+                // Check if we have a valid persisted token
+                const { accessToken, tokenExpiry, setAccessToken } = useDriveStore.getState();
+                const now = Date.now();
+
+                if (accessToken && tokenExpiry && now < tokenExpiry) {
+                    // Restore session
+                    console.log("Restoring Google Session...");
+                    window.gapi.client.setToken({ access_token: accessToken });
+                    setAuthorized(true);
+                    // Initialize structure with existing token
+                    initializeDriveStructure();
+                }
+
+                await initGis((accessToken, expiresIn) => {
+                    // Update store with new token
+                    const { setAccessToken } = useDriveStore.getState();
+                    // setAccessToken comes from store but using getState inside callback to be safe or use destructured
+                    // Actually, let's just use the prop from useDriveStore hook if stable, or getState.
+                    // useDriveStore hook values are stable.
+                    setAccessToken(accessToken, expiresIn);
+                    // setAuthorized is handled by setAccessToken in our store update, but we can call it explicitly if needed.
+                    // effectively:
                     setAuthorized(true);
                     initializeDriveStructure();
                 });
