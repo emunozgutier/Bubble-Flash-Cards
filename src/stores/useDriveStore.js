@@ -24,6 +24,14 @@ const useDriveStore = create(
                 deckFileIds: { ...state.deckFileIds, [deckName]: fileId }
             })),
             setIsLoading: (isLoading) => set({ isLoading }),
+            logout: () => set({
+                isAuthorized: false,
+                accessToken: null,
+                tokenExpiry: null,
+                appFolderId: null,
+                deckFileIds: {},
+                isLoading: false
+            }),
         }),
         {
             name: 'bubble-flash-cards-drive-storage',

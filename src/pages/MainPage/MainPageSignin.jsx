@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { initGapi, initGis, findFile, saveFile, loadFile, createFolder, listFiles, signIn } from '../../services/googleDriveService';
+import { initGapi, initGis, findFile, saveFile, loadFile, createFolder, listFiles, signIn, signOut } from '../../services/googleDriveService';
 import useDriveStore from '../../stores/useDriveStore';
 import useDataStore from '../../stores/useDataStore';
 import useThemeStore from '../../stores/useThemeStore';
@@ -9,7 +9,7 @@ const APP_FOLDER_NAME = 'BubbleFlashCards';
 const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
 const MainPageSignin = () => {
-    const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading, accessToken, tokenExpiry, setAccessToken } = useDriveStore();
+    const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading, accessToken, tokenExpiry, setAccessToken, logout } = useDriveStore();
     const { setCards, setCurrentDeckName } = useDataStore();
 
     const loadDeck = async (deckName, fileId) => {
@@ -131,8 +131,25 @@ const MainPageSignin = () => {
 
     const { colors, fontSizes } = useThemeStore();
 
+    const handleSignOut = () => {
+        signOut();
+        logout();
+        alert("Signed out from Google Drive.");
+    };
+
     if (isAuthorized) {
-        return <span className="fw-medium" style={{ color: colors.text, fontSize: fontSizes.medium }}>✅ Connected</span>;
+        return (
+            <div className="d-flex align-items-center gap-2">
+                <span className="fw-medium" style={{ color: colors.text, fontSize: fontSizes.medium }}>✅ Connected</span>
+                <button
+                    className="btn btn-outline-danger btn-sm px-2 py-0"
+                    onClick={handleSignOut}
+                    style={{ fontSize: '0.8rem' }}
+                >
+                    Sign Out
+                </button>
+            </div>
+        );
     }
 
     return (
@@ -148,7 +165,6 @@ const MainPageSignin = () => {
             Sign In with Google
         </button>
     );
-
 };
 
 export default MainPageSignin;

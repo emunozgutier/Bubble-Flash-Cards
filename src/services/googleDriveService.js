@@ -90,6 +90,19 @@ export const signIn = () => {
     }
 };
 
+export const signOut = () => {
+    const token = window.gapi?.client?.getToken();
+    if (token && window.google?.accounts?.oauth2) {
+        window.google.accounts.oauth2.revoke(token.access_token, () => {
+            console.log('Token revoked');
+        });
+    }
+    // Clear local gapi token
+    if (window.gapi?.client) {
+        window.gapi.client.setToken(null);
+    }
+};
+
 export const findFile = async (filename, parentId = null) => {
     try {
         let query = `name = '${filename}' and trashed = false`;
