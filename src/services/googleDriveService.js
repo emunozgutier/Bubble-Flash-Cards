@@ -127,7 +127,7 @@ export const listFiles = async (folderId) => {
         const query = `'${folderId}' in parents and trashed = false and mimeType = 'application/json'`;
         const response = await window.gapi.client.drive.files.list({
             q: query,
-            fields: 'files(id, name)',
+            fields: 'files(id, name, size)',
             spaces: 'drive',
         });
         return response.result.files;

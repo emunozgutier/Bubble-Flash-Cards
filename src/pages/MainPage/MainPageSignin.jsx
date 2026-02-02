@@ -4,9 +4,10 @@ import useDriveStore from '../../stores/useDriveStore';
 import useDataStore from '../../stores/useDataStore';
 import useThemeStore from '../../stores/useThemeStore';
 
+import { DEFAULT_DECKS, DECK_NAMES } from '../../utils/deckData';
+
 const ROOT_FOLDER_NAME = 'breadBoardApps';
 const APP_FOLDER_NAME = 'BubbleFlashCards';
-const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
 
 const MainPageSignin = () => {
     const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading, accessToken, tokenExpiry, setAccessToken, logout } = useDriveStore();
@@ -34,7 +35,8 @@ const MainPageSignin = () => {
         for (const deck of DECK_NAMES) {
             if (!newIds[deck]) {
                 const filename = `${deck}.json`;
-                const initialData = { cards: [] }; // Empty deck
+                // Use default data if available, otherwise empty
+                const initialData = DEFAULT_DECKS[deck] || { cards: [] };
                 const res = await saveFile(filename, initialData, null, parentId);
                 newIds[deck] = res.id;
             }
@@ -42,6 +44,27 @@ const MainPageSignin = () => {
         setDeckFileIds(newIds);
         // Load the first one after ensuring creation
         await loadDeck(DECK_NAMES[0], newIds[DECK_NAMES[0]]);
+    };
+
+    const repairEmptyDecks = async (files) => {
+        if (!files || files.length === 0) return;
+
+        for (const file of files) {
+            const deckName = file.name.replace(/\.json$/i, '');
+            // Check if it's one of our standard decks and if it's "empty" (under 100 bytes is a safe bet for an empty shell)
+            if (DECK_NAMES.includes(deckName) && file.size && parseInt(file.size) < 100) {
+                console.log(`Repairing empty deck: ${deckName} (Size: ${file.size})`);
+                const defaultData = DEFAULT_DECKS[deckName];
+                if (defaultData) {
+                    try {
+                        await saveFile(`${deckName}.json`, defaultData, file.id);
+                        console.log(`Repaired ${deckName}`);
+                    } catch (err) {
+                        console.error(`Failed to repair ${deckName}`, err);
+                    }
+                }
+            }
+        }
     };
 
     // Initialize folders and decks
@@ -81,7 +104,10 @@ const MainPageSignin = () => {
 
             setDeckFileIds(ids);
 
-            // 4. Ensure default decks exist (create if missing)
+            // 4. Repair any existing empty files
+            await repairEmptyDecks(files);
+
+            // 5. Ensure default decks exist (create if missing)
             await createMissingDecks(appId, ids);
 
         } catch (err) {

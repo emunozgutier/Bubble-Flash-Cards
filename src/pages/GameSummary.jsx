@@ -21,6 +21,27 @@ function GameSummary({ title = 'Game Summary' }) {
 
     const [syncStatus, setSyncStatus] = useState(''); // '', 'Saving...', 'Saved', 'Error'
 
+    const handleManualSave = async () => {
+        if (!isAuthorized) {
+            alert("Not signed in to Google Drive.");
+            return;
+        }
+        if (!currentDeckName || !deckFileIds[currentDeckName]) {
+            alert("This deck is not synced with Google Drive.");
+            return;
+        }
+
+        try {
+            setSyncStatus('Saving to Drive...');
+            const fileId = deckFileIds[currentDeckName];
+            await saveFile(`${currentDeckName}.json`, { cards }, fileId);
+            setSyncStatus('Progress Saved to Drive ✅');
+        } catch (err) {
+            console.error("Manual save failed", err);
+            setSyncStatus('Save Failed ❌');
+        }
+    };
+
     useEffect(() => {
         const autoSave = async () => {
             // Only save if authorized and we have a file mapped
@@ -59,7 +80,27 @@ function GameSummary({ title = 'Game Summary' }) {
             <div className="summary-screen" style={{ overflowY: 'auto', padding: '20px', height: '100%', boxSizing: 'border-box' }}>
                 <h2>{gameState === 'won' ? 'Great Job!' : 'Game Over'}</h2>
                 <h3>Score: {score}</h3>
-                {syncStatus && <div style={{ marginTop: '10px', color: 'var(--color-primary)', fontStyle: 'italic' }}>{syncStatus}</div>}
+                {syncStatus && (
+                    <div style={{ marginTop: '10px', color: 'var(--color-primary)', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                        {syncStatus}
+                        {syncStatus.includes('Failed') && (
+                            <button
+                                onClick={handleManualSave}
+                                style={{
+                                    background: 'transparent',
+                                    border: '1px solid var(--color-primary)',
+                                    color: 'var(--color-primary)',
+                                    borderRadius: '4px',
+                                    cursor: 'pointer',
+                                    padding: '2px 8px',
+                                    fontSize: '0.8rem'
+                                }}
+                            >
+                                Retry Save
+                            </button>
+                        )}
+                    </div>
+                )}
 
                 <div className="summary-list">
                     <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--color-text)' }}>
