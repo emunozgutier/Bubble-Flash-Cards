@@ -1,7 +1,7 @@
 {
-  "hash": "0997d6e",
-  "date": "2026-02-01T12:10:52-08:00",
-  "title": "Add Deck Info page and deck info button",
-  "message": "Introduce a new DeckInfoPage with accompanying CSS to show per-card progress for the current deck (sorted by proficiency then lastSeen), render proficiency stars, and display a FlashCard preview. Integrate the page into navigation (App.jsx + useNavigationStore) and wire an info action from MainPage -> MainPageDeckList -> MainPageDeckButton so users can open the deck info view. Also: adjust FlashCard rendering to handle cards with alternate front/back fields and add minor MainPage CSS for the info button hover animation.",
+  "hash": "d253686",
+  "date": "2026-02-01T21:36:13-08:00",
+  "title": "Persist Drive auth + auto-save progress",
+  "message": "Persist Google Drive auth state and auto-save deck progress from the game summary. Changes include:\n\n- Add persisted zustand drive store (accessToken, tokenExpiry) with setAccessToken and isAuthorized handling; persist appFolderId, deckFileIds, accessToken and tokenExpiry.\n- Update initGis to pass token expiry (expires_in) to callbacks.\n- Restore Google session on sign-in if a valid persisted token exists and set gapi token accordingly; update sign-in flow to store access token and expiry.\n- Add auto-save in GameSummary: when authorized and a deck file mapping exists, save current cards to Drive via saveFile and show a syncStatus message in the UI.\n\nThese changes allow the app to maintain Drive authorization between sessions and automatically persist user progress to the corresponding deck file.",
   "source": "Local Git"
 }

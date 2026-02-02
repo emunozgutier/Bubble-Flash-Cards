@@ -24,6 +24,11 @@ function MatchingGame() {
 
     // Initialize Game
     useEffect(() => {
+        if (!cards || cards.length === 0) {
+            alert('This deck has no cards! Returning to main menu.');
+            navigateTo('main');
+            return;
+        }
         startNewGame();
     }, [cards]);
 

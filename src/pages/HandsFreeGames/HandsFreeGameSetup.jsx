@@ -20,23 +20,15 @@ function HandsFreeGameSetup() {
         if (cards.length > 0) {
             const success = startGame(cards, mode);
             if (success) {
-                // We might want to store practiceMode in the store if the game needs it
-                // For now, let's assume we pass it or set a separate flag if needed.
-                // Since useGameStore doesn't have practiceMode yet, we can add it or just pass it as metadata purely for the UI?
-                // Actually, HandsFreeGame needs to know. I should add it to the store or rely on component state?
-                // Store is better for persistence across reloads. 
-                // I'll add setPracticeMode action to store later or just augment state now via direct set for quickness if I don't want to refactor store again immediately.
-                // Cleaner: Add to store. But for now, let's just set it directly on the store state object if possible or just use a query param logic.
-                // I'll add a `setPracticeMode` to the store in the next step or just assume the game component defaults to false if not set.
-                // Let's add it to store state directly for now.
+                // ... existing code ...
                 useGameStore.setState({ practiceMode });
 
                 navigateTo('handsFree');
             } else {
-                alert('No valid cards to play with! (Welcome card is excluded)');
+                alert("No playable cards found in this deck. (Note: The 'Welcome' card is excluded).");
             }
         } else {
-            alert('No cards available in this deck!');
+            alert('This deck is empty! Please add cards or select a different non-empty deck.');
         }
     };
 

@@ -12,16 +12,20 @@ function BubbleGameSetup() {
     const { startGame } = useGameStore();
 
     const handleStart = (mode) => {
-        if (cards.length > 0) {
+        if (cards && cards.length > 0) {
             try {
-                startGame(cards, mode);
-                navigateTo('bubble');
+                const success = startGame(cards, mode);
+                if (success) {
+                    navigateTo('bubble');
+                } else {
+                    alert("No playable cards found in this deck. (Note: The 'Welcome' card is excluded from games).");
+                }
             } catch (error) {
                 console.error("Failed to start game:", error);
-                alert("Error starting game with this deck. Please try another deck.");
+                alert("Error starting game. Please try another deck.");
             }
         } else {
-            alert('No cards available in this deck!');
+            alert('This deck is empty! Please add cards or select a different non-empty deck.');
         }
     };
 
