@@ -1,0 +1,44 @@
+.create-deck-page {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.custom-input {
+    border-width: 1px;
+    border-style: solid;
+    transition: all 0.2s ease;
+}
+
+.custom-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(var(--color-primary-rgb), 0.25);
+    background-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.card-form-container {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-back {
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.btn-back:hover {
+    transform: translateX(-3px);
+}
+
+.backdrop-blur {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.italic {
+    font-style: italic;
+}

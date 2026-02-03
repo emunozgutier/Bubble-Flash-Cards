@@ -80,7 +80,31 @@ function MainPage() {
                                 backgroundColor: colors.surface,
                                 borderColor: colors.border
                             }}>
-                            <h5 className="mb-3" style={{ color: colors.primary, fontSize: fontSizes.large }}>Your Decks</h5>
+                            <div className="d-flex justify-content-between align-items-center mb-3">
+                                <h5 className="mb-0" style={{ color: colors.primary, fontSize: fontSizes.large }}>Your Decks</h5>
+                                <button
+                                    className="btn btn-sm"
+                                    style={{
+                                        backgroundColor: colors.primary,
+                                        color: colors.text,
+                                        borderRadius: '50%',
+                                        width: '40px',
+                                        height: '40px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        fontSize: '24px',
+                                        border: 'none',
+                                        transition: 'transform 0.2s'
+                                    }}
+                                    onClick={() => navigateTo('createDeck')}
+                                    onMouseOver={(e) => e.target.style.transform = 'scale(1.1)'}
+                                    onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                                    title="Create New Deck"
+                                >
+                                    +
+                                </button>
+                            </div>
                             <div className="flex-grow-1 overflow-y-auto overflow-x-hidden p-4"
                                 style={{
                                     scrollbarGutter: 'stable'

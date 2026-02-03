@@ -8,6 +8,7 @@ import HandsFreeGame from './pages/HandsFreeGames/HandsFreeGame';
 import MatchingGame from './pages/MatchingGame/MatchingGame';
 import DeckInfoPage from './pages/DeckInfoPage/DeckInfoPage';
 import HelpPage from './pages/HelpPage';
+import CreateDeckPage from './pages/CreateDeckPage/CreateDeckPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import useNavigationStore from './stores/useNavigationStore';
 import useThemeStore from './stores/useThemeStore';
@@ -49,6 +50,7 @@ function App() {
         {currentPage === 'matching' && <MatchingGame />}
         {currentPage === 'deckInfo' && <DeckInfoPage />}
         {currentPage === 'help' && <HelpPage />}
+        {currentPage === 'createDeck' && <CreateDeckPage />}
       </ErrorBoundary>
     </PageBorder>
   );
