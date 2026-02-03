@@ -1,7 +1,7 @@
 {
-  "hash": "cef67ca",
-  "date": "2026-02-02T22:21:30-08:00",
-  "title": "Add Edit Deck page and Drive delete support",
-  "message": "Add a full EditDeckPage (JSX + CSS) allowing users to rename, edit, add/delete cards, save to Drive, and delete a deck; wire it into App routing and add an Edit button to DeckInfoPage. Implement deleteFile in GoogleDriveWriteServices and export saveFile/createFolder/deleteFile from googleDriveService. Add removeDeckFileId to useDriveStore to update Drive file ID mappings when decks are renamed or removed. Also adjust navigation keys (bubble -> game-bubble, createDeck -> create-deck) to match new route names.",
+  "hash": "c1cd699",
+  "date": "2026-02-02T22:22:02-08:00",
+  "title": "chore: deploy-time version update",
+  "message": "",
   "source": "Local Git"
 }

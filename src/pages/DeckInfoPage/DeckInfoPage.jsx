@@ -3,7 +3,7 @@ import useDataStore from '../../stores/useDataStore';
 import useNavigationStore from '../../stores/useNavigationStore';
 import useThemeStore from '../../stores/useThemeStore';
 import FlashCard from '../../components/FlashCard';
-import { FaArrowLeft, FaStar, FaRegStar, FaEdit } from 'react-icons/fa6';
+import { FaArrowLeft, FaStar, FaRegStar, FaPenToSquare as FaEdit } from 'react-icons/fa6';
 import './DeckInfoPage.css';
 
 const DeckInfoPage = () => {
