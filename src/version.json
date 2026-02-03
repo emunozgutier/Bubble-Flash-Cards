@@ -1,7 +1,7 @@
 {
-  "hash": "db5663c",
-  "date": "2026-02-01T21:58:24-08:00",
-  "title": "Add default deck utils and manual save retry",
-  "message": "Centralize default deck data into src/utils/deckData.js (exports DECK_NAMES and DEFAULT_DECKS) and update MainPage and MainPageSignin to import from the new module. Add repairEmptyDecks in MainPageSignin to detect small/empty Drive files and restore them from defaults before creating missing decks. Request file size in googleDriveService.listFiles (fields: 'files(id, name, size)') to support the repair check. Add a manual save handler and a \"Retry Save\" button in GameSummary to allow users to retry saving progress to Drive when an automatic save fails.",
+  "hash": "8b11936",
+  "date": "2026-02-02T22:04:11-08:00",
+  "title": "Split Google Drive service and add CSV support",
+  "message": "Refactor Google Drive logic into modular services and add CSV import/export + recovery logic. New files: GoogleDriveSignin, GoogleDriveReadServices, GoogleDriveWriteServices, JsonToCsv, and constants. googleDriveService now re-exports the new modules for compatibility. MainPage and MainPageSignin imports updated to use the new services; MainPageSignin now treats .json/.csv names, relies on loadFile's internal recovery, and maps deck file ids based on both .json and .csv. Read service listFiles now includes CSV mimeType and loadFile converts CSV to JSON and repairs empty decks by restoring defaults and saving them back. Write service saveFile can convert deck JSON to CSV (ensures .csv extension) and create/update files; createFolder and saveFile implemented via Drive multipart uploads. deckData now re-uses DECK_NAMES from the shared constants. version.json updated to reflect these changes.",
   "source": "Local Git"
 }
