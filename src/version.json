@@ -1,7 +1,7 @@
 {
-  "hash": "8b11936",
-  "date": "2026-02-02T22:04:11-08:00",
-  "title": "Split Google Drive service and add CSV support",
-  "message": "Refactor Google Drive logic into modular services and add CSV import/export + recovery logic. New files: GoogleDriveSignin, GoogleDriveReadServices, GoogleDriveWriteServices, JsonToCsv, and constants. googleDriveService now re-exports the new modules for compatibility. MainPage and MainPageSignin imports updated to use the new services; MainPageSignin now treats .json/.csv names, relies on loadFile's internal recovery, and maps deck file ids based on both .json and .csv. Read service listFiles now includes CSV mimeType and loadFile converts CSV to JSON and repairs empty decks by restoring defaults and saving them back. Write service saveFile can convert deck JSON to CSV (ensures .csv extension) and create/update files; createFolder and saveFile implemented via Drive multipart uploads. deckData now re-uses DECK_NAMES from the shared constants. version.json updated to reflect these changes.",
+  "hash": "cef67ca",
+  "date": "2026-02-02T22:21:30-08:00",
+  "title": "Add Edit Deck page and Drive delete support",
+  "message": "Add a full EditDeckPage (JSX + CSS) allowing users to rename, edit, add/delete cards, save to Drive, and delete a deck; wire it into App routing and add an Edit button to DeckInfoPage. Implement deleteFile in GoogleDriveWriteServices and export saveFile/createFolder/deleteFile from googleDriveService. Add removeDeckFileId to useDriveStore to update Drive file ID mappings when decks are renamed or removed. Also adjust navigation keys (bubble -> game-bubble, createDeck -> create-deck) to match new route names.",
   "source": "Local Git"
 }
