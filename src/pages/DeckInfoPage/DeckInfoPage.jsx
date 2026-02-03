@@ -3,7 +3,7 @@ import useDataStore from '../../stores/useDataStore';
 import useNavigationStore from '../../stores/useNavigationStore';
 import useThemeStore from '../../stores/useThemeStore';
 import FlashCard from '../../components/FlashCard';
-import { FaArrowLeft, FaStar, FaRegStar } from 'react-icons/fa6';
+import { FaArrowLeft, FaStar, FaRegStar, FaEdit } from 'react-icons/fa6';
 import './DeckInfoPage.css';
 
 const DeckInfoPage = () => {
@@ -56,9 +56,18 @@ const DeckInfoPage = () => {
                     <FaArrowLeft />
                     <span>Back</span>
                 </button>
-                <div className="ms-4">
-                    <h1 className="h3 mb-0" style={{ color: colors.primary }}>{currentDeckName} Progress</h1>
-                    <p className="small mb-0 opacity-75">Showing learning status for {cards.length} cards</p>
+                <div className="ms-4 d-flex align-items-center gap-3">
+                    <div>
+                        <h1 className="h3 mb-0" style={{ color: colors.primary }}>{currentDeckName} Progress</h1>
+                        <p className="small mb-0 opacity-75">Showing learning status for {cards.length} cards</p>
+                    </div>
+                    <button
+                        className="btn btn-sm btn-outline-primary d-flex align-items-center gap-2"
+                        onClick={() => navigateTo('edit-deck')}
+                        style={{ borderColor: `${colors.primary}44`, color: colors.primary }}
+                    >
+                        <FaEdit /> Edit Deck
+                    </button>
                 </div>
             </header>
 

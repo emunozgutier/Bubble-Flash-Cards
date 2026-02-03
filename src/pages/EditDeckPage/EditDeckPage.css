@@ -1,0 +1,39 @@
+.edit-deck-page {
+    animation: fadeIn 0.3s ease;
+}
+
+.edit-deck-header {
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.custom-input {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.custom-input:focus {
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+    border-color: var(--primary-color);
+}
+
+.card-form-container {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-list input:focus {
+    box-shadow: none;
+    border-color: var(--primary-color) !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

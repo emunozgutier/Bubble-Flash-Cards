@@ -82,3 +82,21 @@ export const saveFile = async (filename, content, fileId = null, parentId = null
         throw err;
     }
 };
+
+export const deleteFile = async (fileId) => {
+    const accessToken = window.gapi.auth.getToken().access_token;
+    try {
+        const response = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}`, {
+            method: 'DELETE',
+            headers: new Headers({ 'Authorization': 'Bearer ' + accessToken }),
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error.message || 'Failed to delete file');
+        }
+        return true;
+    } catch (err) {
+        console.error("Error deleting file", err);
+        throw err;
+    }
+};

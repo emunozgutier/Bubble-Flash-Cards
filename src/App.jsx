@@ -9,6 +9,7 @@ import MatchingGame from './pages/MatchingGame/MatchingGame';
 import DeckInfoPage from './pages/DeckInfoPage/DeckInfoPage';
 import HelpPage from './pages/HelpPage';
 import CreateDeckPage from './pages/CreateDeckPage/CreateDeckPage';
+import EditDeckPage from './pages/EditDeckPage/EditDeckPage';
 import ErrorBoundary from './components/ErrorBoundary';
 import useNavigationStore from './stores/useNavigationStore';
 import useThemeStore from './stores/useThemeStore';
@@ -44,13 +45,14 @@ function App() {
       <ErrorBoundary>
         {currentPage === 'main' && <MainPage />}
         {currentPage === 'bubbleSetup' && <BubbleGameSetup />}
-        {currentPage === 'bubble' && <BubbleGame />}
+        {currentPage === 'game-bubble' && <BubbleGame />}
         {currentPage === 'handsFreeSetup' && <HandsFreeGameSetup />}
         {currentPage === 'handsFree' && <HandsFreeGame />}
         {currentPage === 'matching' && <MatchingGame />}
         {currentPage === 'deckInfo' && <DeckInfoPage />}
         {currentPage === 'help' && <HelpPage />}
-        {currentPage === 'createDeck' && <CreateDeckPage />}
+        {currentPage === 'create-deck' && <CreateDeckPage />}
+        {currentPage === 'edit-deck' && <EditDeckPage />}
       </ErrorBoundary>
     </PageBorder>
   );

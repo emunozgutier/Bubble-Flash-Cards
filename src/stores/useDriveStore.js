@@ -23,6 +23,11 @@ const useDriveStore = create(
             updateDeckFileId: (deckName, fileId) => set((state) => ({
                 deckFileIds: { ...state.deckFileIds, [deckName]: fileId }
             })),
+            removeDeckFileId: (deckName) => set((state) => {
+                const newDeckFileIds = { ...state.deckFileIds };
+                delete newDeckFileIds[deckName];
+                return { deckFileIds: newDeckFileIds };
+            }),
             setIsLoading: (isLoading) => set({ isLoading }),
             logout: () => set({
                 isAuthorized: false,
