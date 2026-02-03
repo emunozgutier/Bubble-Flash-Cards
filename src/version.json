@@ -1,7 +1,7 @@
 {
-  "hash": "c1cd699",
-  "date": "2026-02-02T22:22:02-08:00",
-  "title": "chore: deploy-time version update",
-  "message": "",
+  "hash": "95072ab",
+  "date": "2026-02-02T22:27:08-08:00",
+  "title": "Update icon import and bump version",
+  "message": "Replace FaEdit import with FaPenToSquare as FaEdit from react-icons/fa6 to accommodate the renamed export, and update src/version.json with a deploy-time hash/date/title metadata update.",
   "source": "Local Git"
 }
