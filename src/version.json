@@ -1,7 +1,7 @@
 {
-  "hash": "d253686",
-  "date": "2026-02-01T21:36:13-08:00",
-  "title": "Persist Drive auth + auto-save progress",
-  "message": "Persist Google Drive auth state and auto-save deck progress from the game summary. Changes include:\n\n- Add persisted zustand drive store (accessToken, tokenExpiry) with setAccessToken and isAuthorized handling; persist appFolderId, deckFileIds, accessToken and tokenExpiry.\n- Update initGis to pass token expiry (expires_in) to callbacks.\n- Restore Google session on sign-in if a valid persisted token exists and set gapi token accordingly; update sign-in flow to store access token and expiry.\n- Add auto-save in GameSummary: when authorized and a deck file mapping exists, save current cards to Drive via saveFile and show a syncStatus message in the UI.\n\nThese changes allow the app to maintain Drive authorization between sessions and automatically persist user progress to the corresponding deck file.",
+  "hash": "db5663c",
+  "date": "2026-02-01T21:58:24-08:00",
+  "title": "Add default deck utils and manual save retry",
+  "message": "Centralize default deck data into src/utils/deckData.js (exports DECK_NAMES and DEFAULT_DECKS) and update MainPage and MainPageSignin to import from the new module. Add repairEmptyDecks in MainPageSignin to detect small/empty Drive files and restore them from defaults before creating missing decks. Request file size in googleDriveService.listFiles (fields: 'files(id, name, size)') to support the repair check. Add a manual save handler and a \"Retry Save\" button in GameSummary to allow users to retry saving progress to Drive when an automatic save fails.",
   "source": "Local Git"
 }

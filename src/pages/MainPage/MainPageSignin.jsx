@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
-import { initGapi, initGis, findFile, saveFile, loadFile, createFolder, listFiles, signIn, signOut } from '../../services/googleDriveService';
+import { initGapi, initGis, signIn, signOut } from '../../services/GoogleDriveSignin';
+import { ROOT_FOLDER_NAME, APP_FOLDER_NAME } from '../../services/GoogleDriveConstants';
+import { findFile, loadFile, listFiles } from '../../services/GoogleDriveReadServices';
+import { saveFile, createFolder } from '../../services/GoogleDriveWriteServices';
 import useDriveStore from '../../stores/useDriveStore';
 import useDataStore from '../../stores/useDataStore';
 import useThemeStore from '../../stores/useThemeStore';
 
 import { DEFAULT_DECKS, DECK_NAMES } from '../../utils/deckData';
 
-const ROOT_FOLDER_NAME = 'breadBoardApps';
-const APP_FOLDER_NAME = 'BubbleFlashCards';
+
 
 const MainPageSignin = () => {
     const { isAuthorized, setAuthorized, setAppFolderId, setDeckFileIds, setIsLoading, accessToken, tokenExpiry, setAccessToken, logout } = useDriveStore();
@@ -50,18 +52,13 @@ const MainPageSignin = () => {
         if (!files || files.length === 0) return;
 
         for (const file of files) {
-            const deckName = file.name.replace(/\.json$/i, '');
-            // Check if it's one of our standard decks and if it's "empty" (under 100 bytes is a safe bet for an empty shell)
-            if (DECK_NAMES.includes(deckName) && file.size && parseInt(file.size) < 100) {
-                console.log(`Repairing empty deck: ${deckName} (Size: ${file.size})`);
-                const defaultData = DEFAULT_DECKS[deckName];
-                if (defaultData) {
-                    try {
-                        await saveFile(`${deckName}.json`, defaultData, file.id);
-                        console.log(`Repaired ${deckName}`);
-                    } catch (err) {
-                        console.error(`Failed to repair ${deckName}`, err);
-                    }
+            const deckName = file.name.replace(/\.(json|csv)$/i, '');
+            // We now rely on loadFile's internal recovery logic
+            if (DECK_NAMES.includes(deckName)) {
+                try {
+                    await loadFile(file.id, file.name);
+                } catch (err) {
+                    console.error(`Failed to verify/repair ${deckName}`, err);
                 }
             }
         }
@@ -97,7 +94,7 @@ const MainPageSignin = () => {
             const ids = {};
             if (files && files.length > 0) {
                 files.forEach(file => {
-                    const deckName = file.name.replace(/\.json$/i, '');
+                    const deckName = file.name.replace(/\.(json|csv)$/i, '');
                     ids[deckName] = file.id;
                 });
             }

@@ -4,7 +4,7 @@ import hsk3Data from '../data/decks/HSK3.json';
 import hsk4Data from '../data/decks/HSK4.json';
 import hsk5Data from '../data/decks/HSK5.json';
 
-export const DECK_NAMES = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
+export { DECK_NAMES } from '../services/GoogleDriveConstants';
 
 export const DEFAULT_DECKS = {
     'HSK1': hsk1Data,

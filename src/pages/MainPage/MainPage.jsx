@@ -3,7 +3,7 @@ import useNavigationStore from '../../stores/useNavigationStore';
 import useDataStore from '../../stores/useDataStore';
 import useDriveStore from '../../stores/useDriveStore';
 import useThemeStore from '../../stores/useThemeStore';
-import { loadFile } from '../../services/googleDriveService';
+import { loadFile } from '../../services/GoogleDriveReadServices';
 import MainPageDeckList from './MainPageDeckList';
 import MainPageTitleBar from './MainPageTitleBar';
 import GameSelectionModal from '../../components/GameSelectionModal';
