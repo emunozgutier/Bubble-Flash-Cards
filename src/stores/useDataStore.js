@@ -61,6 +61,7 @@ const useDataStore = create(
 
                         const now = Date.now();
                         let newProficiency = card.proficiency || 0;
+                        let newTimesSeen = (card.timesSeen || 0) + 1;
 
                         if (isCorrect) {
                             newProficiency = Math.min((newProficiency || 0) + 1, 5); // Max proficiency 5
@@ -71,7 +72,8 @@ const useDataStore = create(
                         return {
                             ...card,
                             lastSeen: now,
-                            proficiency: newProficiency
+                            proficiency: newProficiency,
+                            timesSeen: newTimesSeen
                         };
                     });
 

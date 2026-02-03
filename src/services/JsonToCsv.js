@@ -4,7 +4,7 @@
 
 export const jsonToCsv = (cards) => {
     if (!cards || cards.length === 0) return '';
-    const headers = ['id', 'chinese', 'pinyin', 'english', 'proficiency', 'lastSeen'];
+    const headers = ['id', 'chinese', 'pinyin', 'english', 'proficiency', 'lastSeen', 'timesSeen'];
     const csvRows = cards.map(card => {
         return headers.map(header => {
             let val = card[header];
@@ -49,6 +49,7 @@ export const csvToJson = (csvString) => {
             let val = rowValues[index] ? rowValues[index].replace(/^"|"$/g, '').replace(/""/g, '"') : null;
             if (header === 'proficiency') val = val ? parseInt(val, 10) : 0;
             if (header === 'lastSeen') val = val ? parseInt(val, 10) : null;
+            if (header === 'timesSeen') val = val ? parseInt(val, 10) : 0;
             card[header] = val;
         });
         cards.push(card);

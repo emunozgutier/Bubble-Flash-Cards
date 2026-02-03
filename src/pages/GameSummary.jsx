@@ -62,9 +62,9 @@ function GameSummary({ title = 'Game Summary' }) {
         autoSave();
     }, [isAuthorized, currentDeckName, deckFileIds, cards]); // Depend on cards to ensure we save latest version
 
-    const getProficiency = (cardId) => {
+    const getCardStats = (cardId) => {
         const card = cards.find(c => c.id === cardId);
-        return card ? card.proficiency : 0;
+        return card ? { proficiency: card.proficiency || 0, timesSeen: card.timesSeen || 0 } : { proficiency: 0, timesSeen: 0 };
     };
 
     const handleExit = () => {
@@ -111,11 +111,12 @@ function GameSummary({ title = 'Game Summary' }) {
                                 <th style={{ padding: '8px' }}>Your Answer</th>
                                 <th style={{ padding: '8px' }}>Result</th>
                                 <th style={{ padding: '8px' }}>Proficiency</th>
+                                <th style={{ padding: '8px' }}>Times Seen</th>
                             </tr>
                         </thead>
                         <tbody>
                             {sessionResults.map((result, index) => {
-                                const currentProf = getProficiency(result.cardId);
+                                const stats = getCardStats(result.cardId);
                                 const isCorrect = result.isCorrect;
                                 return (
                                     <tr key={index} style={{ borderBottom: '1px solid var(--color-border)' }}>
@@ -131,7 +132,10 @@ function GameSummary({ title = 'Game Summary' }) {
                                         </td>
                                         <td style={{ padding: '8px' }}>
                                             {/* Show stars or number */}
-                                            {'★'.repeat(currentProf) + '☆'.repeat(5 - (currentProf || 0))}
+                                            {'★'.repeat(stats.proficiency) + '☆'.repeat(5 - stats.proficiency)}
+                                        </td>
+                                        <td style={{ padding: '8px', textAlign: 'center' }}>
+                                            {stats.timesSeen}
                                         </td>
                                     </tr>
                                 );

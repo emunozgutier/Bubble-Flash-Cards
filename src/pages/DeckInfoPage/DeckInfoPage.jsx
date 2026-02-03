@@ -77,7 +77,10 @@ const DeckInfoPage = () => {
                             >
                                 <div className="d-flex justify-content-between align-items-center mb-2 px-2">
                                     {renderProficiencyStars(card.proficiency)}
-                                    <span className="last-seen-text">{formatLastSeen(card.lastSeen)}</span>
+                                    <div className="d-flex flex-column align-items-end">
+                                        <span className="last-seen-text">{formatLastSeen(card.lastSeen)}</span>
+                                        <span className="times-seen-text" style={{ fontSize: '0.75rem', opacity: 0.8 }}>Seen: {card.timesSeen || 0} times</span>
+                                    </div>
                                 </div>
                                 <FlashCard card={card} />
                             </div>
