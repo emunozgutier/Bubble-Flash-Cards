@@ -154,48 +154,63 @@
 /* Mobile Portrait Responsiveness */
 @media (max-width: 600px) {
     .main-bubble {
-        top: 35%;
+        top: 32%;
         left: 50%;
-        width: 60cqi;
-        height: 60cqi;
-        font-size: 8cqi;
+        width: 45cqi;
+        height: 45cqi;
+        font-size: 7cqi;
     }
 
     .bubble-text {
-        font-size: 6cqi;
+        font-size: 5cqi;
     }
 
     .option-0 {
-        top: 70%;
+        top: 60%;
         left: 28%;
-        width: 42cqi;
-        height: 42cqi;
+        width: 35cqi;
+        height: 35cqi;
     }
 
     .option-1 {
-        top: 70%;
+        top: 60%;
         left: 72%;
-        width: 42cqi;
-        height: 42cqi;
+        width: 35cqi;
+        height: 35cqi;
     }
 
     .option-2 {
-        top: 88%;
+        top: 78%;
         left: 50%;
-        width: 42cqi;
-        height: 42cqi;
+        width: 35cqi;
+        height: 35cqi;
     }
 }
 
-/* Extra small screens check */
-@media (max-width: 400px) {
+/* Extra small screens check - tighter for short viewports */
+@media (max-width: 400px),
+(max-height: 600px) {
     .main-bubble {
-        width: 65cqi;
-        height: 65cqi;
+        width: 42cqi;
+        height: 42cqi;
+        top: 28%;
     }
 
     .option-bubble {
-        width: 45cqi;
-        height: 45cqi;
+        width: 32cqi;
+        height: 32cqi;
+    }
+
+    .option-0,
+    .option-1 {
+        top: 55%;
+    }
+
+    .option-2 {
+        top: 74%;
+    }
+
+    .bubble-text {
+        font-size: 4.5cqi;
     }
 }
