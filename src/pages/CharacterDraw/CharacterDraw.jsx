@@ -136,15 +136,14 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                 </div>
 
                 <div className="draw-controls">
-                    <label className="toggle-switch">
-                        <input
-                            type="checkbox"
-                            checked={isGuided}
-                            onChange={(e) => setIsGuided(e.target.checked)}
-                        />
-                        <span className="slider round"></span>
-                        <span className="label-text">{isGuided ? "Guided" : "Unguided"}</span>
-                    </label>
+                    <div className="style-selector" style={{ marginBottom: 0 }}>
+                        <button
+                            className={`style-btn ${isGuided ? 'active' : ''}`}
+                            onClick={() => setIsGuided(!isGuided)}
+                        >
+                            {isGuided ? "Guided" : "Unguided"}
+                        </button>
+                    </div>
 
                     <div className="style-selector">
                         <button
@@ -174,7 +173,7 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                     </div>
 
                     <button onClick={handleNext} className="next-btn">
-                        Skip / Next
+                        {currentIndex === characters.length - 1 ? 'Close' : 'Skip'}
                     </button>
                 </div>
             </div>

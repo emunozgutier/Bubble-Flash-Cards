@@ -16,8 +16,8 @@
     padding: 20px;
     box-sizing: border-box;
     animation: fadeIn 0.3s ease-out;
-    overflow: hidden;
-    /* Prevent internal scroll leaks */
+    overflow-y: auto;
+    /* Allow vertical scroll if content overflows */
 }
 
 @keyframes fadeIn {
@@ -351,15 +351,46 @@
 }
 
 @media (max-width: 600px) {
+    .character-draw-container {
+        padding: 10px;
+        justify-content: flex-start;
+        /* Start from top on mobile */
+    }
+
     .draw-card {
-        padding: 16px;
+        padding: 20px 16px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .english-hint {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .draw-controls {
-        gap: 15px;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+
+    .style-selector {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .style-btn {
+        padding: 8px 12px;
+        flex: 1 1 auto;
+        min-width: 60px;
+    }
+
+    .next-btn {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .toggle-switch {
+        transform: scale(1.1);
     }
 }

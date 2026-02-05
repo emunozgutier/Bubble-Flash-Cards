@@ -1,7 +1,7 @@
 {
-  "hash": "e6ae184",
-  "date": "2026-02-04T22:15:11-08:00",
-  "title": "Add 'Fast' font style and 'Print' label",
-  "message": "Introduce a new 'fast' font style and corresponding UI control. CSS: add .fast-font, .target-char.fast-font (uses \"Zhi Mang Xing\", 1.4rem, preserves primary color) and .ghost-char.fast-font. JSX: rename the \"Regular\" button label to \"Print\", add a new Fast style button that triggers handleStyleChange('fast'), and move the Messy button after Fast. This provides a quick handwriting-style option in the character draw UI.",
+  "hash": "1f999cf",
+  "date": "2026-02-04T22:22:50-08:00",
+  "title": "chore: deploy-time version update",
+  "message": "",
   "source": "Local Git"
 }
