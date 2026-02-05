@@ -41,6 +41,24 @@ function App() {
     }
   }, [colors]);
 
+  // Sync state with URL when browser navigation occurs (back/forward)
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const draw = params.get('draw');
+      const def = params.get('def');
+
+      if (draw && def) {
+        setDrawingCard({ chinese: draw, english: def });
+      } else {
+        setDrawingCard(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [setDrawingCard]);
+
   return (
     <PageBorder>
       <ErrorBoundary>
