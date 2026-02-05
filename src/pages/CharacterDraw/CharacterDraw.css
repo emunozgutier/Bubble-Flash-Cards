@@ -301,10 +301,20 @@
 
 .draw-controls {
     display: flex;
-    gap: 30px;
+    flex-direction: column;
+    gap: 16px;
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+
+.control-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .skip-btn,

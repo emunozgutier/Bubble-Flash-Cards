@@ -136,45 +136,51 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                 </div>
 
                 <div className="draw-controls">
-                    <div className="style-selector" style={{ marginBottom: 0 }}>
-                        <button
-                            className={`style-btn ${isGuided ? 'active' : ''}`}
-                            onClick={() => setIsGuided(!isGuided)}
-                        >
-                            {isGuided ? "Guided" : "Unguided"}
-                        </button>
+                    {/* Row 1: Font Styles */}
+                    <div className="control-row">
+                        <div className="style-selector">
+                            <button
+                                className={`style-btn ${fontStyle === 'regular' ? 'active' : ''}`}
+                                onClick={() => handleStyleChange('regular')}
+                            >
+                                Print
+                            </button>
+                            <button
+                                className={`style-btn ${fontStyle === 'brush' ? 'active' : ''}`}
+                                onClick={() => handleStyleChange('brush')}
+                            >
+                                Brush
+                            </button>
+                            <button
+                                className={`style-btn ${fontStyle === 'fast' ? 'active' : ''}`}
+                                onClick={() => handleStyleChange('fast')}
+                            >
+                                Fast
+                            </button>
+                            <button
+                                className={`style-btn ${fontStyle === 'messy' ? 'active' : ''}`}
+                                onClick={() => handleStyleChange('messy')}
+                            >
+                                Messy
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="style-selector">
-                        <button
-                            className={`style-btn ${fontStyle === 'regular' ? 'active' : ''}`}
-                            onClick={() => handleStyleChange('regular')}
-                        >
-                            Print
-                        </button>
-                        <button
-                            className={`style-btn ${fontStyle === 'brush' ? 'active' : ''}`}
-                            onClick={() => handleStyleChange('brush')}
-                        >
-                            Brush
-                        </button>
-                        <button
-                            className={`style-btn ${fontStyle === 'fast' ? 'active' : ''}`}
-                            onClick={() => handleStyleChange('fast')}
-                        >
-                            Fast
-                        </button>
-                        <button
-                            className={`style-btn ${fontStyle === 'messy' ? 'active' : ''}`}
-                            onClick={() => handleStyleChange('messy')}
-                        >
-                            Messy
+                    {/* Row 2: Guided & Action */}
+                    <div className="control-row">
+                        <div className="style-selector">
+                            <button
+                                className={`style-btn ${isGuided ? 'active' : ''}`}
+                                onClick={() => setIsGuided(!isGuided)}
+                            >
+                                {isGuided ? "Guided" : "Unguided"}
+                            </button>
+                        </div>
+
+                        <button onClick={handleNext} className="next-btn">
+                            {currentIndex === characters.length - 1 ? 'Close' : 'Skip'}
                         </button>
                     </div>
-
-                    <button onClick={handleNext} className="next-btn">
-                        {currentIndex === characters.length - 1 ? 'Close' : 'Skip'}
-                    </button>
                 </div>
             </div>
         </div>

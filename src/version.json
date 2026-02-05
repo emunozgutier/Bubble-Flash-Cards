@@ -1,7 +1,7 @@
 {
-  "hash": "1f999cf",
-  "date": "2026-02-04T22:22:50-08:00",
-  "title": "chore: deploy-time version update",
-  "message": "",
+  "hash": "9ef865a",
+  "date": "2026-02-04T22:36:39-08:00",
+  "title": "CharacterDraw: add mobile styles, UI tweaks",
+  "message": "Allow vertical scrolling and improve mobile layout for the CharacterDraw page. CSS: change overflow to overflow-y:auto, add responsive adjustments under 600px (reduced container padding, column layout for controls, style-selector/style-btn/next-btn sizing, scale toggle-switch, spacing tweaks). JSX: replace the checkbox toggle with a single style button that toggles guided mode, and change the Skip/Next button label to show \"Close\" on the last character. Also update version.json with a deploy-time version hash/date.",
   "source": "Local Git"
 }
