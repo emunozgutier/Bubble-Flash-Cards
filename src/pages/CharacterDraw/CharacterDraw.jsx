@@ -101,6 +101,14 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                     <div className="progress-indicator">
                         Character {currentIndex + 1} of {characters.length}: <span className={`target-char ${fontStyle !== 'regular' ? fontStyle + '-font' : ''}`}>{currentChar}</span>
                     </div>
+                    <a
+                        href={`https://fonts.google.com/?preview.text=${encodeURIComponent(currentChar)}&lang=zh_Hans`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="google-fonts-link"
+                    >
+                        View on Google Fonts
+                    </a>
                 </div>
 
                 <div className="draw-area">

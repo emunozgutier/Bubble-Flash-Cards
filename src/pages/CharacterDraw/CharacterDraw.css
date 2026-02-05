@@ -92,6 +92,23 @@
     margin-top: 8px;
 }
 
+.google-fonts-link {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    margin-top: 6px;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.google-fonts-link:hover {
+    opacity: 1;
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
 .target-char {
     font-weight: bold;
     color: var(--color-text);
