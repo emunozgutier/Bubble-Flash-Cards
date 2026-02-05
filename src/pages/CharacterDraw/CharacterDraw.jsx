@@ -7,12 +7,20 @@ import './CharacterDraw.css'; // We'll need some styles
 const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isGuided, setIsGuided] = useState(true);
+    const [fontStyle, setFontStyle] = useState('regular'); // regular, messy, brush
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
     const [writerInstance, setWriterInstance] = useState(null);
     const writerTargetRef = useRef(null);
 
     const currentChar = characters ? characters[currentIndex] : '';
+
+    const handleStyleChange = (style) => {
+        setFontStyle(style);
+        if (style !== 'regular') {
+            setIsGuided(false);
+        }
+    };
 
     useEffect(() => {
         if (!currentChar) {
@@ -151,11 +159,16 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                     <h2>Draw the Character</h2>
                     <div className="english-hint">{englishDefinition}</div>
                     <div className="progress-indicator">
-                        Character {currentIndex + 1} of {characters.length}: <span className="target-char">{currentChar}</span>
+                        Character {currentIndex + 1} of {characters.length}: <span className={`target-char ${fontStyle !== 'regular' ? fontStyle + '-font' : ''}`}>{currentChar}</span>
                     </div>
                 </div>
 
                 <div className="draw-area">
+                    {fontStyle !== 'regular' && currentChar && (
+                        <div className="ghost-char-container">
+                            <span className={`ghost-char ${fontStyle}-font`}>{currentChar}</span>
+                        </div>
+                    )}
                     {/* SVG Container */}
                     <div ref={writerTargetRef} className="hanzi-target" />
 
@@ -179,6 +192,27 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                         <span className="slider round"></span>
                         <span className="label-text">{isGuided ? "Guided" : "Unguided"}</span>
                     </label>
+
+                    <div className="style-selector">
+                        <button
+                            className={`style-btn ${fontStyle === 'regular' ? 'active' : ''}`}
+                            onClick={() => handleStyleChange('regular')}
+                        >
+                            Regular
+                        </button>
+                        <button
+                            className={`style-btn ${fontStyle === 'messy' ? 'active' : ''}`}
+                            onClick={() => handleStyleChange('messy')}
+                        >
+                            Messy
+                        </button>
+                        <button
+                            className={`style-btn ${fontStyle === 'brush' ? 'active' : ''}`}
+                            onClick={() => handleStyleChange('brush')}
+                        >
+                            Brush
+                        </button>
+                    </div>
 
                     <button onClick={handleNext} className="next-btn">
                         Skip / Next
