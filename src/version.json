@@ -1,7 +1,7 @@
 {
-  "hash": "6896481",
-  "date": "2026-02-04T20:51:18-08:00",
-  "title": "chore: deploy-time version update",
-  "message": "",
+  "hash": "ca96e5d",
+  "date": "2026-02-04T21:56:42-08:00",
+  "title": "Sync drawing state with URL and history",
+  "message": "Initialize and synchronize the drawing card with URL search params. Added a helper to read draw/def from the URL and set drawingCard in the navigation store on load, and updated setDrawingCard to update URL params via history.pushState. Added navigateTo behavior to clear draw/def when navigating back to the main page. Also added a popstate handler in App.jsx to update app state when the user uses browser back/forward so deep links and history navigation keep state consistent.",
   "source": "Local Git"
 }
