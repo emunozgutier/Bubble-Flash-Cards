@@ -150,3 +150,52 @@
     border-color: #388E3C !important;
     z-index: 20;
 }
+
+/* Mobile Portrait Responsiveness */
+@media (max-width: 600px) {
+    .main-bubble {
+        top: 35%;
+        left: 50%;
+        width: 60cqi;
+        height: 60cqi;
+        font-size: 8cqi;
+    }
+
+    .bubble-text {
+        font-size: 6cqi;
+    }
+
+    .option-0 {
+        top: 70%;
+        left: 28%;
+        width: 42cqi;
+        height: 42cqi;
+    }
+
+    .option-1 {
+        top: 70%;
+        left: 72%;
+        width: 42cqi;
+        height: 42cqi;
+    }
+
+    .option-2 {
+        top: 88%;
+        left: 50%;
+        width: 42cqi;
+        height: 42cqi;
+    }
+}
+
+/* Extra small screens check */
+@media (max-width: 400px) {
+    .main-bubble {
+        width: 65cqi;
+        height: 65cqi;
+    }
+
+    .option-bubble {
+        width: 45cqi;
+        height: 45cqi;
+    }
+}

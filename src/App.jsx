@@ -45,14 +45,14 @@ function App() {
       <ErrorBoundary>
         {currentPage === 'main' && <MainPage />}
         {currentPage === 'bubbleSetup' && <BubbleGameSetup />}
-        {currentPage === 'game-bubble' && <BubbleGame />}
+        {currentPage === 'bubble' && <BubbleGame />}
         {currentPage === 'handsFreeSetup' && <HandsFreeGameSetup />}
         {currentPage === 'handsFree' && <HandsFreeGame />}
         {currentPage === 'matching' && <MatchingGame />}
         {currentPage === 'deckInfo' && <DeckInfoPage />}
         {currentPage === 'help' && <HelpPage />}
-        {currentPage === 'create-deck' && <CreateDeckPage />}
-        {currentPage === 'edit-deck' && <EditDeckPage />}
+        {currentPage === 'createDeck' && <CreateDeckPage />}
+        {currentPage === 'editDeck' && <EditDeckPage />}
       </ErrorBoundary>
     </PageBorder>
   );

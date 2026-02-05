@@ -30,9 +30,10 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
         }
 
         try {
+            const size = Math.min(300, window.innerWidth - 80);
             const writer = HanziWriter.create(writerTargetRef.current, currentChar, {
-                width: 300,
-                height: 300,
+                width: size,
+                height: size,
                 padding: 20,
                 showOutline: isGuided, // Initialize based on state
                 strokeAnimationSpeed: 1,
