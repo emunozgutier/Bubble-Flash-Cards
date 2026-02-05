@@ -3,12 +3,12 @@ import useDataStore from '../../stores/useDataStore';
 import useNavigationStore from '../../stores/useNavigationStore';
 import useThemeStore from '../../stores/useThemeStore';
 import FlashCard from '../../components/FlashCard';
-import { FaArrowLeft, FaStar, FaRegStar, FaPenToSquare as FaEdit } from 'react-icons/fa6';
+import { FaArrowLeft, FaStar, FaRegStar, FaPenToSquare as FaEdit, FaPencil } from 'react-icons/fa6';
 import './DeckInfoPage.css';
 
 const DeckInfoPage = () => {
     const { cards, currentDeckName } = useDataStore();
-    const { navigateTo } = useNavigationStore();
+    const { navigateTo, setDrawingCard } = useNavigationStore();
     const { colors } = useThemeStore();
 
     const sortedCards = useMemo(() => {
@@ -92,6 +92,15 @@ const DeckInfoPage = () => {
                                     </div>
                                 </div>
                                 <FlashCard card={card} />
+                                <div className="card-actions mt-2 d-flex justify-content-center">
+                                    <button
+                                        className="btn-draw-card"
+                                        onClick={() => setDrawingCard(card)}
+                                        title="Practice drawing this character"
+                                    >
+                                        <FaPencil /> Draw
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>

@@ -10,6 +10,7 @@ import DeckInfoPage from './pages/DeckInfoPage/DeckInfoPage';
 import HelpPage from './pages/HelpPage';
 import CreateDeckPage from './pages/CreateDeckPage/CreateDeckPage';
 import EditDeckPage from './pages/EditDeckPage/EditDeckPage';
+import CharacterDraw from './pages/CharacterDraw/CharacterDraw';
 import ErrorBoundary from './components/ErrorBoundary';
 import useNavigationStore from './stores/useNavigationStore';
 import useThemeStore from './stores/useThemeStore';
@@ -17,7 +18,7 @@ import useThemeStore from './stores/useThemeStore';
 import PageBorder from './components/PageBorder';
 
 function App() {
-  const { currentPage } = useNavigationStore();
+  const { currentPage, drawingCard, setDrawingCard } = useNavigationStore();
   const { colors, fontFamily } = useThemeStore();
 
   useEffect(() => {
@@ -43,6 +44,13 @@ function App() {
   return (
     <PageBorder>
       <ErrorBoundary>
+        {drawingCard && (
+          <CharacterDraw
+            characters={drawingCard.chinese || drawingCard.front}
+            englishDefinition={drawingCard.english || drawingCard.back}
+            onComplete={() => setDrawingCard(null)}
+          />
+        )}
         {currentPage === 'main' && <MainPage />}
         {currentPage === 'bubbleSetup' && <BubbleGameSetup />}
         {currentPage === 'bubble' && <BubbleGame />}
