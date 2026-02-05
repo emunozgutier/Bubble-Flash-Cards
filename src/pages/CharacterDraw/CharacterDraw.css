@@ -112,6 +112,12 @@
     color: var(--color-primary);
 }
 
+.target-char.fast-font {
+    font-family: "Zhi Mang Xing", cursive;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+}
+
 .draw-area {
     position: relative;
     background-color: var(--color-surface);
@@ -186,12 +192,20 @@
     font-family: "Long Cang", cursive;
 }
 
+.ghost-char.fast-font {
+    font-family: "Zhi Mang Xing", cursive;
+}
+
 .messy-font {
     font-family: "Liu Jian Mao Cao", cursive;
 }
 
 .brush-font {
     font-family: "Long Cang", cursive;
+}
+
+.fast-font {
+    font-family: "Zhi Mang Xing", cursive;
 }
 
 .style-selector {

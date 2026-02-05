@@ -143,19 +143,25 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                             className={`style-btn ${fontStyle === 'regular' ? 'active' : ''}`}
                             onClick={() => handleStyleChange('regular')}
                         >
-                            Regular
-                        </button>
-                        <button
-                            className={`style-btn ${fontStyle === 'messy' ? 'active' : ''}`}
-                            onClick={() => handleStyleChange('messy')}
-                        >
-                            Messy
+                            Print
                         </button>
                         <button
                             className={`style-btn ${fontStyle === 'brush' ? 'active' : ''}`}
                             onClick={() => handleStyleChange('brush')}
                         >
                             Brush
+                        </button>
+                        <button
+                            className={`style-btn ${fontStyle === 'fast' ? 'active' : ''}`}
+                            onClick={() => handleStyleChange('fast')}
+                        >
+                            Fast
+                        </button>
+                        <button
+                            className={`style-btn ${fontStyle === 'messy' ? 'active' : ''}`}
+                            onClick={() => handleStyleChange('messy')}
+                        >
+                            Messy
                         </button>
                     </div>
 
