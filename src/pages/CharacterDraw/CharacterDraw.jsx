@@ -1,6 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react';
-import HanziWriter from 'hanzi-writer';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import '../CommonPage.css';
 import './CharacterDraw.css'; // We'll need some styles
 
@@ -8,133 +7,74 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isGuided, setIsGuided] = useState(true);
     const [fontStyle, setFontStyle] = useState('regular'); // regular, messy, brush
-    const [isLoading, setIsLoading] = useState(true);
-    const [hasError, setHasError] = useState(false);
-    const [writerInstance, setWriterInstance] = useState(null);
-    const writerTargetRef = useRef(null);
+    const canvasRef = useRef(null);
+    const [isDrawing, setIsDrawing] = useState(false);
+    const [context, setContext] = useState(null);
 
     const currentChar = characters ? characters[currentIndex] : '';
 
     const handleStyleChange = (style) => {
         setFontStyle(style);
-        if (style !== 'regular') {
-            setIsGuided(false);
-        }
     };
 
     useEffect(() => {
-        if (!currentChar) {
-            onComplete();
-            return;
-        }
-
-        setIsLoading(true);
-        setHasError(false);
-        setWriterInstance(null); // Clear previous instance
-
-        // Clear previous content
-        if (writerTargetRef.current) {
-            writerTargetRef.current.innerHTML = '';
-        }
-
-        try {
+        if (canvasRef.current) {
+            const canvas = canvasRef.current;
             const size = Math.min(300, window.innerWidth - 80);
-            const writer = HanziWriter.create(writerTargetRef.current, currentChar, {
-                width: size,
-                height: size,
-                padding: 20,
-                showOutline: isGuided, // Initialize based on state
-                strokeAnimationSpeed: 1,
-                delayBetweenStrokes: 200, // Speed up animation
-                charDataLoader: (char, onComplete, onLoadingError) => {
-                    // Use default loader but hook into error
-                    fetch(`https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0/${char}.json`)
-                        .then(res => {
-                            if (!res.ok) throw new Error('Network response was not ok');
-                            return res.json();
-                        })
-                        .then(onComplete)
-                        .catch(onLoadingError);
-                },
-                onLoadCharDataError: (err) => {
-                    console.error("Failed to load char data", err);
-                    setHasError(true);
-                    setIsLoading(false);
-                },
-                onLoadCharDataSuccess: () => {
-                    setIsLoading(false);
-                }
-            });
-
-            if (!isGuided) {
-                writer.hideOutline();
-            }
-
-            setWriterInstance(writer);
-
-        } catch (err) {
-            console.error("Error creating HanziWriter", err);
-            setHasError(true);
-            setIsLoading(false);
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.lineWidth = 12;
+            ctx.strokeStyle = '#ffffff';
+            setContext(ctx);
+            // Clear on char change
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
-
-        // Cleanup
-        return () => {
-            // accessible if we needed to cancel something, but HanziWriter instance is standalone
-        };
-
     }, [currentChar]);
 
-    // Start Quiz once writer is ready
-    useEffect(() => {
-        if (writerInstance && !isLoading && !hasError) {
-            startQuiz();
+    const startDrawing = useCallback((e) => {
+        const { offsetX, offsetY } = getCoordinates(e);
+        if (context) {
+            context.beginPath();
+            context.moveTo(offsetX, offsetY);
+            setIsDrawing(true);
         }
-    }, [writerInstance, isLoading, hasError]);
+    }, [context]);
 
-    // Handle Guided/Unguided toggle dynamically
-    useEffect(() => {
-        if (!writerInstance) return;
+    const draw = useCallback((e) => {
+        if (!isDrawing || !context) return;
+        const { offsetX, offsetY } = getCoordinates(e);
+        context.lineTo(offsetX, offsetY);
+        context.stroke();
+    }, [isDrawing, context]);
 
-        if (isGuided) {
-            writerInstance.showOutline();
-        } else {
-            writerInstance.hideOutline();
+    const stopDrawing = useCallback(() => {
+        if (isDrawing && context) {
+            context.closePath();
+            setIsDrawing(false);
         }
-    }, [isGuided, writerInstance]);
+    }, [isDrawing, context]);
 
-    const startQuiz = () => {
-        if (!writerInstance) return;
-
-        // "Guided" -> Show outline/hints more aggressively or simple quizzing with hints on mistake
-        // "Unguided" -> Strict
-
-        if (isGuided) {
-            writerInstance.showOutline();
-        } else {
-            writerInstance.hideOutline();
+    const getCoordinates = (e) => {
+        if (e.touches && e.touches.length > 0) {
+            const rect = canvasRef.current.getBoundingClientRect();
+            return {
+                offsetX: e.touches[0].clientX - rect.left,
+                offsetY: e.touches[0].clientY - rect.top
+            };
         }
+        return {
+            offsetX: e.nativeEvent.offsetX,
+            offsetY: e.nativeEvent.offsetY
+        };
+    };
 
-        // Actually, HanziWriter 'quiz' method has options
-        writerInstance.quiz({
-            onMistake: function (strokeData) {
-                console.log('Oh no! you made a mistake on stroke ' + strokeData.strokeNum);
-            },
-            onComplete: function (summaryData) {
-                console.log('You did it! You finished drawing ' + currentChar);
-                // Maybe auto-advance or nice checkmark?
-                // For now, let's wait a moment then advance or let user click Next
-                // Let's simple animate a success and wait
-                setTimeout(() => {
-                    handleNext();
-                }, 1000);
-            },
-            // We set initial state here, but future toggles are handled by the other useEffect
-            // We removed dynamic 'isGuided' dependency from startQuiz so it doesn't reset
-            showOutline: isGuided,
-            showHintAfterMisses: 3, // Keep consistent or standard, since we can't easily update this mid-quiz without restart
-            highlightOnComplete: true
-        });
+    const clearCanvas = () => {
+        if (context && canvasRef.current) {
+            context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        }
     };
 
     const handleNext = () => {
@@ -164,22 +104,27 @@ const CharacterDraw = ({ characters, englishDefinition, onComplete }) => {
                 </div>
 
                 <div className="draw-area">
-                    {fontStyle !== 'regular' && currentChar && (
+                    {isGuided && currentChar && (
                         <div className="ghost-char-container">
-                            <span className={`ghost-char ${fontStyle}-font`}>{currentChar}</span>
+                            <span className={`ghost-char ${fontStyle !== 'regular' ? fontStyle + '-font' : ''}`}>{currentChar}</span>
                         </div>
                     )}
-                    {/* SVG Container */}
-                    <div ref={writerTargetRef} className="hanzi-target" />
 
-                    {isLoading && <div className="loading-overlay">Loading stroke data...</div>}
+                    <canvas
+                        ref={canvasRef}
+                        className="drawing-canvas"
+                        onMouseDown={startDrawing}
+                        onMouseMove={draw}
+                        onMouseUp={stopDrawing}
+                        onMouseLeave={stopDrawing}
+                        onTouchStart={startDrawing}
+                        onTouchMove={draw}
+                        onTouchEnd={stopDrawing}
+                    />
 
-                    {hasError && (
-                        <div className="error-overlay">
-                            <p>Could not load character data (Offline?).</p>
-                            <button onClick={handleSkip} className="skip-btn">Skip this Character</button>
-                        </div>
-                    )}
+                    <button className="clear-canvas-btn" onClick={clearCanvas} title="Clear Drawing">
+                        Clear
+                    </button>
                 </div>
 
                 <div className="draw-controls">
