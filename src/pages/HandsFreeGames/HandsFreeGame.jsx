@@ -13,6 +13,7 @@ import '../BubbleGame/BubbleGame.css';
 import './HandsFreeGame.css';
 import HandsFreeGameReady from './HandsFreeGameReady';
 import HandsFreeGameInputDiagnostics from './HandsFreeGameInputDiagnostics';
+import HandsFreeInputConfig from './HandsFreeInputConfig';
 
 
 function HandsFreeGame() {
@@ -43,6 +44,7 @@ function HandsFreeGame() {
     const [debugLogs, setDebugLogs] = useState([]);
     const [showAnswer, setShowAnswer] = useState(false);
     const [showHelpModal, setShowHelpModal] = useState(false);
+    const [showConfigModal, setShowConfigModal] = useState(false);
     const recognitionRef = useRef(null);
     const audioRef = useRef(null);
 
@@ -53,7 +55,7 @@ function HandsFreeGame() {
 
     // Helper wrappers that log events
     const handleCorrect = () => {
-        if (showHelpModal) return;
+        if (showHelpModal || showConfigModal) return;
         if (gameState === 'game_over' || gameState === 'won') {
             log("Action: Continue Study");
             gameStore.continueGame();
@@ -66,7 +68,7 @@ function HandsFreeGame() {
     };
 
     const handleIncorrect = () => {
-        if (showHelpModal) return;
+        if (showHelpModal || showConfigModal) return;
         if (gameState === 'game_over' || gameState === 'won') {
             log("Action: Exit to Main");
             navigateTo('main');
@@ -81,7 +83,7 @@ function HandsFreeGame() {
 
 
     const handleReplay = (rate = 1.0) => {
-        if (showHelpModal) return;
+        if (showHelpModal || showConfigModal) return;
         if (currentCard) {
             speak(currentCard.displayQuestion || currentCard.displayAnswer, rate, log);
         }
@@ -104,7 +106,7 @@ function HandsFreeGame() {
             cleanupDebug();
             cleanupKeyboard();
         };
-    }, [currentCard, gameState, showHelpModal]); // Re-bind when state changes for closure
+    }, [currentCard, gameState, showHelpModal, showConfigModal]); // Re-bind when state changes for closure
 
     // Initial Audio Playback to unlock Audio Context
     useEffect(() => {
@@ -284,6 +286,7 @@ function HandsFreeGame() {
                 title={`Hands Free - Lives: ${lives}`}
                 onExit={() => navigateTo('main')}
                 onHelp={() => setShowHelpModal(true)}
+                onSettings={() => setShowConfigModal(true)}
             />
 
             {audioComponent}
@@ -343,6 +346,11 @@ function HandsFreeGame() {
             <HandsFreeGameInputDiagnostics
                 show={showHelpModal}
                 onHide={() => setShowHelpModal(false)}
+            />
+
+            <HandsFreeInputConfig
+                show={showConfigModal}
+                onHide={() => setShowConfigModal(false)}
             />
         </div>
     );

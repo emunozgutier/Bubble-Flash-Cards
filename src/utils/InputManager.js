@@ -1,21 +1,73 @@
-export const setupInputListeners = ({ onCorrect, onIncorrect, onReplay, log = console.log }) => {
-    const handleKeyDown = (e) => {
-        log(`Key: ${e.code} (${e.key})`);
+const STORAGE_KEY = 'hands_free_input_mappings';
 
-        if (e.code === 'ArrowRight' || e.code === 'Space' || e.code === 'MediaTrackNext') {
-            // Prevent scroll for space
-            if (e.code === 'Space') e.preventDefault();
+const DEFAULT_MAPPINGS = {
+    correct: ['ArrowRight', 'Space', 'MediaTrackNext'],
+    incorrect: ['ArrowLeft', 'MediaTrackPrevious'],
+    replay: ['MediaPlayPause']
+};
+
+// Load mappings from storage or use defaults
+export const getMappings = () => {
+    try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            return JSON.parse(stored);
+        }
+    } catch (e) {
+        console.error("Failed to load input mappings", e);
+    }
+    return JSON.parse(JSON.stringify(DEFAULT_MAPPINGS)); // Deep copy defaults
+};
+
+export const saveMappings = (newMappings) => {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newMappings));
+        // Dispatch event so active listeners can reload if needed (optional optimization)
+        window.dispatchEvent(new Event('input-mappings-changed'));
+    } catch (e) {
+        console.error("Failed to save input mappings", e);
+    }
+};
+
+export const resetMappings = () => {
+    saveMappings(DEFAULT_MAPPINGS);
+    return DEFAULT_MAPPINGS;
+};
+
+export const setupInputListeners = ({ onCorrect, onIncorrect, onReplay, log = console.log }) => {
+    let currentMappings = getMappings();
+
+    const handleMappingsChanged = () => {
+        currentMappings = getMappings();
+        // log("Input mappings updated");
+    };
+
+    const handleKeyDown = (e) => {
+        // log(`Key: ${e.code} (${e.key})`); // moved to debug listener mostly
+
+        // Check mappings
+        const isCorrect = currentMappings.correct.includes(e.code);
+        const isIncorrect = currentMappings.incorrect.includes(e.code);
+        const isReplay = currentMappings.replay.includes(e.code);
+
+        if (isCorrect) {
+            if (e.code === 'Space') e.preventDefault(); // Prevent scroll
             if (onCorrect) onCorrect();
-        } else if (e.code === 'ArrowLeft' || e.code === 'MediaTrackPrevious') {
+        } else if (isIncorrect) {
             if (onIncorrect) onIncorrect();
-        } else if (e.code === 'MediaPlayPause') {
+        } else if (isReplay) {
             e.preventDefault();
             if (onReplay) onReplay();
         }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('input-mappings-changed', handleMappingsChanged);
+
+    return () => {
+        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener('input-mappings-changed', handleMappingsChanged);
+    };
 };
 
 export const setupDiagnosticListeners = (onInput) => {
@@ -71,4 +123,3 @@ export const setupDebugKeyboardListener = (onKeyUpdate) => {
     window.addEventListener('keydown', debugListener);
     return () => window.removeEventListener('keydown', debugListener);
 };
-
