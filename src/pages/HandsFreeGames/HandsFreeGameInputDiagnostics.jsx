@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import useThemeStore from '../../stores/useThemeStore';
 import { setupDiagnosticListeners } from '../../utils/InputManager';
 
-const HandsFreeGameInputDiagnostics = ({ show, onHide }) => {
+const HandsFreeGameInputDiagnostics = ({ show, onHide, logs }) => {
     const { colors } = useThemeStore();
     const [lastInput, setLastInput] = useState(null);
 
@@ -77,6 +77,27 @@ const HandsFreeGameInputDiagnostics = ({ show, onHide }) => {
                         <li><strong>Enter</strong>: Select/Action</li>
                     </ul>
                 </div>
+
+                {logs && logs.length > 0 && (
+                    <div className="mt-4">
+                        <div className="fw-bold mb-2">System Logs (Last 10):</div>
+                        <div
+                            className="p-2 rounded overflow-auto font-monospace"
+                            style={{
+                                backgroundColor: 'rgba(0,0,0,0.2)',
+                                maxHeight: '150px',
+                                fontSize: '0.8rem',
+                                whiteSpace: 'pre-wrap'
+                            }}
+                        >
+                            {logs.map((log, i) => (
+                                <div key={i} className="mb-1 border-bottom border-secondary pb-1 last:border-0">
+                                    {log}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </Modal.Body>
             <Modal.Footer style={{ backgroundColor: colors.surface, borderColor: colors.border }}>
                 <Button variant="secondary" onClick={onHide} style={{ backgroundColor: colors.border, border: 'none' }}>

@@ -346,6 +346,7 @@ function HandsFreeGame() {
             <HandsFreeGameInputDiagnostics
                 show={showHelpModal}
                 onHide={() => setShowHelpModal(false)}
+                logs={debugLogs}
             />
 
             <HandsFreeInputConfig
