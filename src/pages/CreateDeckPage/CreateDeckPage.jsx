@@ -4,13 +4,14 @@ import useThemeStore from '../../stores/useThemeStore';
 import useDriveStore from '../../stores/useDriveStore';
 import { saveFile } from '../../services/googleDriveService';
 import { FaArrowLeft, FaPlus, FaTrash, FaSave } from 'react-icons/fa';
+import { parseAnkiApkg } from '../../utils/ankiParser';
 import '../CommonPage.css';
 import './CreateDeckPage.css';
 
 const CreateDeckPage = () => {
     const { navigateTo } = useNavigationStore();
     const { colors, fontSizes } = useThemeStore();
-    const { isAuthorized, appFolderId, setIsLoading, updateDeckFileId } = useDriveStore();
+    const { isAuthorized, appFolderId, setIsLoading, isLoading, updateDeckFileId } = useDriveStore(); // added isLoading
 
     const [deckName, setDeckName] = useState('');
     const [cards, setCards] = useState([]);
@@ -33,6 +34,34 @@ const CreateDeckPage = () => {
         setCards([...cards, newCard]);
         setCurrentFront('');
         setCurrentBack('');
+    };
+
+    const handleAnkiImport = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        setIsLoading(true);
+        try {
+            const importedCards = await parseAnkiApkg(file);
+            if (importedCards && importedCards.length > 0) {
+                // Determine deck name from filename if not already set
+                if (!deckName) {
+                    const name = file.name.replace('.apkg', '').replace(/_/g, ' ');
+                    setDeckName(name);
+                }
+                setCards((prevCards) => [...prevCards, ...importedCards]);
+                alert(`Successfully imported ${importedCards.length} cards from Anki deck.`);
+            } else {
+                alert('No cards found in the Anki deck.');
+            }
+        } catch (error) {
+            console.error('Anki import error:', error);
+            alert('Failed to import Anki deck. Please check the console/file.');
+        } finally {
+            setIsLoading(false);
+            // Reset input value so same file can be selected again if needed
+            e.target.value = '';
+        }
     };
 
     const handleDeleteCard = (id) => {
@@ -105,6 +134,24 @@ const CreateDeckPage = () => {
                                 borderColor: colors.border
                             }}
                         />
+                    </div>
+
+                    {/* Import Anki Deck */}
+                    <div className="mb-4 d-flex justify-content-end">
+                        <input
+                            type="file"
+                            accept=".apkg"
+                            id="anki-file-input"
+                            style={{ display: 'none' }}
+                            onChange={handleAnkiImport}
+                        />
+                        <button
+                            className="btn btn-outline-primary"
+                            onClick={() => document.getElementById('anki-file-input').click()}
+                            disabled={isLoading}
+                        >
+                            {isLoading ? 'Importing...' : 'Import Anki Deck (.apkg)'}
+                        </button>
                     </div>
 
                     {/* Add Card Form */}
