@@ -1,7 +1,7 @@
 {
-  "hash": "f652436",
-  "date": "2026-05-14T21:58:49-07:00",
-  "title": "Ignore pimsleur data directory",
-  "message": "Add pimsleur/ to .gitignore under a new '# Data' section to prevent tracking of local data files.",
+  "hash": "b5460fa",
+  "date": "2026-05-28T19:03:11-07:00",
+  "title": "chore: deploy-time version update",
+  "message": "",
   "source": "Local Git"
 }
