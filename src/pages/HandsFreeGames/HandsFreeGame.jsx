@@ -116,23 +116,52 @@ function HandsFreeGame() {
         }
     }, [currentCard]);
 
+    // Refs to avoid tearing down SpeechRecognition and MediaSession on every state change
+    const currentCardRef = useRef(currentCard);
+    const gameStateRef = useRef(gameState);
+    const handleCorrectRef = useRef(handleCorrect);
+    const handleIncorrectRef = useRef(handleIncorrect);
+    const handleReplayRef = useRef(handleReplay);
+
+    useEffect(() => {
+        currentCardRef.current = currentCard;
+    }, [currentCard]);
+
+    useEffect(() => {
+        gameStateRef.current = gameState;
+    }, [gameState]);
+
+    useEffect(() => {
+        handleCorrectRef.current = handleCorrect;
+    }, [handleCorrect]);
+
+    useEffect(() => {
+        handleIncorrectRef.current = handleIncorrect;
+    }, [handleIncorrect]);
+
+    useEffect(() => {
+        handleReplayRef.current = handleReplay;
+    }, [handleReplay]);
+
     // Initialize Media Session & Speech
     useEffect(() => {
         const cleanupMedia = initMediaSession({
-            onNext: handleCorrect,
-            onPrev: handleIncorrect,
-            onPlay: () => handleReplay(1.0),
-            onPause: () => handleReplay(0.25),
+            onNext: () => handleCorrectRef.current(),
+            onPrev: () => handleIncorrectRef.current(),
+            onPlay: () => handleReplayRef.current(1.0),
+            onPause: () => handleReplayRef.current(0.25),
             log
         });
 
         // Decentralized Speech Recognition
+        let recognition = null;
         if (practiceMode) {
-            const recognition = setupSpeechRecognition({
+            recognition = setupSpeechRecognition({
                 onResult: (final, interim) => {
                     setSpeechResult(final || interim);
-                    if (currentCard && final) {
-                        const answer = currentCard.displayAnswer || '';
+                    const card = currentCardRef.current;
+                    if (card && final) {
+                        const answer = card.displayAnswer || '';
                         if (answer && final.toLowerCase().includes(answer.toLowerCase())) {
                             log("Voice Match!");
                         }
@@ -152,11 +181,14 @@ function HandsFreeGame() {
 
         return () => {
             cleanupMedia();
-            if (recognitionRef.current) {
-                recognitionRef.current.stop();
+            if (recognition) {
+                try {
+                    recognition.stop();
+                } catch (e) { /* ignore */ }
+                recognitionRef.current = null;
             }
         };
-    }, [practiceMode, currentCard, gameState]); // Re-bind when state changes for closure
+    }, [practiceMode]); // Re-bind only when practiceMode changes
 
     // Update Media Metadata
     useEffect(() => {
@@ -311,7 +343,12 @@ function HandsFreeGame() {
                             front={
                                 <div className="text-center">
                                     <div className="mb-2" style={{ fontSize: fontSizes.xlarge, color: colors.textSecondary }}>{currentCard.pinyin}</div>
-                                    <div style={{ fontSize: fontSizes.xxlarge, color: colors.text }}>{currentCard.displayAnswer}</div>
+                                    <div
+                                        className={`answer-text ${showAnswer ? 'visible' : 'hidden'}`}
+                                        style={{ fontSize: fontSizes.xxlarge, color: colors.text }}
+                                    >
+                                        {currentCard.displayAnswer}
+                                    </div>
                                 </div>
                             }
                             flippable={false}

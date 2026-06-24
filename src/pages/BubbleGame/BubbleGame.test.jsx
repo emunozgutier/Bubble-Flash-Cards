@@ -51,7 +51,7 @@ vi.mock('../../stores/useGameStore', () => ({
 }));
 
 // Mock submodules
-vi.mock('../../components/GameTitleBar', () => ({ default: () => <div data-testid="game-title-bar" /> }));
+vi.mock('../../components/GameTitleBar', () => ({ default: ({ title }) => <div data-testid="game-title-bar">{title}</div> }));
 vi.mock('./BubbleGameBubble', () => ({
     default: ({ text, onClick, className }) => (
         <div data-testid="bubble" onClick={onClick} className={className}>

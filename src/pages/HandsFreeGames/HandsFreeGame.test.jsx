@@ -40,11 +40,17 @@ vi.mock('../../utils/AudioManager', () => ({
     speak: vi.fn(),
     initMediaSession: vi.fn(() => vi.fn()), // Returns cleanup function
     updateMediaMetadata: vi.fn(),
+    warmupAudio: vi.fn(),
+    setupSpeechRecognition: vi.fn(() => vi.fn()),
 }));
 
 vi.mock('../../utils/InputManager', () => ({
     setupInputListeners: vi.fn(() => vi.fn()), // Returns cleanup function
     setupDiagnosticListeners: vi.fn(() => vi.fn()),
+    setupDebugKeyboardListener: vi.fn(() => vi.fn()),
+    getMappings: vi.fn(() => ({ correct: [], incorrect: [], replay: [] })),
+    saveMappings: vi.fn(),
+    resetMappings: vi.fn(() => ({ correct: [], incorrect: [], replay: [] })),
 }));
 
 // Mock useGameStore
