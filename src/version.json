@@ -1,7 +1,7 @@
 {
-  "hash": "b5460fa",
-  "date": "2026-05-28T19:03:11-07:00",
-  "title": "chore: deploy-time version update",
-  "message": "",
+  "hash": "3b35415",
+  "date": "2026-06-24T18:20:54-07:00",
+  "title": "Remove crossorigin and enable vite --host",
+  "message": "Remove the unnecessary crossorigin attribute from the module script in index.html. Update the dev script in package.json to run vite with --host so the local dev server is reachable on the network (useful for LAN testing or containers). Build and deploy scripts unchanged.",
   "source": "Local Git"
 }
