@@ -46,7 +46,7 @@ const DeckInfoPage = () => {
     };
 
     return (
-        <div className="deck-info-page min-vh-100 d-flex flex-column">
+        <div className="deck-info-page min-h-100 d-flex flex-column">
             <header className="deck-info-header d-flex align-items-center">
                 <button
                     className="deck-info-back-btn"

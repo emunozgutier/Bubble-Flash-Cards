@@ -9,8 +9,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
     background-color: #1a1a1a;
     /* Dark background for outside area */
     overflow: hidden;

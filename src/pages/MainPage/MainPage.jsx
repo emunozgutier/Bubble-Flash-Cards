@@ -65,7 +65,7 @@ function MainPage() {
     };
 
     return (
-        <div className="d-flex flex-column vh-100 overflow-hidden bg-black">
+        <div className="d-flex flex-column h-100 overflow-hidden bg-black">
             {/* Header / Title Bar */}
             <div className="flex-shrink-0">
                 <MainPageTitleBar />

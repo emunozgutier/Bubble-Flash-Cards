@@ -145,7 +145,7 @@ function BubbleGame() {
     const displayCardsLeft = cardsLeft + 1;
 
     return (
-        <div className="bubble-game-container d-flex flex-column vh-100 overflow-hidden">
+        <div className="bubble-game-container d-flex flex-column h-100 overflow-hidden">
             {isDrawing && currentCard && (
                 <CharacterDraw
                     characters={currentCard.chinese || currentCard.front}
