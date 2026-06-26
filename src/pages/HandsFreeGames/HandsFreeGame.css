@@ -227,4 +227,51 @@
         font-size: 0.85rem !important;
     }
 }
+
+/* Style modal for short landscape screens */
+@media (max-height: 480px) and (orientation: landscape) {
+    .input-config-modal {
+        max-width: 90% !important;
+        margin: 0.5rem auto !important;
+    }
+    
+    .input-config-modal .modal-content {
+        max-height: calc(100vh - 1rem) !important;
+    }
+    
+    .input-config-modal .modal-header,
+    .input-config-modal .modal-footer {
+        padding: 8px 16px !important;
+    }
+    
+    .input-config-modal .modal-body {
+        padding: 10px 16px !important;
+    }
+
+    .input-config-modal table {
+        margin-bottom: 0.5rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .input-config-modal td, 
+    .input-config-modal th {
+        padding: 6px 10px !important;
+    }
+    
+    .input-config-modal .badge {
+        padding: 4px 8px !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .input-config-modal .btn-sm {
+        padding: 4px 8px !important;
+        font-size: 0.8rem !important;
+    }
+
+    .input-config-modal .diagnostic-display {
+        min-height: 120px !important;
+        padding: 10px !important;
+    }
+}
+
 

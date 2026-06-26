@@ -27,6 +27,8 @@ const HandsFreeGameInputDiagnostics = ({ show, onHide, logs }) => {
             onHide={onHide}
             centered
             size="md"
+            scrollable
+            dialogClassName="input-config-modal"
             contentClassName="border-0 shadow-lg"
         >
             <Modal.Header closeButton style={{ backgroundColor: colors.surface, color: colors.text, borderColor: colors.border }}>

@@ -56,7 +56,7 @@ const HandsFreeInputConfig = ({ show, onHide }) => {
     };
 
     return (
-        <Modal show={show} onHide={onHide} centered size="lg" backdrop="static">
+        <Modal show={show} onHide={onHide} centered size="lg" backdrop="static" scrollable dialogClassName="input-config-modal">
             <Modal.Header closeButton style={{ backgroundColor: colors.background, color: colors.text }}>
                 <Modal.Title>Button Configuration</Modal.Title>
             </Modal.Header>
