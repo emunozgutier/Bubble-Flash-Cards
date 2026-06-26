@@ -24,16 +24,20 @@ const HandsFreeInputConfig = ({ show, onHide }) => {
 
             const code = e.code;
 
-            // Avoid adding duplicates to the same action
-            if (!mappings[listeningFor].includes(code)) {
-                const newMappings = {
-                    ...mappings,
-                    [listeningFor]: [...mappings[listeningFor], code]
-                };
-                setMappings(newMappings);
-                saveMappings(newMappings);
-            }
+            // Remove this key code from all actions to maintain uniqueness
+            const cleanMappings = {};
+            Object.keys(mappings).forEach(action => {
+                cleanMappings[action] = (mappings[action] || []).filter(k => k !== code);
+            });
 
+            // Add the key code to the target action
+            const newMappings = {
+                ...cleanMappings,
+                [listeningFor]: [...cleanMappings[listeningFor], code]
+            };
+
+            setMappings(newMappings);
+            saveMappings(newMappings);
             setListeningFor(null);
         };
 
