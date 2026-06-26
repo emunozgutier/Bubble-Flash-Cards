@@ -1,7 +1,7 @@
 {
-  "hash": "43e75d5",
-  "date": "2026-06-25T13:28:03-07:00",
-  "title": "chore: deploy-time version update",
-  "message": "",
+  "hash": "0b4dbf7",
+  "date": "2026-06-25T23:36:20-07:00",
+  "title": "Add global error toast UI and handlers",
+  "message": "Introduce a reusable global error/toast system: add a React GlobalErrorToast component (with CSS) and replace the simple window.onerror in index.html with a more robust IIFE that renders animated glassmorphism toasts, throttles/folds duplicates, shows a progress bar, and handles unhandled promise rejections. Add test buttons on the MainPage to trigger runtime and script errors for QA. Also bump src/version.json to the new deploy hash/date.",
   "source": "Local Git"
 }
