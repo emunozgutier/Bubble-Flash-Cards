@@ -81,7 +81,31 @@ function MainPage() {
                                 borderColor: colors.border
                             }}>
                             <div className="d-flex justify-content-between align-items-center mb-3">
-                                <h5 className="mb-0" style={{ color: colors.primary, fontSize: fontSizes.large }}>Your Decks</h5>
+                                <div className="d-flex align-items-center gap-2">
+                                    <h5 className="mb-0" style={{ color: colors.primary, fontSize: fontSizes.large }}>Your Decks</h5>
+                                    <button 
+                                        id="test-trigger-error-btn"
+                                        onClick={() => { throw new Error("Test Reference Error"); }} 
+                                        style={{ fontSize: '10px', padding: '2px 5px', color: '#ff5252', border: '1px solid #ff5252', borderRadius: '4px' }}
+                                    >
+                                        Trigger Error
+                                    </button>
+                                    <button 
+                                        id="test-trigger-script-error-btn"
+                                        onClick={() => {
+                                            const event = new ErrorEvent('error', {
+                                                message: 'Script error.',
+                                                filename: '',
+                                                lineno: 0,
+                                                colno: 0
+                                            });
+                                            window.dispatchEvent(event);
+                                        }}
+                                        style={{ fontSize: '10px', padding: '2px 5px', color: '#ff8a80', border: '1px solid #ff8a80', borderRadius: '4px' }}
+                                    >
+                                        Trigger Script Error
+                                    </button>
+                                </div>
                                 <button
                                     className="btn btn-sm"
                                     style={{
