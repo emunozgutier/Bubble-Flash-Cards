@@ -5,7 +5,7 @@ import { MdSkipPrevious, MdSkipNext } from 'react-icons/md';
 
 const HandsFreeGameButtons = ({ onReplay, onCorrect, onIncorrect }) => {
     return (
-        <div className="w-100 d-flex flex-column gap-4 align-items-center">
+        <div className="hands-free-buttons-container w-100 d-flex flex-column gap-4 align-items-center">
             {/* Primary Controls (Speak/Slow) */}
             <div className="d-flex gap-3 justify-content-center w-100">
                 <button

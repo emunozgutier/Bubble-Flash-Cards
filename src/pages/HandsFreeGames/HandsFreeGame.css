@@ -23,6 +23,34 @@
     min-height: 1.2em;
 }
 
+/* Hands Free Game Main Layout */
+.hands-free-game-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.hands-free-left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.hands-free-right-column {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Card layout during gameplay: stacked in portrait, side-by-side in landscape */
 .hands-free-cards-container {
     width: 100%;
@@ -41,14 +69,162 @@
     justify-content: center;
 }
 
+/* Landscape Mode Adjustments */
 @media (orientation: landscape) {
-    .hands-free-cards-container {
+    .hands-free-game-layout {
         flex-direction: row;
-        justify-content: center;
+        align-items: stretch;
+    }
+
+    .hands-free-left-column {
+        flex: 1.8; /* Thicker column for question/answers */
+        justify-content: space-around;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .hands-free-right-column {
+        flex: 1; /* Thinner column for actions */
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 10px 20px;
         align-items: center;
     }
 
-    .hands-free-answer-wrapper {
-        width: auto;
+    .hands-free-cards-container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        width: 100%;
+        gap: 0.75rem !important;
     }
-}
+
+    .hands-free-answer-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Stacked cards vertically in landscape with shorter height */
+    .hands-free-cards-container .flash-card-container {
+        width: 320px;
+        height: 130px;
+    }
+
+    /* Fit text styling inside smaller vertical cards */
+    .hands-free-cards-container .hands-free-question-text {
+        font-size: 1.8rem !important;
+        line-height: 1.2;
+    }
+
+    .hands-free-cards-container .hands-free-pinyin {
+        font-size: 1rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    .hands-free-cards-container .answer-text {
+        font-size: 1.4rem !important;
+        line-height: 1.2;
+    }
+
+    /* Responsive adjustments for gameplay action buttons in landscape */
+    .hands-free-buttons-container {
+        gap: 8px !important;
+        width: 100%;
+    }
+    
+    .hands-free-buttons-container > .d-flex {
+        flex-direction: column !important;
+        gap: 8px !important;
+        width: 100% !important;
+    }
+    
+    .hands-free-buttons-container > .d-flex button {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 8px 12px !important;
+        font-size: 0.95rem !important;
+    }
+    
+    .backup-controls {
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 8px !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+    
+    .backup-button {
+        width: 100% !important;
+        height: auto !important;
+        padding: 8px 12px !important;
+        font-size: 0.95rem !important;
+        flex-direction: row !important; /* side by side icon & text inside button */
+        justify-content: center !important;
+        align-items: center !important;
+        border-radius: 8px !important;
+        gap: 6px !important;
+    }
+    
+    .backup-button svg {
+        font-size: 20px !important;
+        width: 20px !important;
+        height: 20px !important;
+    }
+}
+
+/* Mobile landscape viewports / Short screens */
+@media (max-height: 480px) and (orientation: landscape) {
+    .hands-free-left-column {
+        padding: 5px;
+    }
+
+    .hands-free-cards-container {
+        gap: 0.5rem !important;
+    }
+
+    .hands-free-cards-container .flash-card-container {
+        width: 280px;
+        height: 105px;
+    }
+
+    .hands-free-cards-container .hands-free-question-text {
+        font-size: 1.4rem !important;
+    }
+
+    .hands-free-cards-container .hands-free-pinyin {
+        font-size: 0.85rem !important;
+        margin-bottom: 0px !important;
+    }
+
+    .hands-free-cards-container .answer-text {
+        font-size: 1.15rem !important;
+    }
+
+    .hands-free-right-column {
+        padding: 8px 12px;
+    }
+
+    .hands-free-buttons-container {
+        gap: 6px !important;
+    }
+    
+    .hands-free-buttons-container > .d-flex {
+        gap: 6px !important;
+    }
+    
+    .hands-free-buttons-container > .d-flex button {
+        padding: 6px 10px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .backup-controls {
+        gap: 6px !important;
+    }
+    
+    .backup-button {
+        padding: 6px 10px !important;
+        font-size: 0.85rem !important;
+    }
+}
+

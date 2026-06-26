@@ -324,59 +324,63 @@ function HandsFreeGame() {
             {audioComponent}
 
             <div className="game-content-center p-0 flex-column justify-content-between overflow-hidden">
-                {/* Visual Card Display - Dual Cards */}
-                <div className="hands-free-cards-container p-3 gap-3">
-                    {/* Question Card */}
-                    <FlashCard
-                        card={null}
-                        front={<div className="text-center" style={{ fontSize: fontSizes.xxxlarge }}>{currentCard.displayQuestion}</div>}
-                        flippable={false}
-                    />
+                <div className="hands-free-game-layout">
+                    {/* Left Column: Cards & Speech Status */}
+                    <div className="hands-free-left-column">
+                        <div className="hands-free-cards-container p-3 gap-3">
+                            {/* Question Card */}
+                            <FlashCard
+                                card={null}
+                                front={<div className="hands-free-question-text text-center" style={{ fontSize: fontSizes.xxxlarge }}>{currentCard.displayQuestion}</div>}
+                                flippable={false}
+                            />
 
-                    {/* Answer Card - Visible after delay */}
-                    <div
-                        className="hands-free-answer-wrapper transition-opacity duration-500"
-                        style={{ opacity: showAnswer ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}
-                    >
-                        <FlashCard
-                            card={null}
-                            front={
-                                <div className="text-center">
-                                    <div className="mb-2" style={{ fontSize: fontSizes.xlarge, color: colors.textSecondary }}>{currentCard.pinyin}</div>
-                                    <div
-                                        className={`answer-text ${showAnswer ? 'visible' : 'hidden'}`}
-                                        style={{ fontSize: fontSizes.xxlarge, color: colors.text }}
-                                    >
-                                        {currentCard.displayAnswer}
-                                    </div>
-                                </div>
-                            }
-                            flippable={false}
-                        />
-                    </div>
-                </div>
-
-                {/* Speech Status Overlay (if active) */}
-                {practiceMode && (
-                    <div className="px-3 w-100">
-                        <div className="speech-status p-2 border rounded mx-auto" style={{ borderColor: colors.border, maxWidth: '500px' }}>
-                            <div className="speech-status-label small text-uppercase" style={{ color: colors.textSecondary }}>
-                                Listening ({recognitionRef.current?.lang})
-                            </div>
-                            <div className="speech-result fst-italic" style={{ color: colors.text }}>
-                                {speechResult || '...'}
+                            {/* Answer Card - Visible after delay */}
+                            <div
+                                className="hands-free-answer-wrapper transition-opacity duration-500"
+                                style={{ opacity: showAnswer ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}
+                            >
+                                <FlashCard
+                                    card={null}
+                                    front={
+                                        <div className="text-center">
+                                            <div className="hands-free-pinyin mb-2" style={{ fontSize: fontSizes.xlarge, color: colors.textSecondary }}>{currentCard.pinyin}</div>
+                                            <div
+                                                className={`answer-text ${showAnswer ? 'visible' : 'hidden'}`}
+                                                style={{ fontSize: fontSizes.xxlarge, color: colors.text }}
+                                            >
+                                                {currentCard.displayAnswer}
+                                            </div>
+                                        </div>
+                                    }
+                                    flippable={false}
+                                />
                             </div>
                         </div>
-                    </div>
-                )}
 
-                {/* Extracted Buttons Component */}
-                <div className="w-100 p-3 pt-0">
-                    <HandsFreeGameButtons
-                        onReplay={handleReplay}
-                        onCorrect={handleCorrect}
-                        onIncorrect={handleIncorrect}
-                    />
+                        {/* Speech Status Overlay (if active) */}
+                        {practiceMode && (
+                            <div className="px-3 w-100 mb-3">
+                                <div className="speech-status p-2 border rounded mx-auto" style={{ borderColor: colors.border, maxWidth: '500px' }}>
+                                    <div className="speech-status-label small text-uppercase" style={{ color: colors.textSecondary }}>
+                                        Listening ({recognitionRef.current?.lang})
+                                    </div>
+                                    <div className="speech-result fst-italic" style={{ color: colors.text }}>
+                                        {speechResult || '...'}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Right Column: Action Buttons */}
+                    <div className="hands-free-right-column">
+                        <HandsFreeGameButtons
+                            onReplay={handleReplay}
+                            onCorrect={handleCorrect}
+                            onIncorrect={handleIncorrect}
+                        />
+                    </div>
                 </div>
             </div>
 
