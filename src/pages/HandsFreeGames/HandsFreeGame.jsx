@@ -325,7 +325,7 @@ function HandsFreeGame() {
 
             <div className="game-content-center p-0 flex-column justify-content-between overflow-hidden">
                 {/* Visual Card Display - Dual Cards */}
-                <div className="w-100 flex-grow-1 d-flex flex-column align-items-center justify-content-center p-3 gap-3 overflow-auto">
+                <div className="hands-free-cards-container p-3 gap-3">
                     {/* Question Card */}
                     <FlashCard
                         card={null}
@@ -335,7 +335,7 @@ function HandsFreeGame() {
 
                     {/* Answer Card - Visible after delay */}
                     <div
-                        className="w-100 d-flex justify-content-center transition-opacity duration-500"
+                        className="hands-free-answer-wrapper transition-opacity duration-500"
                         style={{ opacity: showAnswer ? 1 : 0, transition: 'opacity 0.5s ease-in-out' }}
                     >
                         <FlashCard

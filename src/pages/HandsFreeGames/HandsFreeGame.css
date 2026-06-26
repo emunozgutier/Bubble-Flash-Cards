@@ -22,3 +22,33 @@
 .speech-result {
     min-height: 1.2em;
 }
+
+/* Card layout during gameplay: stacked in portrait, side-by-side in landscape */
+.hands-free-cards-container {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.hands-free-answer-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media (orientation: landscape) {
+    .hands-free-cards-container {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hands-free-answer-wrapper {
+        width: auto;
+    }
+}
