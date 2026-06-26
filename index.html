@@ -12,23 +12,201 @@
     href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Zhi+Mang+Xing&family=Liu+Jian+Mao+Cao&family=Long+Cang&display=swap"
     rel="stylesheet">
   <script>
-    window.onerror = function (message, source, lineno, colno, error) {
-      const errorDiv = document.createElement('div');
-      errorDiv.style.position = 'fixed';
-      errorDiv.style.top = '0';
-      errorDiv.style.left = '0';
-      errorDiv.style.width = '100%';
-      errorDiv.style.backgroundColor = 'red';
-      errorDiv.style.color = 'white';
-      errorDiv.style.padding = '20px';
-      errorDiv.style.zIndex = '9999';
-      errorDiv.textContent = 'Global Error: ' + message + ' at ' + source + ':' + lineno + ':' + colno;
-      document.body.appendChild(errorDiv);
-      console.error(message, error);
-    };
+    (function() {
+      // Global error handler
+      window.onerror = function (message, source, lineno, colno, error) {
+        try {
+          // Avoid duplicate/flooding errors by limiting to 3 active toasts
+          const existingToasts = document.querySelectorAll('.global-error-toast');
+          if (existingToasts.length >= 3) {
+            const firstCloseBtn = existingToasts[0].querySelector('.close-btn-action');
+            if (firstCloseBtn) firstCloseBtn.click();
+          }
+
+          // Format details
+          let title = "Application Error";
+          let displayMessage = message || "An unknown error occurred.";
+          
+          if (message === "Script error.") {
+            title = "Script Error";
+            displayMessage = "Script error at :0:0. (A cross-origin or browser extension script failed)";
+          } else {
+            const filename = source ? source.split('/').pop() : '';
+            if (filename) {
+              title = "Runtime Error";
+              displayMessage = message + " (" + filename + ":" + lineno + ":" + colno + ")";
+            }
+          }
+
+          // Get or create container
+          let container = document.getElementById('global-error-container');
+          if (!container) {
+            container = document.createElement('div');
+            container.id = 'global-error-container';
+            container.style.cssText = `
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              z-index: 999999;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              max-width: 420px;
+              width: calc(100% - 40px);
+              pointer-events: none;
+            `;
+            document.body.appendChild(container);
+
+            // Add CSS styles for animations and glassmorphism
+            const style = document.createElement('style');
+            style.textContent = `
+              .global-error-toast {
+                pointer-events: auto;
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                background: rgba(30, 10, 10, 0.75);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(211, 47, 47, 0.45);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(211, 47, 47, 0.2);
+                border-radius: 12px;
+                padding: 14px 16px;
+                color: #fff;
+                font-family: system-ui, -apple-system, sans-serif;
+                position: relative;
+                overflow: hidden;
+                opacity: 0;
+                transform: translateX(50px);
+                transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+              }
+              .global-error-toast.show {
+                opacity: 1;
+                transform: translateX(0);
+              }
+              .global-error-toast.hide {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.9);
+              }
+              .global-error-toast:hover {
+                border-color: rgba(211, 47, 47, 0.8);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 20px rgba(211, 47, 47, 0.4);
+                transform: translateY(-2px);
+              }
+              .global-error-toast-close {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                background: transparent;
+                border: none;
+                color: rgba(255, 255, 255, 0.4);
+                cursor: pointer;
+                padding: 4px;
+                line-height: 1;
+                font-size: 16px;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+                border-radius: 4px;
+              }
+              .global-error-toast-close:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff;
+              }
+              .global-error-toast-progress {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 3px;
+                background: linear-gradient(90deg, #d32f2f, #ff5252);
+                width: 100%;
+                transform-origin: left;
+                transition: transform 6s linear;
+                transform: scaleX(1);
+              }
+              @media (max-width: 480px) {
+                #global-error-container {
+                  top: 10px !important;
+                  right: 20px !important;
+                  left: 20px !important;
+                  width: auto !important;
+                  max-width: none !important;
+                }
+                .global-error-toast {
+                  transform: translateY(-50px);
+                }
+                .global-error-toast.show {
+                  transform: translateY(0);
+                }
+              }
+            `;
+            document.head.appendChild(style);
+          }
+
+          // Create Toast element
+          const toast = document.createElement('div');
+          toast.className = 'global-error-toast';
+          
+          toast.innerHTML = `
+            <div style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(211, 47, 47, 0.2); color: #ff5252; font-weight: bold; font-size: 14px;">⚠️</div>
+            <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 4px; padding-right: 20px;">
+              <div style="font-weight: 600; font-size: 0.95rem; color: #ff8a80; letter-spacing: 0.3px;">${title}</div>
+              <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.9); line-height: 1.4; word-break: break-word;">${displayMessage}</div>
+            </div>
+            <button class="global-error-toast-close close-btn-action" aria-label="Close">×</button>
+            <div class="global-error-toast-progress"></div>
+          `;
+
+          container.appendChild(toast);
+
+          // Force reflow and add class to transition in
+          toast.offsetHeight;
+          toast.classList.add('show');
+
+          // Animate progress bar
+          const progressBar = toast.querySelector('.global-error-toast-progress');
+          setTimeout(() => {
+            progressBar.style.transform = 'scaleX(0)';
+          }, 50);
+
+          let dismissTimeout = setTimeout(dismiss, 6000);
+
+          // Close button event
+          toast.querySelector('.global-error-toast-close').onclick = dismiss;
+
+          function dismiss() {
+            clearTimeout(dismissTimeout);
+            toast.classList.remove('show');
+            toast.classList.add('hide');
+            setTimeout(() => {
+              toast.remove();
+            }, 300);
+          }
+        } catch (e) {
+          console.error("Error rendering error toast:", e);
+        }
+
+        // Keep standard console log output
+        console.error(message, error);
+      };
+
+      // Promise rejections handler
+      window.onunhandledrejection = function (event) {
+        try {
+          const reason = event.reason;
+          const message = reason && (reason.message || String(reason)) || "Unhandled Promise Rejection";
+          window.onerror(message, "", 0, 0, reason);
+        } catch (e) {
+          console.error("Error in promise rejection handler:", e);
+        }
+      };
+    })();
   </script>
-  <script type="module" crossorigin src="/Bubble-Flash-Cards/assets/index-A9l3Y_BQ.js"></script>
-  <link rel="stylesheet" crossorigin href="/Bubble-Flash-Cards/assets/index-CjvvpI7F.css">
+  <script type="module" crossorigin src="/Bubble-Flash-Cards/assets/index-D84Y7Edy.js"></script>
+  <link rel="stylesheet" crossorigin href="/Bubble-Flash-Cards/assets/index-D1sfJ1sb.css">
 </head>
 
 <body>
